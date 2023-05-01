@@ -1,0 +1,2 @@
+class Fretboard < ApplicationRecord
+end
