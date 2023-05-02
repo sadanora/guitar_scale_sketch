@@ -1,0 +1,2 @@
+class Dot < ApplicationRecord
+end

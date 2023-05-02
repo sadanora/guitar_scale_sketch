@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_082626) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_000828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dots", force: :cascade do |t|
+    t.integer "fret", null: false
+    t.integer "string", null: false
+    t.string "color", null: false
+    t.integer "fretboard_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fretboard_id"], name: "index_dots_on_fretboard_id"
+  end
 
   create_table "fretboards", force: :cascade do |t|
     t.integer "position", null: false
@@ -31,5 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_082626) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "dots", "fretboards"
   add_foreign_key "fretboards", "scores"
 end
