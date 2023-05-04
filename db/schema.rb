@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_045532) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_052152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,12 +26,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_045532) do
 
   create_table "frets", force: :cascade do |t|
     t.integer "fret_number", null: false
-    t.string "E1", null: false
-    t.string "B2", null: false
-    t.string "G3", null: false
-    t.string "D4", null: false
-    t.string "A5", null: false
-    t.string "E6", null: false
+    t.string "E1", default: "", null: false
+    t.string "B2", default: "", null: false
+    t.string "G3", default: "", null: false
+    t.string "D4", default: "", null: false
+    t.string "A5", default: "", null: false
+    t.string "E6", default: "", null: false
     t.integer "fretboard_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
