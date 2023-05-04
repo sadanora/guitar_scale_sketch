@@ -1,0 +1,69 @@
+class Api::ScoresController < ApplicationController
+  before_action :set_score, only: %i[show update destroy]
+
+  def index
+    @scores = Score.all
+    render json: @scores
+  end
+
+  def show
+    render json: @score
+  end
+
+  def create
+    @score = Score.new(score_params)
+
+    if @score.save
+      render json: @score, status: :created
+    else
+      render json: @score.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @score.update(score_params)
+      render json: @score, status: :ok
+    else
+      render json: @score.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @score.destroy
+  end
+
+  private
+
+  def set_score
+    @score = Score.find(params[:id])
+  end
+
+  def score_params
+    params.require(:score).permit(
+      :title,
+      :is_public
+    # ).merge(
+    #   fretboards: fretboard_params
+    )
+  end
+
+  # def fretboard_params
+  #   params.require(:fretboard).permit(
+  #     :position,
+  #     :start_fret,
+  #     :end_fret,
+  #     :score_id
+  #   ).merge(
+  #     dots: dots_params
+  #   )
+  # end
+
+  # def dots_params
+  #   params.require(:score).permit(
+  #     :fret,
+  #     :string,
+  #     :color,
+  #     :fretboard_id
+  #   )
+  # end
+end
