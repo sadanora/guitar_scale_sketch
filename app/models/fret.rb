@@ -1,0 +1,2 @@
+class Fret < ApplicationRecord
+end
