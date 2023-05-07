@@ -1,0 +1,24 @@
+fret1:
+  fret_number: 3
+  E1: "#333"
+  fretboard: E BlueNote 1
+
+dot2:
+  fret_number: 4
+  B2: "#DA6272"
+  fretboard: E BlueNote 2
+
+dot3:
+  fret_number: 2
+  G3: "#F3C759"
+  fretboard: C Major 1
+
+dot4:
+  fret_number: 8
+  D4: "#5EC84E"
+  fretboard: C Major 2
+
+dot5:
+  fret_number: 17
+  E1: "#42AAC7"
+  fretboard: C Major 3
