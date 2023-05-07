@@ -5,7 +5,6 @@ class Api::ScoresController < ApplicationController
 
   def index
     @scores = Score.all
-    render json: @scores
   end
 
   def show; end
