@@ -2,6 +2,7 @@
 
 class Api::ScoresController < ApplicationController
   before_action :set_score, only: %i[show update destroy]
+  before_action :snakeize_params, only: %i[create update]
 
   def index
     @scores = Score.all
