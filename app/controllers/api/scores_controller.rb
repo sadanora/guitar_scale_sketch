@@ -7,7 +7,6 @@ class Api::ScoresController < ApplicationController
   end
 
   def show
-    render json: @score
   end
 
   def create
@@ -42,28 +41,6 @@ class Api::ScoresController < ApplicationController
     params.require(:score).permit(
       :title,
       :is_public
-    # ).merge(
-    #   fretboards: fretboard_params
     )
   end
-
-  # def fretboard_params
-  #   params.require(:fretboard).permit(
-  #     :position,
-  #     :start_fret,
-  #     :end_fret,
-  #     :score_id
-  #   ).merge(
-  #     dots: dots_params
-  #   )
-  # end
-
-  # def dots_params
-  #   params.require(:score).permit(
-  #     :fret,
-  #     :string,
-  #     :color,
-  #     :fretboard_id
-  #   )
-  # end
 end
