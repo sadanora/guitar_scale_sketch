@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Fretboard < ApplicationRecord
   belongs_to :score
   has_many :frets, dependent: :destroy

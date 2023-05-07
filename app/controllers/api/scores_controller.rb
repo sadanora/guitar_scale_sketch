@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::ScoresController < ApplicationController
   before_action :set_score, only: %i[show update destroy]
 
@@ -6,8 +8,7 @@ class Api::ScoresController < ApplicationController
     render json: @scores
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @score = Score.new(score_params)
