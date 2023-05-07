@@ -12,6 +12,7 @@ Metrics/ClassLength:
     - test/**/*
 
 AllCops:
+  SuggestExtensions: false
   Exclude:
     - '**/templates/**/*'
     - '**/vendor/**/*'
