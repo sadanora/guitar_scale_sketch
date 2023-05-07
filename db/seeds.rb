@@ -3,7 +3,7 @@ require 'active_record/fixtures'
 tables = %i[
   scores
   fretboards
-  dots
+  frets
 ]
 
 ActiveRecord::FixtureSet.create_fixtures 'db/fixtures', tables
