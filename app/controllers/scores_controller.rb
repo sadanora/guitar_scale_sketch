@@ -5,7 +5,7 @@ class ScoresController < ApplicationController
 
   # GET /scores or /scores.json
   def index
-    @scores = Score.all
+    @scores = Score.page(params[:page])
   end
 
   # GET /scores/1 or /scores/1.json
