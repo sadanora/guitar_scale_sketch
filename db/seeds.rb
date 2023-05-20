@@ -1,8 +1,88 @@
-# frozen_string_literal: true
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+Score.create(
+  [
+    {
+      "title": "BlueNote Scale",
+      "is_public": true,
+      "score_code": <<~'EOS'
+      [
+        {
+          "position": 0,
+          "start_fret": 1,
+          "end_fret": 5,
+          "dots": [
+            {
+              "string": 1,
+              "fret": 1,
+              "color": "#333"
+            },
+            {
+              "string": 1,
+              "fret": 1,
+              "color": "red"
+            }
+          ]
+        },
+        {
+          "position": 1,
+          "start_fret": 3,
+          "end_fret": 10,
+          "dots": [
+            {
+              "string": 1,
+              "fret": 3,
+              "color": "red"
+            },
+            {
+              "string": 6,
+              "fret": 5,
+              "color": "black"
+            }
+          ]
+        }
+      ]
+      EOS
+    },
+    {
+      "title": "CMajor Scale",
+      "is_public": false,
+      "score_code": <<~'EOS'
+      [
+        {
+          "position": 0,
+          "start_fret": 3,
+          "end_fret": 6,
+          "dots": [
+            {
+              "string": 2,
+              "fret": 3,
+              "color": "blue"
+            },
+            {
+              "string": 4,
+              "fret": 5,
+              "color": "yellow"
+            }
+          ]
+        },
+        {
+          "position": 1,
+          "start_fret": 11,
+          "end_fret": 17,
+          "dots": [
+            {
+              "string": 6,
+              "fret": 12,
+              "color": "red"
+            },
+            {
+              "string": 3,
+              "fret": 16,
+              "color": "black"
+            }
+          ]
+        }
+      ]
+      EOS
+    }
+  ]
+)
