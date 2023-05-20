@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Scores</h1>
+
+<div id="scores">
+  <% @scores.each do |score| %>
+    <%= render score %>
+    <p>
+      <%= link_to "Show this score", score %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New score", new_score_path %>

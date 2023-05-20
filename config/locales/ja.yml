@@ -1,6 +1,11 @@
 ---
 ja:
   activerecord:
+    models:
+      score: スコア
+    attributes:
+      score:
+        title: タイトル
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
