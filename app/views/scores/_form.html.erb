@@ -1,8 +1,12 @@
-<%= turbo_frame_tag score do %>
+<div data-controller="fretboard">
   <%= bootstrap_form_with(model: score) do |form| %>
     <%= form.text_field :title %>
-    <%= form.text_area :score_code %>
+    <%= form.text_area :score_code, data: { fretboard_target: "output" } %>
     <%= form.check_box :is_public %>
     <%= form.primary %>
   <% end %>
-<% end %>
+  <button data-action="click->fretboard#fetchCode">fetch</button>
+
+  <button data-action="click->fretboard#add">Add</button>
+  <div data-fretboard-target="output" id="scoreContainer"></div>
+</div>
