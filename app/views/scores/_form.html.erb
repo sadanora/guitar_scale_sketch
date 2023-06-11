@@ -1,10 +1,17 @@
 <div data-controller="fretboard">
-  <%= bootstrap_form_with(model: score) do |form| %>
-    <%= form.text_field :title %>
-    <%= form.text_area :score_code, data: { fretboard_target: "output" } %>
-    <%= form.check_box :is_public %>
-    <%= form.primary %>
+  <%= bootstrap_form_with(model: score) do |f| %>
+    <%= f.text_field :title %>
+    <%= f.text_area :score_code, data: { fretboard_target: "output" } %>
+    <%= f.check_box :is_public %>
+    <%= f.primary %>
   <% end %>
+
+  <%= bootstrap_form_tag do |f| %>
+    <%= f.select :start_fret, [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ], include_blank: "Select a Start Fret", floating: true, data: { fretboard_target: "start_fret" } %>
+    <%= f.select :end_fret, [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,24 ], include_blank: "Select a End Fret", floating: true, data: { fretboard_target: "end_fret" } %>
+  <% end %>
+
+  <button data-action="click->fretboard#generateFretboardCode">fetch</button>
   <button data-action="click->fretboard#fetchCode">fetch</button>
 
   <button data-action="click->fretboard#add">Add</button>

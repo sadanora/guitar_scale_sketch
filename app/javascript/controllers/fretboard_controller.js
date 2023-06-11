@@ -2,19 +2,14 @@ import { Controller } from "@hotwired/stimulus";
 import { Layer, Text, Line, Circle, Stage, Rect } from "konva";
 
 export default class extends Controller {
-  static targets = ["output"];
-
-  fetchCode() {
-    const fretboardCode = JSON.stringify(this.generateFretboardCode());
-    this.outputTarget.value = `${fretboardCode}`;
-  }
+  static targets = ["start_fret", "end_fret", "output"];
 
   generateFretboardCode() {
     const fretboardCode = {
       id: 1,
       position: 1,
-      start_fret: 1,
-      end_fret: 6,
+      start_fret: parseInt(start_fret.value),
+      end_fret: parseInt(end_fret.value),
       dots: [
         {
           fret: 3,
@@ -29,6 +24,11 @@ export default class extends Controller {
       ],
     };
     return fretboardCode;
+  }
+
+  fetchCode() {
+    const fretboardCode = JSON.stringify(this.generateFretboardCode());
+    this.outputTarget.value = `${fretboardCode}`;
   }
 
   add() {
@@ -54,24 +54,7 @@ export default class extends Controller {
     let layer = new Layer();
 
     // 想定される指板図1つ分のデータ
-    const fretboardData = {
-      id: 1,
-      position: 1,
-      start_fret: 1,
-      end_fret: 6,
-      dots: [
-        {
-          fret: 3,
-          guitarString: 5,
-          color: "red",
-        },
-        {
-          fret: 1,
-          guitarString: 3,
-          color: "black",
-        },
-      ],
-    };
+    const fretboardData = this.generateFretboardCode();
 
     // 指板の描画
     function drawFretboard(fretboardData) {
@@ -145,7 +128,7 @@ export default class extends Controller {
     function createGuitarStrings(fretboardWidth) {
       const guitarStrings = [];
 
-      for (let i = 0; i < fretboardWidth; i++) {
+      for (let i = 0; i < 6; i++) {
         const y = referencePoint + guitarStringSpacing * i;
         const guitarString = new Konva.Line({
           x: referencePoint,
@@ -225,32 +208,16 @@ export default class extends Controller {
 
     function getClickableAreaX(i) {
       let x = 34;
-      if (i === 1) {
-        x = 134;
-      } else if (i === 2) {
-        x = 234;
-      } else if (i === 3) {
-        x = 334;
-      } else if (i === 4) {
-        x = 434;
-      } else if (i === 5) {
-        x = 534;
+      if (i > 0) {
+        x = 34 + 100 * i;
       }
       return x;
     }
 
     function getDotX(i) {
       let x = 80;
-      if (i === 1) {
-        x = 180;
-      } else if (i === 2) {
-        x = 280;
-      } else if (i === 3) {
-        x = 380;
-      } else if (i === 4) {
-        x = 480;
-      } else if (i === 5) {
-        x = 580;
+      if (i > 0) {
+        x = 80 + 100 * i;
       }
       return x;
     }
