@@ -1,32 +1,22 @@
-<%= form_with(model: score) do |form| %>
-  <% if score.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(score.errors.count, "error") %> prohibited this score from being saved:</h2>
-
-      <ul>
-        <% score.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<div data-controller="score">
+  <%= bootstrap_form_with(model: score) do |f| %>
+    <%= f.text_field :title, data: { score_target: "title" } %>
+    <%= f.text_area :score_code, data: { score_target: "output" } %>
+    <%= f.check_box :is_public %>
+    <%= f.primary %>
   <% end %>
 
-  <div>
-    <%= form.label :id, style: "display: block" %>
-    <%= form.text_field :id %>
-  </div>
+  <%= bootstrap_form_with do |f| %>
+    <%= f.select :startFret, [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ], include_blank: "Select a Start Fret", floating: true, wrapper: { data: { score_target: "startFret" } } %>
+    <%= f.select :endFret, [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,24 ], include_blank: "Select a End Fret", floating: true, wrapper: { data: { score_target: "endFret" } } %>
+  <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+  <%# <button data-action="click->score#generateStage">fetch</button> %>
 
-  <div>
-    <%= form.label :is_public, style: "display: block" %>
-    <%= form.check_box :is_public %>
-  </div>
+  <button data-action="click->score#addFretboard">Add</button>
+  <div data-score-target="output" id="scoreContainer"></div>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+  <%# <button data-action="click->score#draw">draw</button> %>
+  <%# <button data-action="click->score#fetchScoreCode">fetch</button> %>
+
+</div>
