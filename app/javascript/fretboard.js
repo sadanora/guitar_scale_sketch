@@ -25,7 +25,6 @@ export default class Fretboard {
     const fretboardsParts = [];
     fretboardsParts.push(this.#createFrets(fretNumbers));
     fretboardsParts.push(this.#createGuitarStrings(fretNumbers.length));
-    // fretboardsParts.push(this.#createTunings());
 
     const dots = this.#renderDots(fretNumbers);
     fretboardsParts.push(dots);
@@ -48,11 +47,6 @@ export default class Fretboard {
       width: 30,
       height: 30,
     });
-
-    // const imageNode = new Text({
-    //   text: "delete",
-    //   fontSize: 18,
-    // });
 
     Image.fromURL("/trash-fill.svg", (imageNode) => {
       button.add(imageNode);

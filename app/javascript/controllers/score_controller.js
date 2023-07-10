@@ -16,14 +16,11 @@ export default class extends Controller {
   }
 
   addFretboard() {
-    // stageがない場合はスルー　あった場合はstageから描画済みのfretboardの情報を取得して
-    // scoreCodeValue, score.scoreCode を更新する
     if (this.score.stage) {
       this.updateScoreCode();
       this.score.stage.clear();
     }
 
-    // 追加するscoreCodeValueに追加する指板の情報を追加
     const newFretboardCode = {
       startFret: parseInt(startFret.value),
       endFret: parseInt(endFret.value),
@@ -38,10 +35,8 @@ export default class extends Controller {
     }
     this.scoreCodeValue = this.score.scoreCode;
 
-    // 更新したscoreCodeValueを使ってscore.fretboardsを更新する
     this.score.fretboards = this.score.createFretboards(this.scoreCodeValue);
 
-    // 再描画
     this.draw();
   }
 
