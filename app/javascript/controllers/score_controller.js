@@ -10,12 +10,7 @@ export default class extends Controller {
     document
       .getElementById("scoreContainer")
       .addEventListener("fretboardDeleted", (e) => {
-        console.log(`削除されたID ${e.detail.layerId}`);
         this.updateScoreCode();
-        console.log("after cb scoreCode");
-        console.log(this.scoreCodeValue);
-        console.log("after cb score");
-        console.log(this.score);
         this.draw();
       });
   }
@@ -55,8 +50,6 @@ export default class extends Controller {
   }
 
   updateScoreCode() {
-    console.log("before scoreCode");
-    console.log(this.scoreCodeValue);
     const newScoreCode = [];
     this.score.stage.children.map((e, i) => {
       const visibleDots = e.children.filter(this.findVisibleDot);
