@@ -10,13 +10,6 @@
     <%= f.select :startFret, [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ], include_blank: "Select a Start Fret", floating: true, wrapper: { data: { score_target: "startFret" } } %>
     <%= f.select :endFret, [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,24 ], include_blank: "Select a End Fret", floating: true, wrapper: { data: { score_target: "endFret" } } %>
   <% end %>
-
-  <%# <button data-action="click->score#generateStage">fetch</button> %>
-
   <button data-action="click->score#addFretboard">Add</button>
   <div data-score-target="output" id="scoreContainer"></div>
-
-  <%# <button data-action="click->score#draw">draw</button> %>
-  <%# <button data-action="click->score#fetchScoreCode">fetch</button> %>
-
 </div>
