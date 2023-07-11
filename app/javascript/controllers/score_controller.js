@@ -48,10 +48,10 @@ export default class extends Controller {
   updateScoreCode() {
     const newScoreCode = [];
 
-    const fretboards = this.score.stage.children.filter(this.findFretboard);
+    const fretboards = this.score.stage.children.filter(this.isFretboard);
     fretboards.map((e, i) => {
       if (e.attrs.kinds === "fretboard") {
-        const visibleDots = e.children.filter(this.findVisibleDot);
+        const visibleDots = e.children.filter(this.isVisibleDot);
 
         const dots = visibleDots.map((visibleDot) => ({
           fill: visibleDot.attrs.fill,
@@ -74,12 +74,12 @@ export default class extends Controller {
     this.score.fretboards = this.score.createFretboards(this.scoreCodeValue);
   }
 
-  findVisibleDot(obj) {
-    return obj.className === "Circle" && obj.visible() ? true : false;
+  isVisibleDot(dot) {
+    return dot.className === "Circle" && dot.visible() ? true : false;
   }
 
-  findFretboard(obj) {
-    return obj.attrs.kinds === "fretboard";
+  isFretboard(layer) {
+    return layer.attrs.kinds === "fretboard";
   }
 
   fetchTitle() {
