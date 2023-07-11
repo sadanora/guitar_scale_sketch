@@ -14,10 +14,11 @@ export default class Fretboard {
 
   render() {
     const layer = new Layer({
+      kinds: "fretboard",
       fretboardPosition: this.position,
       startFret: this.startFret,
       endFret: this.endFret,
-      y: 200 * (this.position - 1),
+      y: 100 + 200 * (this.position - 1),
     });
 
     const fretNumbers = this.#generateFretNumbers(this.startFret, this.endFret);

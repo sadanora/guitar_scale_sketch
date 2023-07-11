@@ -1,4 +1,4 @@
-import { Layer, Text, Line, Circle, Stage, Rect } from "konva";
+import { Text, Layer, Stage } from "konva";
 import Fretboard from "./fretboard.js";
 
 export default class Score {
@@ -20,11 +20,13 @@ export default class Score {
 
   draw() {
     this.stage = this.generateStage();
+    const title = this.createTitle();
+
     this.fretboards.map((e) => {
       const renderdFretboard = e.render();
       this.stage.add(renderdFretboard);
+      this.stage.add(title);
     });
-    // this.stage.draw();
   }
 
   generateStage() {
@@ -46,5 +48,23 @@ export default class Score {
       fretboards.push(fretboard);
     });
     return fretboards;
+  }
+
+  createTitle() {
+    const element = document.querySelector(".container");
+    const width = element.clientWidth;
+
+    const layer = new Layer({
+      kinds: "title",
+    });
+    const text = new Text({
+      text: this.title,
+      fontSize: 24,
+      y: 20,
+      width: width,
+      align: "center",
+    });
+    layer.add(text);
+    return layer;
   }
 }

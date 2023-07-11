@@ -41,27 +41,32 @@ export default class extends Controller {
   }
 
   draw() {
+    this.fetchTitle();
     this.score.draw();
   }
 
   updateScoreCode() {
     const newScoreCode = [];
-    this.score.stage.children.map((e, i) => {
-      const visibleDots = e.children.filter(this.findVisibleDot);
 
-      const dots = visibleDots.map((visibleDot) => ({
-        fill: visibleDot.attrs.fill,
-        fret: visibleDot.attrs.fret,
-        guitarString: visibleDot.attrs.guitarString,
-      }));
+    const fretboards = this.score.stage.children.filter(this.findFretboard);
+    fretboards.map((e, i) => {
+      if (e.attrs.kinds === "fretboard") {
+        const visibleDots = e.children.filter(this.findVisibleDot);
 
-      const fretboardCode = {
-        position: i + 1,
-        startFret: e.attrs.startFret,
-        endFret: e.attrs.endFret,
-        dots: dots,
-      };
-      newScoreCode.push(fretboardCode);
+        const dots = visibleDots.map((visibleDot) => ({
+          fill: visibleDot.attrs.fill,
+          fret: visibleDot.attrs.fret,
+          guitarString: visibleDot.attrs.guitarString,
+        }));
+
+        const fretboardCode = {
+          position: i + 1,
+          startFret: e.attrs.startFret,
+          endFret: e.attrs.endFret,
+          dots: dots,
+        };
+        newScoreCode.push(fretboardCode);
+      }
     });
     this.scoreCodeValue = newScoreCode;
     this.score.scoreCode = this.scoreCodeValue;
@@ -71,5 +76,13 @@ export default class extends Controller {
 
   findVisibleDot(obj) {
     return obj.className === "Circle" && obj.visible() ? true : false;
+  }
+
+  findFretboard(obj) {
+    return obj.attrs.kinds === "fretboard";
+  }
+
+  fetchTitle() {
+    this.score.title = this.titleTarget.value;
   }
 }
