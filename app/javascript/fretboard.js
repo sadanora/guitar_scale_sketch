@@ -4,6 +4,7 @@ export default class Fretboard {
   static referencePoint = 34;
   static black = "#555555";
   static guitarStringSpacing = 30;
+  static currentColor = "#555555";
 
   constructor(fretboardCode = {}) {
     this.position = fretboardCode.position;
@@ -148,13 +149,16 @@ export default class Fretboard {
       );
       const visibleStatus = existingDot ? existingDot.visible : false;
 
+      dotCode.fill ??= this.constructor.black;
+      console.log(dotCode.fill);
+
       const dot = new Circle({
         x: dotX,
         y:
           34 +
           (dotCode.guitarString - 1) * this.constructor.guitarStringSpacing,
         radius: 12,
-        fill: this.constructor.black,
+        fill: dotCode.fill,
         visible: visibleStatus,
         fret: dotCode.fret,
         guitarString: dotCode.guitarString,
@@ -170,10 +174,12 @@ export default class Fretboard {
       });
 
       dot.on("click", function () {
+        dot.fill(Fretboard.currentColor);
         dot.isVisible() ? dot.hide() : dot.show();
       });
 
       clickableArea.on("click", function () {
+        dot.fill(Fretboard.currentColor);
         dot.isVisible() ? dot.hide() : dot.show();
       });
 

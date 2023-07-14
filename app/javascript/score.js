@@ -67,4 +67,8 @@ export default class Score {
     layer.add(text);
     return layer;
   }
+
+  setDotColor(color) {
+    Fretboard.currentColor = color;
+  }
 }

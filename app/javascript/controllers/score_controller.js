@@ -3,7 +3,7 @@ import Score from "../score.js";
 // Connects to data-controller="score"
 export default class extends Controller {
   static targets = ["title", "startFret", "endFret", "output"];
-  static values = { scoreCode: [] };
+  static values = { scoreCode: [], dotColor: String };
 
   initialize() {
     this.score = new Score(this.titleTarget.value, this.scoreCodeValue);
@@ -84,5 +84,37 @@ export default class extends Controller {
 
   fetchTitle() {
     this.score.title = this.titleTarget.value;
+  }
+
+  setBlack() {
+    this.dotColorValue = "#555555";
+  }
+
+  setRed() {
+    this.dotColorValue = "#C7243A";
+  }
+
+  setYellow() {
+    this.dotColorValue = "#EDAD0B";
+  }
+
+  setLightGreen() {
+    this.dotColorValue = "#A4C520";
+  }
+
+  setGreen() {
+    this.dotColorValue = "#009250";
+  }
+
+  setBlue() {
+    this.dotColorValue = "#007FB1";
+  }
+
+  setViolet() {
+    this.dotColorValue = "#5D639E";
+  }
+
+  dotColorValueChanged() {
+    this.score.setDotColor(this.dotColorValue);
   }
 }
