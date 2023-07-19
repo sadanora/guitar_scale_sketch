@@ -1,4 +1,4 @@
-import { Text, Layer, Stage } from "konva";
+import { Text, Group, Layer, Stage } from "konva";
 import Fretboard from "./fretboard.js";
 
 export default class Score {
@@ -7,38 +7,26 @@ export default class Score {
     this.fretboards = this.createFretboards(scoreCode);
   }
 
+  draw() {
+    this.stage = this.#generateStage();
+    const layer = new Layer();
+    this.stage.add(layer);
+    const title = this.#createTitle();
+    layer.add(title);
+
+    this.fretboards.map((fretboard) => {
+      layer.add(fretboard.draw());
+    });
+  }
+
   createFretboard(startFret, endFret, position) {
     const fretboardCode = {
       startFret: startFret,
       endFret: endFret,
       position: position,
     };
-
     const fretboard = new Fretboard(fretboardCode);
     this.fretboards.push(fretboard);
-  }
-
-  draw() {
-    this.stage = this.generateStage();
-    const title = this.createTitle();
-
-    this.fretboards.map((e) => {
-      const renderdFretboard = e.render();
-      this.stage.add(renderdFretboard);
-      this.stage.add(title);
-    });
-  }
-
-  generateStage() {
-    const element = document.querySelector(".container");
-    const width = element.clientWidth;
-    const height = width * 1.41;
-    const stage = new Stage({
-      container: "scoreContainer",
-      width: width,
-      height: height,
-    });
-    return stage;
   }
 
   createFretboards(scoreCode) {
@@ -50,22 +38,33 @@ export default class Score {
     return fretboards;
   }
 
-  createTitle() {
+  #generateStage() {
     const element = document.querySelector(".container");
     const width = element.clientWidth;
+    const height = width * 1.41;
+    const stage = new Stage({
+      container: "scoreContainer",
+      width: width,
+      height: height,
+    });
+    return stage;
+  }
 
-    const layer = new Layer({
+  #createTitle() {
+    const element = document.querySelector(".container");
+    const width = element.clientWidth;
+    const titleContainer = new Group({
       kinds: "title",
     });
-    const text = new Text({
+    const title = new Text({
       text: this.title,
       fontSize: 24,
       y: 20,
       width: width,
       align: "center",
     });
-    layer.add(text);
-    return layer;
+    titleContainer.add(title);
+    return titleContainer;
   }
 
   setDotColor(color) {
