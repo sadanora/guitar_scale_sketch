@@ -41,7 +41,7 @@ export default class Score {
   #generateStage() {
     const element = document.querySelector(".container");
     const width = element.clientWidth;
-    const height = width * 1.41;
+    const height = width * Math.sqrt(2);
     const stage = new Stage({
       container: "scoreContainer",
       width: width,
