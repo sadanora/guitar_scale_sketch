@@ -16,7 +16,7 @@ export default class Fretboard {
 
   draw() {
     const fretboard = new Group({
-      kinds: "fretboard",
+      name: "fretboard",
       fretboardPosition: this.position,
       startFret: this.startFret,
       endFret: this.endFret,
@@ -177,6 +177,7 @@ export default class Fretboard {
       fingerPosition.fret - fretNumbers[0]
     );
     return new Group({
+      name: "dotContainer",
       x: dotContainerX,
       y:
         17 +
