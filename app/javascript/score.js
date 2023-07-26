@@ -5,12 +5,12 @@ export default class Score {
   constructor(title = "", scoreCode = []) {
     this.title = title;
     this.fretboards = this.createFretboards(scoreCode);
+    this.stage = this.#generateStage();
   }
 
   draw() {
-    this.stage = this.#generateStage();
-    const layer = new Layer();
-    this.stage.add(layer);
+    let layer = this.stage.getChildren()[0];
+    layer.destroyChildren();
     const title = this.#createTitle();
     layer.add(title);
 
@@ -31,6 +31,7 @@ export default class Score {
 
   createFretboards(scoreCode) {
     const fretboards = [];
+    // this.fretboards = [];
     scoreCode.forEach((e) => {
       const fretboard = new Fretboard(e);
       fretboards.push(fretboard);
@@ -41,12 +42,15 @@ export default class Score {
   #generateStage() {
     const element = document.querySelector(".container");
     const width = element.clientWidth;
-    const height = width * 1.41;
+    const height = width * Math.sqrt(2);
     const stage = new Stage({
       container: "scoreContainer",
       width: width,
       height: height,
     });
+    const layer = new Layer();
+    stage.add(layer);
+
     return stage;
   }
 

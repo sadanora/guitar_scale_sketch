@@ -19,9 +19,7 @@ export default class extends Controller {
   }
 
   addFretboard() {
-    if (this.score.stage) {
-      this.#updateScoreCode();
-    }
+    this.#updateScoreCode();
     this.#addFretboardCode();
     this.scoreCodeValue = this.score.scoreCode;
     this.score.fretboards = this.score.createFretboards(this.scoreCodeValue);
@@ -43,43 +41,42 @@ export default class extends Controller {
   }
 
   #updateScoreCode() {
-    const fretboards = this.score.stage.children[0].children.filter(
-      this.#isFretboard
-    );
-    const newScoreCode = fretboards.map((fretboard, i) => {
-      const dotContainers = fretboard.getChildren((node) => {
-        return node.getClassName() === "Group";
+    if (this.score.fretboards.length === 0) {
+      return;
+    } else {
+      const fretboards = this.score.stage.getLayers()[0].getChildren((node) => {
+        return node.hasName("fretboard");
       });
-      const dots = dotContainers
-        .map((dotContainer) => {
-          return dotContainer.getChildren((node) => {
-            return node.getClassName() === "Circle";
-          });
-        })
-        .filter((v) => v.length)
-        .flat();
-      const dotCodes = dots.map((dotCode) => ({
-        fill: dotCode.attrs.fill,
-        fret: dotCode.attrs.fret,
-        guitarString: dotCode.attrs.guitarString,
-      }));
-      const fretboardCode = {
-        position: i + 1,
-        startFret: fretboard.attrs.startFret,
-        endFret: fretboard.attrs.endFret,
-        dots: dotCodes,
-      };
-      return fretboardCode;
-    });
+      const newScoreCode = fretboards.map((fretboard, i) => {
+        const dotContainers = fretboard.getChildren((node) => {
+          return node.hasName("dotContainer");
+        });
+        const dots = dotContainers
+          .map((dotContainer) => {
+            return dotContainer.getChildren((node) => {
+              return node.getClassName() === "Circle";
+            });
+          })
+          .filter((v) => v.length)
+          .flat();
+        const dotCodes = dots.map((dot) => ({
+          fill: dot.attrs.fill,
+          fret: dot.attrs.fret,
+          guitarString: dot.attrs.guitarString,
+        }));
+        const fretboardCode = {
+          position: i + 1,
+          startFret: fretboard.attrs.startFret,
+          endFret: fretboard.attrs.endFret,
+          dots: dotCodes,
+        };
+        return fretboardCode;
+      });
 
-    this.scoreCodeValue = newScoreCode;
-    this.score.scoreCode = this.scoreCodeValue;
-    this.outputTarget.value = JSON.stringify(this.scoreCodeValue);
-    this.score.fretboards = this.score.createFretboards(this.scoreCodeValue);
-  }
-
-  #isFretboard(group) {
-    return group.attrs.kinds === "fretboard";
+      this.scoreCodeValue = this.score.scoreCode = newScoreCode;
+      this.outputTarget.value = JSON.stringify(this.scoreCodeValue);
+      this.score.fretboards = this.score.createFretboards(this.scoreCodeValue);
+    }
   }
 
   draw() {
