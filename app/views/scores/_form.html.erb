@@ -1,27 +1,27 @@
-<div data-controller="score">
+<div data-controller="score-form">
   <%= bootstrap_form_with(model: score) do |f| %>
-    <%= f.text_field :title, data: { score_target: "title" } %>
-    <%= f.text_area :score_code, data: { score_target: "output" } %>
+    <%= f.text_field :title, data: { score_form_target: "title" } %>
+    <%= f.text_area :score_code, data: { score_form_target: "output" } %>
     <%= f.check_box :is_public %>
     <%= f.primary %>
   <% end %>
   <div class="sticky-top input-group input-group-sm">
     <%= bootstrap_form_with do |f| %>
-      <%= f.select :startFret, [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ], include_blank: "Select a Start Fret", floating: true, wrapper: { data: { score_target: "startFret" } } %>
-      <%= f.select :endFret, [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,24 ], include_blank: "Select a End Fret", floating: true, wrapper: { data: { score_target: "endFret" } } %>
+      <%= f.select :startFret, [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ], include_blank: "Select a Start Fret", floating: true, wrapper: { data: { score_form_target: "startFret" } } %>
+      <%= f.select :endFret, [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,24 ], include_blank: "Select a End Fret", floating: true, wrapper: { data: { score_form_target: "endFret" } } %>
     <% end %>
     <div class="color-picker">
       <ul>
-        <li><span class="black" data-action="click->score#setBlack"></span></li>
-        <li><span class="red" data-action="click->score#setRed"></span></li>
-        <li><span class="yellow" data-action="click->score#setYellow"></span></li>
-        <li><span class="light-green" data-action="click->score#setLightGreen"></span></li>
-        <li><span class="green" data-action="click->score#setGreen"></span></li>
-        <li><span class="blue" data-action="click->score#setBlue"></span></li>
-        <li><span class="violet" data-action="click->score#setViolet"></span></li>
+        <li><span class="black" data-action="click->score-form#setBlack"></span></li>
+        <li><span class="red" data-action="click->score-form#setRed"></span></li>
+        <li><span class="yellow" data-action="click->score-form#setYellow"></span></li>
+        <li><span class="light-green" data-action="click->score-form#setLightGreen"></span></li>
+        <li><span class="green" data-action="click->score-form#setGreen"></span></li>
+        <li><span class="blue" data-action="click->score-form#setBlue"></span></li>
+        <li><span class="violet" data-action="click->score-form#setViolet"></span></li>
       </ul>
     </div>
-    <button data-action="click->score#addFretboard">Add</button>
+    <button data-action="click->score-form#addFretboard">Add</button>
   </div>
-  <div data-score-target="output" id="scoreContainer"></div>
+  <div data-score-form-target="output" id="scoreContainer"></div>
 </div>

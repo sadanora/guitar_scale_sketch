@@ -4,10 +4,25 @@
 
 <div id="scores">
   <% @scores.each do |score| %>
-    <%= render score %>
-    <p>
-      <%= link_to "Show this score", score %>
-    </p>
+    <div id="<%= dom_id score %>">
+      <p>
+        <strong>Id:</strong>
+        <%= score.id %>
+      </p>
+
+      <p>
+        <strong>Title:</strong>
+        <%= score.title %>
+      </p>
+
+      <p>
+        <strong>Is public:</strong>
+        <%= score.is_public %>
+      </p>
+      <p>
+        <%= link_to "Show this score", score %>
+      </p>
+    </div>
   <% end %>
 </div>
 
