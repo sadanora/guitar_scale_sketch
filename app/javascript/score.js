@@ -58,7 +58,7 @@ export default class Score {
     const element = document.querySelector(".container");
     const width = element.clientWidth;
     const titleContainer = new Group({
-      kinds: "title",
+      name: "title",
     });
     const title = new Text({
       text: this.title,

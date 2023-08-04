@@ -49,6 +49,7 @@ export default class Fretboard {
 
   #createFretNumberTexts() {
     const fretNumberTexts = new Group({
+      name: "fretNumberTexts",
       x: 127,
       y: 8,
     });
@@ -67,6 +68,7 @@ export default class Fretboard {
     const points = [0, 0, 0, 150];
 
     const frets = new Group({
+      name: "frets",
       x: Fretboard.referencePoint,
       y: Fretboard.referencePoint,
     });
@@ -84,6 +86,7 @@ export default class Fretboard {
 
   #createGuitarStrings() {
     const guitarStrings = new Group({
+      name: "guitarStrings",
       x: Fretboard.referencePoint,
       y: Fretboard.referencePoint,
     });
@@ -102,6 +105,7 @@ export default class Fretboard {
 
   #createDeleteButton() {
     const button = new Group({
+      name: "deleteButton",
       x: 157 + 100 * (this.fretNumbers.length - 1),
       y: Fretboard.referencePoint + Fretboard.guitarStringSpacing * 4,
       width: 30,
@@ -173,12 +177,12 @@ export default class Fretboard {
   }
 
   #generateDotContainer(fingerPosition) {
-    const dotContainerX = this.#calcDotContainerX(
+    const x = this.#calcDotContainerX(
       fingerPosition.fret - this.fretNumbers[0]
     );
     return new Group({
       name: "dotContainer",
-      x: dotContainerX,
+      x: x,
       y:
         17 +
         (fingerPosition.guitarString - 1) *
