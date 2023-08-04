@@ -12,6 +12,10 @@ export default class Fretboard {
     this.startFret = fretboardCode.startFret;
     this.endFret = fretboardCode.endFret;
     this.dots = fretboardCode.dots || [];
+    this.fretNumbers = this.#generateFretNumbers(
+      fretboardCode.startFret,
+      fretboardCode.endFret
+    );
   }
 
   draw() {
@@ -22,13 +26,12 @@ export default class Fretboard {
       endFret: this.endFret,
       y: 100 + 200 * (this.position - 1),
     });
-    const fretNumbers = this.#generateFretNumbers(this.startFret, this.endFret);
     const fretboardsParts = [
-      this.#createFretNumberTexts(fretNumbers),
-      this.#createFrets(fretNumbers),
-      this.#createGuitarStrings(fretNumbers.length),
-      ...this.#createDots(fretNumbers),
-      this.#createDeleteButton(fretNumbers.length),
+      this.#createFretNumberTexts(),
+      this.#createFrets(),
+      this.#createGuitarStrings(),
+      ...this.#createDots(),
+      this.#createDeleteButton(),
     ];
     fretboardsParts.forEach((parts) => {
       fretboard.add(parts);
@@ -44,12 +47,12 @@ export default class Fretboard {
     return fretNumbers;
   }
 
-  #createFretNumberTexts(fretNumbers) {
+  #createFretNumberTexts() {
     const fretNumberTexts = new Group({
       x: 127,
       y: 8,
     });
-    fretNumbers.forEach((fretNumber, i) => {
+    this.fretNumbers.forEach((fretNumber, i) => {
       const fretNumberText = new Text({
         x: Fretboard.fretDistance * i,
         fontSize: 24,
@@ -60,14 +63,14 @@ export default class Fretboard {
     return fretNumberTexts;
   }
 
-  #createFrets(fretNumbers) {
+  #createFrets() {
     const points = [0, 0, 0, 150];
 
     const frets = new Group({
       x: Fretboard.referencePoint,
       y: Fretboard.referencePoint,
     });
-    [...fretNumbers, fretNumbers.length].forEach((_fretNumber, i) => {
+    [...this.fretNumbers, this.fretNumbers.length].forEach((_fretNumber, i) => {
       const fret = new Line({
         x: Fretboard.fretDistance * i,
         points: points,
@@ -79,7 +82,7 @@ export default class Fretboard {
     return frets;
   }
 
-  #createGuitarStrings(fretboardWidth) {
+  #createGuitarStrings() {
     const guitarStrings = new Group({
       x: Fretboard.referencePoint,
       y: Fretboard.referencePoint,
@@ -88,7 +91,7 @@ export default class Fretboard {
     for (let i = 0; i < 6; i++) {
       const guitarString = new Line({
         y: Fretboard.guitarStringSpacing * i,
-        points: [0, 0, 100 * fretboardWidth, 0],
+        points: [0, 0, 100 * this.fretNumbers.length, 0],
         stroke: Fretboard.black,
         strokeWidth: 1,
       });
@@ -97,9 +100,9 @@ export default class Fretboard {
     return guitarStrings;
   }
 
-  #createDeleteButton(fretboardWidth) {
+  #createDeleteButton() {
     const button = new Group({
-      x: 157 + 100 * (fretboardWidth - 1),
+      x: 157 + 100 * (this.fretNumbers.length - 1),
       y: Fretboard.referencePoint + Fretboard.guitarStringSpacing * 4,
       width: 30,
       height: 30,
@@ -123,12 +126,12 @@ export default class Fretboard {
     return button;
   }
 
-  #createDots(fretNumbers) {
+  #createDots() {
     const guitarStringNumbers = [1, 2, 3, 4, 5, 6];
     const dots = [];
 
     // [{"fret": 1,"guitarString": 1,"fill": ""}, {"fret": 1,"guitarString": 2,"fill": ""}...]
-    const fingerPositions = fretNumbers.flatMap((fretNumber) =>
+    const fingerPositions = this.fretNumbers.flatMap((fretNumber) =>
       guitarStringNumbers.map((guitarStringNumber) => ({
         fret: fretNumber,
         guitarString: guitarStringNumber,
@@ -137,10 +140,7 @@ export default class Fretboard {
     );
 
     fingerPositions.map((fingerPosition) => {
-      const dotContainer = this.#generateDotContainer(
-        fretNumbers,
-        fingerPosition
-      );
+      const dotContainer = this.#generateDotContainer(fingerPosition);
       const clickableArea = new Rect({
         width: 100,
         height: 30,
@@ -172,9 +172,9 @@ export default class Fretboard {
     return dots;
   }
 
-  #generateDotContainer(fretNumbers, fingerPosition) {
+  #generateDotContainer(fingerPosition) {
     const dotContainerX = this.#calcDotContainerX(
-      fingerPosition.fret - fretNumbers[0]
+      fingerPosition.fret - this.fretNumbers[0]
     );
     return new Group({
       name: "dotContainer",
