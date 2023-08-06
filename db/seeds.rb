@@ -6,36 +6,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 1,
-          "end_fret": 5,
+          "position": 1,
+          "startFret": 1,
+          "endFret": 5,
           "dots": [
             {
-              "string": 1,
+              "guitarString": 1,
               "fret": 1,
-              "color": "#333"
+              "fill": "#555555"
             },
             {
-              "string": 1,
+              "guitarString": 1,
               "fret": 1,
-              "color": "red"
+              "fill": "#C7243A"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 3,
-          "end_fret": 10,
+          "position": 2,
+          "startFret": 3,
+          "endFret": 10,
           "dots": [
             {
-              "string": 1,
+              "guitarString": 1,
               "fret": 3,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 5,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -48,36 +48,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -90,36 +90,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -132,36 +132,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -174,36 +174,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -216,36 +216,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -258,36 +258,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -300,36 +300,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -342,36 +342,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -384,36 +384,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -426,36 +426,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -468,36 +468,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -510,36 +510,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -552,36 +552,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -594,36 +594,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }
@@ -636,36 +636,36 @@ Score.create(
       "score_code": <<~'EOS'
       [
         {
-          "position": 0,
-          "start_fret": 3,
-          "end_fret": 6,
+          "position": 1,
+          "startFret": 3,
+          "endFret": 6,
           "dots": [
             {
-              "string": 2,
+              "guitarString": 2,
               "fret": 3,
-              "color": "blue"
+              "fill": "#007FB1"
             },
             {
-              "string": 4,
+              "guitarString": 4,
               "fret": 5,
-              "color": "yellow"
+              "fill": "#EDAD0B"
             }
           ]
         },
         {
-          "position": 1,
-          "start_fret": 11,
-          "end_fret": 17,
+          "position": 2,
+          "startFret": 11,
+          "endFret": 17,
           "dots": [
             {
-              "string": 6,
+              "guitarString": 6,
               "fret": 12,
-              "color": "red"
+              "fill": "#C7243A"
             },
             {
-              "string": 3,
+              "guitarString": 3,
               "fret": 16,
-              "color": "black"
+              "fill": "#555555"
             }
           ]
         }

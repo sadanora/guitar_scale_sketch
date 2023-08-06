@@ -1,17 +1,7 @@
 <div id="<%= dom_id score %>">
-  <p>
-    <strong>Id:</strong>
-    <%= score.id %>
-  </p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= score.title %>
-  </p>
-
-  <p>
-    <strong>Is public:</strong>
-    <%= score.is_public %>
-  </p>
-
+  <div data-controller="score">
+    <div data-score-target="title" class="d-none"><%= score.title %></div>
+    <div data-score-target="scoreCode" class="d-none"><%= score.score_code %></div>
+    <div id="scoreContainer"></div>
+  </div>
 </div>

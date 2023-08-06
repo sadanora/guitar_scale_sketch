@@ -1,4 +1,4 @@
-import { Text, Line, Circle, Rect, Group, Image } from "konva";
+import { Text, Line, Circle, Group } from "konva";
 
 export default class Fretboard {
   static referencePoint = 34;
@@ -12,26 +12,29 @@ export default class Fretboard {
     this.startFret = fretboardCode.startFret;
     this.endFret = fretboardCode.endFret;
     this.dots = fretboardCode.dots || [];
+    this.fretNumbers = this.#generateFretNumbers(
+      fretboardCode.startFret,
+      fretboardCode.endFret
+    );
   }
 
-  draw() {
+  build() {
     const fretboard = new Group({
       name: "fretboard",
       fretboardPosition: this.position,
       startFret: this.startFret,
       endFret: this.endFret,
+      fretNumbers: this.fretNumbers,
       y: 100 + 200 * (this.position - 1),
     });
-    const fretNumbers = this.#generateFretNumbers(this.startFret, this.endFret);
-    const fretboardsParts = [
-      this.#createFretNumberTexts(fretNumbers),
-      this.#createFrets(fretNumbers),
-      this.#createGuitarStrings(fretNumbers.length),
-      ...this.#createDots(fretNumbers),
-      this.#createDeleteButton(fretNumbers.length),
+    const shapes = [
+      this.#createFretNumberTexts(),
+      this.#createFrets(),
+      this.#createGuitarStrings(),
+      ...this.#createDots(),
     ];
-    fretboardsParts.forEach((parts) => {
-      fretboard.add(parts);
+    shapes.forEach((s) => {
+      fretboard.add(s);
     });
 
     return fretboard;
@@ -44,12 +47,13 @@ export default class Fretboard {
     return fretNumbers;
   }
 
-  #createFretNumberTexts(fretNumbers) {
+  #createFretNumberTexts() {
     const fretNumberTexts = new Group({
+      name: "fretNumberTexts",
       x: 127,
       y: 8,
     });
-    fretNumbers.forEach((fretNumber, i) => {
+    this.fretNumbers.forEach((fretNumber, i) => {
       const fretNumberText = new Text({
         x: Fretboard.fretDistance * i,
         fontSize: 24,
@@ -60,14 +64,15 @@ export default class Fretboard {
     return fretNumberTexts;
   }
 
-  #createFrets(fretNumbers) {
+  #createFrets() {
     const points = [0, 0, 0, 150];
 
     const frets = new Group({
+      name: "frets",
       x: Fretboard.referencePoint,
       y: Fretboard.referencePoint,
     });
-    [...fretNumbers, fretNumbers.length].forEach((_fretNumber, i) => {
+    [...this.fretNumbers, this.fretNumbers.length].forEach((_fretNumber, i) => {
       const fret = new Line({
         x: Fretboard.fretDistance * i,
         points: points,
@@ -79,8 +84,9 @@ export default class Fretboard {
     return frets;
   }
 
-  #createGuitarStrings(fretboardWidth) {
+  #createGuitarStrings() {
     const guitarStrings = new Group({
+      name: "guitarStrings",
       x: Fretboard.referencePoint,
       y: Fretboard.referencePoint,
     });
@@ -88,7 +94,7 @@ export default class Fretboard {
     for (let i = 0; i < 6; i++) {
       const guitarString = new Line({
         y: Fretboard.guitarStringSpacing * i,
-        points: [0, 0, 100 * fretboardWidth, 0],
+        points: [0, 0, 100 * this.fretNumbers.length, 0],
         stroke: Fretboard.black,
         strokeWidth: 1,
       });
@@ -97,38 +103,12 @@ export default class Fretboard {
     return guitarStrings;
   }
 
-  #createDeleteButton(fretboardWidth) {
-    const button = new Group({
-      x: 157 + 100 * (fretboardWidth - 1),
-      y: Fretboard.referencePoint + Fretboard.guitarStringSpacing * 4,
-      width: 30,
-      height: 30,
-    });
-
-    Image.fromURL("/trash-fill.svg", (imageNode) => {
-      button.add(imageNode);
-      imageNode.setAttrs({
-        width: 30,
-        height: 30,
-      });
-      button.on("click", function () {
-        const fretboard = this.getParent();
-        const deleteEvent = new CustomEvent("fretboardDeleted", {
-          bubbles: true,
-        });
-        fretboard.destroy();
-        document.getElementById("scoreContainer").dispatchEvent(deleteEvent);
-      });
-    });
-    return button;
-  }
-
-  #createDots(fretNumbers) {
+  #createDots() {
     const guitarStringNumbers = [1, 2, 3, 4, 5, 6];
     const dots = [];
 
     // [{"fret": 1,"guitarString": 1,"fill": ""}, {"fret": 1,"guitarString": 2,"fill": ""}...]
-    const fingerPositions = fretNumbers.flatMap((fretNumber) =>
+    const fingerPositions = this.fretNumbers.flatMap((fretNumber) =>
       guitarStringNumbers.map((guitarStringNumber) => ({
         fret: fretNumber,
         guitarString: guitarStringNumber,
@@ -137,32 +117,13 @@ export default class Fretboard {
     );
 
     fingerPositions.map((fingerPosition) => {
-      const dotContainer = this.#generateDotContainer(
-        fretNumbers,
-        fingerPosition
-      );
-      const clickableArea = new Rect({
-        width: 100,
-        height: 30,
-      });
-      // dotの追加、削除を行うイベント
-      clickableArea.on("click", () => {
-        // dotを取得
-        const dot = this.#getDot(dotContainer);
-        // dotがあれば削除、なければ追加する
-        if (dot.length) {
-          dot[0].destroy();
-        } else {
-          dotContainer.add(this.#generateDot(dotContainer.attrs.dotProperty));
-        }
-      });
-      dotContainer.add(clickableArea);
+      const dotContainer = this.#createDotContainer(fingerPosition);
 
       // fretboard.dotsにfretとguitarStringが一致するdotが存在するか確認
       const drawnDot = this.#getDrawnDot(dotContainer);
       // fretboard.dotsにdotが存在すればdotを追加
       if (drawnDot) {
-        const dot = this.#generateDot(dotContainer.attrs.dotProperty);
+        const dot = this.#createDot(dotContainer.attrs.dotProperty);
         dot.fill(drawnDot.fill);
         dotContainer.add(dot);
       }
@@ -172,13 +133,13 @@ export default class Fretboard {
     return dots;
   }
 
-  #generateDotContainer(fretNumbers, fingerPosition) {
-    const dotContainerX = this.#calcDotContainerX(
-      fingerPosition.fret - fretNumbers[0]
+  #createDotContainer(fingerPosition) {
+    const x = this.#calcDotContainerX(
+      fingerPosition.fret - this.fretNumbers[0]
     );
     return new Group({
       name: "dotContainer",
-      x: dotContainerX,
+      x: x,
       y:
         17 +
         (fingerPosition.guitarString - 1) *
@@ -204,23 +165,15 @@ export default class Fretboard {
     return x;
   }
 
-  #getDot(parent) {
-    return parent.getChildren((node) => {
-      return node.getClassName() === "Circle";
-    });
-  }
-
-  #generateDot(dotProperty) {
+  #createDot(dotProperty) {
     const dot = new Circle({
+      name: "dot",
       x: dotProperty.x,
       y: dotProperty.y,
       radius: dotProperty.radius,
       fill: Fretboard.currentColor,
       fret: dotProperty.fret,
       guitarString: dotProperty.guitarString,
-    });
-    dot.on("click", () => {
-      dot.destroy();
     });
     return dot;
   }

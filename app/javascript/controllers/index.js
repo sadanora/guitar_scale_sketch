@@ -4,8 +4,8 @@
 
 import { application } from "./application";
 
-import HelloController from "./hello_controller";
-application.register("hello", HelloController);
-
 import ScoreController from "./score_controller";
 application.register("score", ScoreController);
+
+import ScoreFormController from "./score_form_controller";
+application.register("score-form", ScoreFormController);
