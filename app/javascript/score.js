@@ -77,7 +77,7 @@ export default class Score {
     return titleContainer;
   }
 
-  addClickEvent(fretboardShapes, scoreCode) {
+  addClickEvent(fretboardShapes) {
     fretboardShapes.forEach((fretboardShape) => {
       this.addDotDestroyEvent(fretboardShape);
       this.addClickableArea(fretboardShape);
