@@ -1,4 +1,4 @@
-import { Text, Line, Circle, Rect, Group, Image } from "konva";
+import { Text, Line, Circle, Group } from "konva";
 
 export default class Fretboard {
   static referencePoint = 34;
@@ -18,23 +18,23 @@ export default class Fretboard {
     );
   }
 
-  draw() {
+  build() {
     const fretboard = new Group({
       name: "fretboard",
       fretboardPosition: this.position,
       startFret: this.startFret,
       endFret: this.endFret,
+      fretNumbers: this.fretNumbers,
       y: 100 + 200 * (this.position - 1),
     });
-    const fretboardsParts = [
+    const shapes = [
       this.#createFretNumberTexts(),
       this.#createFrets(),
       this.#createGuitarStrings(),
       ...this.#createDots(),
-      this.#createDeleteButton(),
     ];
-    fretboardsParts.forEach((parts) => {
-      fretboard.add(parts);
+    shapes.forEach((s) => {
+      fretboard.add(s);
     });
 
     return fretboard;
@@ -103,33 +103,6 @@ export default class Fretboard {
     return guitarStrings;
   }
 
-  #createDeleteButton() {
-    const button = new Group({
-      name: "deleteButton",
-      x: 157 + 100 * (this.fretNumbers.length - 1),
-      y: Fretboard.referencePoint + Fretboard.guitarStringSpacing * 4,
-      width: 30,
-      height: 30,
-    });
-
-    Image.fromURL("/trash-fill.svg", (imageNode) => {
-      button.add(imageNode);
-      imageNode.setAttrs({
-        width: 30,
-        height: 30,
-      });
-      button.on("click", function () {
-        const fretboard = this.getParent();
-        const deleteEvent = new CustomEvent("fretboardDeleted", {
-          bubbles: true,
-        });
-        fretboard.destroy();
-        document.getElementById("scoreContainer").dispatchEvent(deleteEvent);
-      });
-    });
-    return button;
-  }
-
   #createDots() {
     const guitarStringNumbers = [1, 2, 3, 4, 5, 6];
     const dots = [];
@@ -144,29 +117,13 @@ export default class Fretboard {
     );
 
     fingerPositions.map((fingerPosition) => {
-      const dotContainer = this.#generateDotContainer(fingerPosition);
-      const clickableArea = new Rect({
-        width: 100,
-        height: 30,
-      });
-      // dotの追加、削除を行うイベント
-      clickableArea.on("click", () => {
-        // dotを取得
-        const dot = this.#getDot(dotContainer);
-        // dotがあれば削除、なければ追加する
-        if (dot.length) {
-          dot[0].destroy();
-        } else {
-          dotContainer.add(this.#generateDot(dotContainer.attrs.dotProperty));
-        }
-      });
-      dotContainer.add(clickableArea);
+      const dotContainer = this.#createDotContainer(fingerPosition);
 
       // fretboard.dotsにfretとguitarStringが一致するdotが存在するか確認
       const drawnDot = this.#getDrawnDot(dotContainer);
       // fretboard.dotsにdotが存在すればdotを追加
       if (drawnDot) {
-        const dot = this.#generateDot(dotContainer.attrs.dotProperty);
+        const dot = this.#createDot(dotContainer.attrs.dotProperty);
         dot.fill(drawnDot.fill);
         dotContainer.add(dot);
       }
@@ -176,7 +133,7 @@ export default class Fretboard {
     return dots;
   }
 
-  #generateDotContainer(fingerPosition) {
+  #createDotContainer(fingerPosition) {
     const x = this.#calcDotContainerX(
       fingerPosition.fret - this.fretNumbers[0]
     );
@@ -208,23 +165,15 @@ export default class Fretboard {
     return x;
   }
 
-  #getDot(parent) {
-    return parent.getChildren((node) => {
-      return node.getClassName() === "Circle";
-    });
-  }
-
-  #generateDot(dotProperty) {
+  #createDot(dotProperty) {
     const dot = new Circle({
+      name: "dot",
       x: dotProperty.x,
       y: dotProperty.y,
       radius: dotProperty.radius,
       fill: Fretboard.currentColor,
       fret: dotProperty.fret,
       guitarString: dotProperty.guitarString,
-    });
-    dot.on("click", () => {
-      dot.destroy();
     });
     return dot;
   }

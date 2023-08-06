@@ -13,6 +13,7 @@ export default class extends Controller {
   }
 
   draw() {
-    this.score.draw();
+    const fretboardShapes = this.score.buildFretboardShapes();
+    this.score.draw(fretboardShapes);
   }
 }
