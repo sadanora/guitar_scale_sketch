@@ -2,3 +2,5 @@
 
 bundle exec rubocop
 bundle exec erblint --lint-all
+yarn eslint ./app/javascript
+yarn prettier --check ./app/javascript
