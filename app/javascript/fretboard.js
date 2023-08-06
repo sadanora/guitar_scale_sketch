@@ -14,7 +14,7 @@ export default class Fretboard {
     this.dots = fretboardCode.dots || [];
     this.fretNumbers = this.#generateFretNumbers(
       fretboardCode.startFret,
-      fretboardCode.endFret
+      fretboardCode.endFret,
     );
   }
 
@@ -42,7 +42,7 @@ export default class Fretboard {
 
   #generateFretNumbers(startFret, endFret) {
     const fretNumbers = [...Array(endFret - startFret + 1).keys()].map(
-      (value) => value + startFret
+      (value) => value + startFret,
     );
     return fretNumbers;
   }
@@ -113,7 +113,7 @@ export default class Fretboard {
         fret: fretNumber,
         guitarString: guitarStringNumber,
         fill: "",
-      }))
+      })),
     );
 
     fingerPositions.map((fingerPosition) => {
@@ -135,7 +135,7 @@ export default class Fretboard {
 
   #createDotContainer(fingerPosition) {
     const x = this.#calcDotContainerX(
-      fingerPosition.fret - this.fretNumbers[0]
+      fingerPosition.fret - this.fretNumbers[0],
     );
     return new Group({
       name: "dotContainer",
@@ -182,7 +182,7 @@ export default class Fretboard {
     return this.dots.find(
       (dot) =>
         dot.fret === dotContainer.attrs.dotProperty.fret &&
-        dot.guitarString === dotContainer.attrs.dotProperty.guitarString
+        dot.guitarString === dotContainer.attrs.dotProperty.guitarString,
     );
   }
 }

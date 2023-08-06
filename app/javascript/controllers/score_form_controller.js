@@ -28,9 +28,11 @@ export default class extends Controller {
   }
 
   #addFretboardCode() {
+    console.log(this.startFretTargets);
+    console.log(this.endFretTarget.parentNode[2].value);
     const fretboardCode = {
-      startFret: parseInt(startFret.value),
-      endFret: parseInt(endFret.value),
+      startFret: parseInt(this.startFretTarget.parentNode[1].value),
+      endFret: parseInt(this.endFretTarget.parentNode[2].value),
     };
     if (!this.score.scoreCode) {
       fretboardCode.position = 1;

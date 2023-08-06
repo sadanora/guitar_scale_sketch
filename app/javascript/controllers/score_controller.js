@@ -7,7 +7,7 @@ export default class extends Controller {
   initialize() {
     this.score = new Score(
       this.titleTarget.textContent,
-      JSON.parse(this.scoreCodeTarget.textContent)
+      JSON.parse(this.scoreCodeTarget.textContent),
     );
     this.draw();
   }
