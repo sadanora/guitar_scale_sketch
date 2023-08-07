@@ -1,0 +1,9 @@
+@media print {
+  header, .score-actions {
+    display: none;
+  }
+  canvas {
+    display: block;
+    margin: auto;
+  }
+}
