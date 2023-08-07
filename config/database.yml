@@ -23,13 +23,13 @@ default: &default
 
 development:
   <<: *default
-  database: fretboard_diagrams_generator_development
+  database: guitar_scale_sketch_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: fretboard_diagrams_generator
+  #username: guitar_scale_sketch_generator
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: fretboard_diagrams_generator_test
+  database: guitar_scale_sketch_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: fretboard_diagrams_generator_production
-  username: fretboard_diagrams_generator
-  password: <%= ENV["FRETBOARD_DIAGRAMS_GENERATOR_DATABASE_PASSWORD"] %>
+  database: guitar_scale_sketch_production
+  username: guitar_scale_sketch
+  password: <%= ENV["GUITAR_SCALE_SKETCH_DATABASE_PASSWORD"] %>

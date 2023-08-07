@@ -96,7 +96,6 @@ export default class Score {
       })
       .filter((v) => v.length)
       .flat();
-    console.log(dots);
     dots.forEach((dot) => {
       dot.on("click", () => {
         dot.destroy();
