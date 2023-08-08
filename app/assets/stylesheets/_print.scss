@@ -1,0 +1,18 @@
+@page {
+  margin: 10mm;
+  size: A4;
+}
+
+@media print {
+  body {
+    width: 1320px;
+    zoom: 0.8;
+  }
+  header, .score-actions {
+    display: none;
+  }
+  div {
+    display: flex;
+    justify-content: center;
+  }
+}

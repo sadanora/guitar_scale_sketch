@@ -68,7 +68,7 @@ export default class Score {
     });
     const title = new Text({
       text: this.title,
-      fontSize: 24,
+      fontSize: 40,
       y: 20,
       width: width,
       align: "center",
