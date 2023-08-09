@@ -2,6 +2,9 @@ import { Text, Rect, Circle, Image, Group, Layer, Stage } from "konva";
 import Fretboard from "./fretboard.js";
 
 export default class Score {
+  static titleHeight = 100;
+  static fretboardHeight = 200;
+
   constructor(title = "", scoreCode = []) {
     this.title = title;
     this.fretboards = this.createFretboards(scoreCode);
@@ -48,7 +51,7 @@ export default class Score {
   #generateStage() {
     const element = document.querySelector(".container");
     const width = element.clientWidth;
-    const height = width * Math.sqrt(2);
+    const height = Score.titleHeight + Score.fretboardHeight;
     const stage = new Stage({
       container: "scoreContainer",
       width: width,
@@ -58,6 +61,12 @@ export default class Score {
     stage.add(layer);
 
     return stage;
+  }
+
+  setStageHeight() {
+    const stageHeight =
+      Score.titleHeight + Score.fretboardHeight * this.fretboards.length;
+    this.stage.height(stageHeight);
   }
 
   #createTitle() {

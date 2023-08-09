@@ -82,6 +82,7 @@ export default class extends Controller {
 
   draw() {
     this.fetchTitle();
+    this.score.setStageHeight();
     const fretboardShapes = this.score.buildFretboardShapes();
     this.score.addClickEvent(fretboardShapes, this.scoreCode);
     this.score.addDeleteButton(fretboardShapes);
