@@ -10,7 +10,15 @@ export default class extends Controller {
   };
 
   initialize() {
-    this.score = new Score(this.titleTarget.value, this.scoreCodeValue);
+    if (this.outputTarget.value) {
+      this.score = new Score(
+        this.titleTarget.value,
+        JSON.parse(this.outputTarget.value),
+      );
+    } else {
+      this.score = new Score(this.titleTarget.value);
+    }
+    this.draw();
     document
       .getElementById("scoreContainer")
       .addEventListener("fretboardDeleted", () => {
