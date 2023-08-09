@@ -1,11 +1,11 @@
 <div data-controller="score-form">
-  <%= bootstrap_form_with(model: score) do |f| %>
+  <%= bootstrap_form_with(model: score, class: "no-print") do |f| %>
     <%= f.text_field :title, data: { score_form_target: "title" } %>
     <%= f.hidden_field :score_code, data: { score_form_target: "output" } %>
     <%= f.check_box :is_public %>
     <%= f.primary nil, data: { action: "click->score-form#addFretboard" } %>
   <% end %>
-  <div class="sticky-top input-group input-group-sm">
+  <div class="sticky-top input-group input-group-sm no-print">
     <%= bootstrap_form_with do |f| %>
       <%= f.select :startFret, [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ], include_blank: "Select a Start Fret", floating: true, wrapper: { data: { score_form_target: "startFret" } } %>
       <%= f.select :endFret, [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,24 ], include_blank: "Select a End Fret", floating: true, wrapper: { data: { score_form_target: "endFret" } } %>
@@ -23,5 +23,5 @@
     </div>
     <button data-action="click->score-form#addFretboard">Add</button>
   </div>
-  <div data-score-form-target="output" id="scoreContainer"></div>
+  <div class="print-target" data-score-form-target="output" id="scoreContainer"></div>
 </div>
