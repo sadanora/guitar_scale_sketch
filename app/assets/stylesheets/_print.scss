@@ -8,10 +8,10 @@
     width: 1320px;
     zoom: 0.8;
   }
-  header, .score-actions {
+  .no-print {
     display: none;
   }
-  .container {
+  .print-target {
     display: flex;
     justify-content: center;
   }
