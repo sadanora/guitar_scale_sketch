@@ -1,7 +1,7 @@
 <div data-controller="score-form">
   <%= bootstrap_form_with(model: score) do |f| %>
     <%= f.text_field :title, data: { score_form_target: "title" } %>
-    <%= f.text_area :score_code, data: { score_form_target: "output" } %>
+    <%= f.hidden_field :score_code, data: { score_form_target: "output" } %>
     <%= f.check_box :is_public %>
     <%= f.primary nil, data: { action: "click->score-form#addFretboard" } %>
   <% end %>
