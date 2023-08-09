@@ -14,6 +14,7 @@ export default class extends Controller {
 
   draw() {
     const fretboardShapes = this.score.buildFretboardShapes();
+    this.score.setStageHeight();
     this.score.draw(fretboardShapes);
   }
 }
