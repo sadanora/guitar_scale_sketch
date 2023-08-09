@@ -3,7 +3,7 @@
     <%= f.text_field :title, data: { score_form_target: "title" } %>
     <%= f.text_area :score_code, data: { score_form_target: "output" } %>
     <%= f.check_box :is_public %>
-    <%= f.primary %>
+    <%= f.primary nil, data: { action: "click->score-form#addFretboard" } %>
   <% end %>
   <div class="sticky-top input-group input-group-sm">
     <%= bootstrap_form_with do |f| %>
