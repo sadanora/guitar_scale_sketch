@@ -3,36 +3,38 @@ html
   head
     title
       | Guitar Scale Sketch
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
   body
     header.p-3.mb-3.border-bottom.no-print
       .container
-
-      .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
-        = link_to "Guitar Scale Sketch", root_path, class: "d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
-        ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
-
-      li
-        = link_to "指板図一覧", scores_path, class: "nav-link px-2 link-dark"
-      li
-        = link_to "指板図をつくる", new_score_path, class: "nav-link px-2 link-dark"
-      .dropdown.text-end
-        a#dropdownUser1.d-block.link-dark.text-decoration-none.dropdown-toggle[href="#" data-bs-toggle="dropdown" aria-expanded="false"]
-
-      img.rounded-circle[src="https://avatars.githubusercontent.com/u/66685066?v=4" alt="" width="32" height="32"]
-      ul.dropdown-menu.text-small[aria-labelledby="dropdownUser1"]
-
-      li
-        a.dropdown-item[href="#"]
-          | プロフィール編集
-      li
-        hr.dropdown-divider
-      li
-        a.dropdown-item[href="#"]
-          | ログアウト
+        .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+          = link_to 'Guitar Scale Sketch', root_path, class: 'd-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none'
+          ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+            li
+              = link_to '指板図一覧', scores_path, class: 'nav-link px-2 link-dark'
+            li
+              = link_to '指板図をつくる', new_score_path, class: 'nav-link px-2 link-dark'
+          - if logged_in?
+            .dropdown.text-end
+              a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" data-bs-toggle="dropdown" aria-expanded="false"
+                = image_tag current_user.image_url, alt: 'avatar', size: '32x32', class: 'rounded-circle'
+              ul.dropdown-menu.text-small
+                li
+                  p.dropdown-item
+                    = current_user.name
+                li
+                  a.dropdown-item href="#"
+                    | プロフィール編集
+                li
+                  hr.dropdown-divider
+                li.dropdown-item
+                  = link_to 'ログアウト', logout_path
+          - else
+            .text-end
+              = button_to 'Googleでログイン', '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-warning'
     .container
       = yield

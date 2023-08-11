@@ -67,9 +67,9 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'erb_lint', require: false
   gem 'rubocop-fjord', require: false
   gem 'rubocop-rails', require: false
+  gem 'slim_lint', require: false
 end
 
 group :test do
@@ -79,7 +79,9 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'kaminari'
 gem 'bootstrap_form'
-gem 'slim-rails'
 gem 'html2slim'
+gem 'kaminari'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'slim-rails'

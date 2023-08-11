@@ -1,28 +1,23 @@
-p[style="color: green"]
+p style="color: green"
   = notice
 h1
   | Scores
 #scores
   - @scores.each do |score|
-    |  <div id="
-    = dom_id score
-    | "> 
-    p
-
-    strong
-      | Id:
-    = score.id
-    p
-
-    strong
-      | Title:
-    = score.title
-    p
-
-    strong
-      | Is public:
-    = score.is_public
-    p
-      = link_to "Show this score", score
+    div id="#{dom_id score}"
+      p
+        strong
+          | Id:
+        = score.id
+      p
+        strong
+          | Title:
+        = score.title
+      p
+        strong
+          | Is public:
+        = score.is_public
+      p
+        = link_to 'Show this score', score
 = paginate @scores
-= link_to "New score", new_score_path
+= link_to 'New score', new_score_path

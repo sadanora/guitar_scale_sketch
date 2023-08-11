@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :scores
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get "logout", to: 'sessions#destroy'
 
   root to: redirect("/scores")
 end
