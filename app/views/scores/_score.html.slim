@@ -1,9 +1,7 @@
-| <div id="
-= dom_id score
-| "> 
-.print-target[data-controller="score"]
-  .d-none[data-score-target="title"]
+div id="#{dom_id score}"
+.print-target data-controller="score"
+  .d-none data-score-target="title"
     = score.title
-  .d-none[data-score-target="scoreCode"]
+  .d-none data-score-target="scoreCode"
     = score.score_code
   #scoreContainer

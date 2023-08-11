@@ -79,9 +79,9 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'kaminari'
 gem 'bootstrap_form'
-gem 'slim-rails'
 gem 'html2slim'
+gem 'kaminari'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'slim-rails'

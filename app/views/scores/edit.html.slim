@@ -1,8 +1,8 @@
 h1
   | Editing score
-= render "form", score: @score
+= render 'form', score: @score
 br
 div
-  = link_to "Show this score", @score
-  |  | 
-  = link_to "Back to scores", scores_path
+  = link_to 'Show this score', @score
+  |  |
+  = link_to 'Back to scores', scores_path
