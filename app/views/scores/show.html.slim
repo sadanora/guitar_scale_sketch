@@ -1,0 +1,8 @@
+p[style="color: green"]
+  = notice
+= render @score
+.no-print
+  = link_to "Edit this score", edit_score_path(@score)
+  |  | 
+  = link_to "Back to scores", scores_path
+  = button_to "Destroy this score", @score, method: :delete
