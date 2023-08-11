@@ -114,10 +114,10 @@ GEM
     faraday-net_http (3.0.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    hashie (5.0.0)
     hpricot (0.8.6)
     html2slim (0.2.0)
       hpricot
-    hashie (5.0.0)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
