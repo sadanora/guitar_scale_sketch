@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
   resources :scores
   get 'auth/:provider/callback', to: 'sessions#create'
-  get "logout", to: 'sessions#destroy'
+  get 'logout', to: 'sessions#destroy'
 
-  root to: redirect("/scores")
+  root 'welcome#index'
 end
