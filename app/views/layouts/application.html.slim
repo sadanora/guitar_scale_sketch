@@ -37,4 +37,10 @@ html
             .text-end
               = button_to 'Googleでログイン', '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-warning'
     .container
+      - if flash.notice
+        .alert.alert-success
+          = flash.notice
+      - if flash.alert
+        .alert.alert-danger
+          = flash.alert
       = yield
