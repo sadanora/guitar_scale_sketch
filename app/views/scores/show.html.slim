@@ -1,6 +1,10 @@
-= render @score
+- if @score.is_public || @score.created_by?(current_user)
+  = render @score
+- else
+  = content_tag(:p, '非公開の楽譜です')
+
 .no-print
-  = link_to 'Edit this score', edit_score_path(@score)
-  |  |
+  - if @score.created_by?(current_user)
+    = link_to 'Edit this score', edit_score_path(@score)
+    = button_to 'Destroy this score', @score, method: :delete
   = link_to 'Back to scores', scores_path
-  = button_to 'Destroy this score', @score, method: :delete
