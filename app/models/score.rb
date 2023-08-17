@@ -7,6 +7,7 @@ class Score < ApplicationRecord
 
   def created_by?(user)
     return false unless user
+
     user_id == user.id
   end
 end
