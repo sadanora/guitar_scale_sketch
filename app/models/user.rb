@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :created_scores, class_name:"Score"
+  has_many :created_scores, class_name: 'Score', dependent: :destroy
 
   def self.find_or_create_from_auth_hash!(auth_hash)
     provider = auth_hash[:provider]

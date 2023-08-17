@@ -80,7 +80,6 @@ group :test do
 end
 
 gem 'bootstrap_form'
-gem 'html2slim'
 gem 'kaminari'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'

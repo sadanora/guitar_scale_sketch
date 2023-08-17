@@ -9,6 +9,6 @@
       .mb-3.me-2.mb-md-0.text-body-secondary
         = link_to 'Edit this score', edit_score_path(@score)
       .mb-3.me-2.mb-md-0.text-body-secondary
-        = link_to 'Destroy this score', @score, method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }
+        = link_to 'Destroy this score', @score, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }
     .mb-3.me-2.mb-md-0.text-body-secondary
       = link_to 'Back to scores', scores_path
