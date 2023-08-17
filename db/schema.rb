@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_110411) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_12_034946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_110411) do
     t.text "score_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_scores_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,4 +34,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_110411) do
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
+  add_foreign_key "scores", "users"
 end

@@ -2,10 +2,11 @@
 
 class ScoresController < ApplicationController
   before_action :set_score, only: %i[show edit update destroy]
+  skip_before_action :authenticate, only: %i[new show]
 
   # GET /scores or /scores.json
   def index
-    @scores = Score.page(params[:page])
+    @scores = current_user.created_scores.order(updated_at: :desc).page(params[:page])
   end
 
   # GET /scores/1 or /scores/1.json
@@ -21,16 +22,9 @@ class ScoresController < ApplicationController
 
   # POST /scores or /scores.json
   def create
-    @score = Score.new(score_params)
-
-    respond_to do |format|
-      if @score.save
-        format.html { redirect_to score_url(@score), notice: 'Score was successfully created.' }
-        format.json { render :show, status: :created, location: @score }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
+    @score = current_user.created_scores.build(score_params)
+    if @score.save
+      redirect_to @score, notice: 'Score was successfully created.'
     end
   end
 
