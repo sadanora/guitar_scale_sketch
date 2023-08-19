@@ -11,6 +11,6 @@ html
   body
     - if logged_in?
       = render 'header'
-    .container.flash
-      = render 'flash'
-      = yield
+    = render 'flash'
+    = yield
+    = render 'footer'
