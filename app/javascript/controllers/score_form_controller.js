@@ -22,13 +22,13 @@ export default class extends Controller {
     document
       .getElementById("scoreContainer")
       .addEventListener("fretboardDeleted", () => {
-        this.#updateScoreCode();
+        this.updateScoreCode();
         this.draw();
       });
   }
 
   addFretboard() {
-    this.#updateScoreCode();
+    this.updateScoreCode();
     this.#addFretboardCode();
     this.scoreCodeValue = this.score.scoreCode;
     this.score.fretboards = this.score.createFretboards(this.scoreCodeValue);
@@ -49,7 +49,7 @@ export default class extends Controller {
     }
   }
 
-  #updateScoreCode() {
+  updateScoreCode() {
     if (this.score.fretboards.length === 0) {
       return;
     } else {
