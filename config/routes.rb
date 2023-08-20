@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'welcome/index'
+  get 'privacy_policy', to: 'welcome#privacy_policy'
+  get 'tos', to: 'welcome#tos'
   resources :scores
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'

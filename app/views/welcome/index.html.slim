@@ -1,2 +1,53 @@
-h1 Welcome#index
-p Find me in app/views/welcome/index.html.slim
+.container.col-xxl-8.px-3
+  .row.flex-lg-row-reverse.align-items-center.g-5.py-5
+    .col-10.col-sm-8.col-lg-6
+        img.d-block.mx-lg-auto.img-fluid src="/hero.png" alt="main visual" width="700" height="500" loading="lazy"
+    .col-lg-6
+      h1.display-1.fw-bold.text-body-emphasis.lh-1.mb-3
+        | Guitar
+        br
+        | Scale
+        br
+        | Sketch
+      p.lead
+        | 「いま欲しい」ギターの指板図をさっと作れる指板図作成ツール
+  .mx-auto.pb-3.mb-3.mb-md-5.text-md-center
+    .row.g-4.py-5.row-cols-1.row-cols-lg-3
+      .feature.col
+        .feature-icon.d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+          span 🎨
+        h3.fs-2
+          | ドットを打つだけ
+        p
+          | 指板の幅を指定してドットを打つだけで、かんたんに指板図を作成できます。
+      .feature.col
+        .feature-icon.d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+          span 🖨️
+        h3.fs-2
+          | 印刷しやすい
+        p
+          | 作った指板図はブラウザからそのまま印刷して使えます。印刷用に最適化されているので、ページのヘッダーやフッターなど余計な要素は入りません。
+      .feature.col
+        .feature-icon.d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+          span 🔗
+        h3.fs-2
+          | URLで共有
+        p
+          | Googleアカウントでログインすれば指板図の保存やURLでの共有もできます。
+  h2
+    | こんな問題を解決します💡
+  ul
+    li
+      | ネットや書籍に掲載されている指板図でもいいけど、実は自分がいま練習したい運指には情報が多すぎる/少なすぎる
+    li
+      | 指板の図を書き抑えるポジションに印を付け、作った指板図を印刷用にレイアウトする、といった自分で綺麗な指板図を作る手間をなくしたい
+  .d-flex.flex-column.g-4.py-5
+    .d-inline-flex.justify-content-center.align-items-center
+      = button_to 'Googleでログインして指板図をつくる', '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-primary btn-lg'
+    small.d-inline-flex.justify-content-center.align-items-center
+      | ログインすることで
+      = link_to '利用規約', '/#'
+      | ・
+      = link_to 'プライバシーポリシー', '/#', class: 'm-1'
+      | に同意いただいたものとします。
+    = link_to 'ログインせずに指板図をつくる', '/score/new', class: 'd-inline-flex justify-content-center align-items-center m-5'
