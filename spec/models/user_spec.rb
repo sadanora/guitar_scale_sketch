@@ -29,10 +29,10 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:image_url]).to include("を入力してください")
   end
-  # providerとuidが重複したユーザーが作成できないこと
-  it 'is invalid with a duplicate uid and provider' do
-    user = FactoryBot.create(:user)
-    user = FactoryBot.build(:user)
+  # uidが重複したユーザーが作成できないこと
+  it 'is invalid with a duplicate uid' do
+    user = FactoryBot.create(:user, uid: "1234")
+    user = FactoryBot.build(:user, uid: "1234")
     user.valid?
     expect(user.errors[:uid]).to include('はすでに存在します')
   end

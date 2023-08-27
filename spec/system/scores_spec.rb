@@ -1,9 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe "Scores", type: :system do
-  before do
-    driven_by(:rack_test)
-  end
+  it "can be created by logged_in user", js: true do
+    user = FactoryBot.create(:user, :with_scores)
 
-  pending "add some scenarios (or delete) #{__FILE__}"
+    sign_in_as(user)
+    expect(page).to have_content 'ログインしました'
+
+    expect {
+      click_on '指板図をつくる'
+      fill_in 'タイトル', with: 'Test Score'
+      select '1', from: 'Startfret'
+      select '5', from: 'Endfret'
+      click_button 'Add'
+      select '2', from: 'Startfret'
+      select '4', from: 'Endfret'
+      click_button 'Add'
+      click_button '登録する'
+      expect(page).to have_content 'Score was successfully created.'
+    }.to change(Score, :count).by(1)
+  end
 end
