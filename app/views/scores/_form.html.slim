@@ -10,20 +10,34 @@ div data-controller="score-form"
       = f.select :endFret, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], { include_blank: 'Select a End Fret', floating: true }, data: { score_form_target: 'endFret' }
     .color-picker
       ul
+        / li
+        /   span.black data-action="click->score-form#setBlack"
+        / li
+        /   span.red data-action="click->score-form#setRed"
+        / li
+        /   span.yellow data-action="click->score-form#setYellow"
+        / li
+        /   span.light-green data-action="click->score-form#setLightGreen"
+        / li
+        /   span.green data-action="click->score-form#setGreen"
+        / li
+        /   span.blue data-action="click->score-form#setBlue"
+        / li
+        /   span.violet data-action="click->score-form#setViolet"
         li
-          span.black data-action="click->score-form#setBlack"
+          span.black id="#555555" data-action="click->score-form#fetchDotColor"
         li
-          span.red data-action="click->score-form#setRed"
+          span.red id="#C7243A" data-action="click->score-form#fetchDotColor"
         li
-          span.yellow data-action="click->score-form#setYellow"
+          span.yellow id="#EDAD0B" data-action="click->score-form#fetchDotColor"
         li
-          span.light-green data-action="click->score-form#setLightGreen"
+          span.light-green id="#A4C520" data-action="click->score-form#fetchDotColor"
         li
-          span.green data-action="click->score-form#setGreen"
+          span.green id="#009250" data-action="click->score-form#fetchDotColor"
         li
-          span.blue data-action="click->score-form#setBlue"
+          span.blue id="#007FB1" data-action="click->score-form#fetchDotColor"
         li
-          span.violet data-action="click->score-form#setViolet"
+          span.violet id="#5D639E" data-action="click->score-form#fetchDotColor"
     button data-action="click->score-form#addFretboard"
       | Add
   #scoreContainer.print-target data-score-form-target="output"
