@@ -4,15 +4,16 @@ inherit_gem:
   rubocop-fjord:
     - config/rubocop.yml
     - config/rails.yml
-
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
-
 Metrics/ClassLength:
   Exclude:
     - spec/**/*
-
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
 AllCops:
   Exclude:
     - '**/templates/**/*'
