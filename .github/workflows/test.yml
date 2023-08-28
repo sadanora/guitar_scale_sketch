@@ -49,6 +49,10 @@ jobs:
           node-version: '18.4.0'
       - name: Install npm packages
         run: yarn install
+      - name: yarn build js
+        run: yarn build
+      - name: yarn build css
+        run: yarn build:css
       # Add or replace database setup steps here
       - name: DB setup
         run: bundle exec rails db:setup
