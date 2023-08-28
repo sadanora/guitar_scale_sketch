@@ -1,0 +1,51 @@
+# This workflow uses actions that are not certified by GitHub.  They are
+# provided by a third-party and are governed by separate terms of service,
+# privacy policy, and support documentation.
+#
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
+name: "lint"
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.4.0'
+      - name: Install npm packages
+        run: yarn install
+      # Add or replace any other lints here
+      - name: rubocop
+        run: bundle exec rubocop
+      - name: slim-lint
+        run: bundle exec slim-lint app/views -c config/slim_lint.yml
+      - name: eslint
+        run: yarn eslint ./app/javascript
+      - name: prettier
+        run: yarn prettier --check ./app/javascript
+
+
+
