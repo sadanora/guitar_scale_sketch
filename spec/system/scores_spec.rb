@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Scores", type: :system do
-  it "can be created by logged_in user", js: true do
+RSpec.describe 'Scores', type: :system do
+  it 'can be created by logged_in user', js: true do
     user = FactoryBot.create(:user, :with_scores)
 
     sign_in_as(user)
     expect(page).to have_content 'ログインしました'
 
-    expect {
+    expect do
       click_on '指板図をつくる'
       fill_in 'タイトル', with: 'Test Score'
       select '1', from: 'Startfret'
@@ -18,6 +20,6 @@ RSpec.describe "Scores", type: :system do
       click_button 'Add'
       click_button '登録する'
       expect(page).to have_content 'Score was successfully created.'
-    }.to change(Score, :count).by(1)
+    end.to change(Score, :count).by(1)
   end
 end

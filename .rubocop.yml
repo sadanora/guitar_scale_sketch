@@ -1,16 +1,19 @@
+require:
+  - rubocop-rspec
 inherit_gem:
   rubocop-fjord:
     - config/rubocop.yml
     - config/rails.yml
-
 Metrics/BlockLength:
   Exclude:
-    - test/**/*
-
+    - spec/**/*
 Metrics/ClassLength:
   Exclude:
-    - test/**/*
-
+    - spec/**/*
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
 AllCops:
   Exclude:
     - '**/templates/**/*'
