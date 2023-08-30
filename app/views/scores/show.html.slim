@@ -2,7 +2,7 @@
   - if @score.is_public || @score.created_by?(current_user)
     = render @score
   - else
-    = content_tag(:p, '非公開の楽譜です')
+    = content_tag(:p, '非公開の指板図です')
 
   .no-print.d-flex.flex-wrap.justify-content-between.align-items-center.py-3.my-4.border-top
     .col-md-4.d-flex.align-items-center
