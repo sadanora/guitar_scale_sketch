@@ -1,0 +1,15 @@
+.container
+  - if @fingering.is_public || @fingering.created_by?(current_user)
+    = render @fingering
+  - else
+    = content_tag(:p, '非公開の指板図です')
+
+  .no-print.d-flex.flex-wrap.justify-content-between.align-items-center.py-3.my-4.border-top
+    .col-md-4.d-flex.align-items-center
+      - if @fingering.created_by?(current_user)
+        .mb-3.me-2.mb-md-0.text-body-secondary
+          = link_to 'Edit this fingering', edit_fingering_path(@fingering)
+        .mb-3.me-2.mb-md-0.text-body-secondary
+          = link_to 'Destroy this fingering', @fingering, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }
+      .mb-3.me-2.mb-md-0.text-body-secondary
+        = link_to 'Back to fingerings', fingerings_path

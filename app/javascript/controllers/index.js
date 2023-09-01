@@ -4,8 +4,8 @@
 
 import { application } from "./application";
 
-import ScoreController from "./score_controller";
-application.register("score", ScoreController);
+import FingeringController from "./fingering_controller";
+application.register("fingering", FingeringController);
 
-import ScoreFormController from "./score_form_controller";
-application.register("score-form", ScoreFormController);
+import FingeringFormController from "./fingering_form_controller";
+application.register("fingering-form", FingeringFormController);

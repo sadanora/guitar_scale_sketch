@@ -1,0 +1,22 @@
+.container
+  h1
+    | Fingerings
+  #fingerings
+    - @fingerings.each do |fingering|
+      div id="#{dom_id fingering}"
+        p
+          strong
+            | Id:
+          = fingering.id
+        p
+          strong
+            | Title:
+          = fingering.title
+        p
+          strong
+            | Is public:
+          = fingering.is_public
+        p
+          = link_to 'Show this fingering', fingering
+  = paginate @fingerings
+  = link_to 'New fingering', new_fingering_path

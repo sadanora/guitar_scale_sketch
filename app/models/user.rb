@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :created_scores, class_name: 'Score', dependent: :destroy
+  has_many :created_fingerings, class_name: 'Fingering', dependent: :destroy
 
   validates :provider, presence: true
   validates :uid, presence: true

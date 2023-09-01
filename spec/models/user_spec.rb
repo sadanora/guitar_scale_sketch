@@ -44,8 +44,8 @@ RSpec.describe User, type: :model do
     expect(user.errors[:uid]).to include('はすでに存在します')
   end
 
-  it 'has many scores' do
-    user = FactoryBot.create(:user, :with_scores)
-    expect(user.created_scores.length).to eq 5
+  it 'has many fingerings' do
+    user = FactoryBot.create(:user, :with_fingerings)
+    expect(user.created_fingerings.length).to eq 5
   end
 end
