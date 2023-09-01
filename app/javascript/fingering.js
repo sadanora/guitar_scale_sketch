@@ -1,13 +1,13 @@
 import { Text, Rect, Circle, Image, Group, Layer, Stage } from "konva";
 import Fretboard from "./fretboard.js";
 
-export default class Score {
+export default class Fingering {
   static titleHeight = 100;
   static fretboardHeight = 200;
 
-  constructor(title = "", scoreCode = []) {
+  constructor(title = "", fingeringCode = []) {
     this.title = title;
-    this.fretboards = this.createFretboards(scoreCode);
+    this.fretboards = this.createFretboards(fingeringCode);
     this.stage = this.#generateStage();
   }
 
@@ -39,9 +39,9 @@ export default class Score {
     this.fretboards.push(fretboard);
   }
 
-  createFretboards(scoreCode) {
+  createFretboards(fingeringCode) {
     const fretboards = [];
-    scoreCode.forEach((e) => {
+    fingeringCode.forEach((e) => {
       const fretboard = new Fretboard(e);
       fretboards.push(fretboard);
     });
@@ -51,9 +51,9 @@ export default class Score {
   #generateStage() {
     const element = document.querySelector(".container");
     const width = element.clientWidth;
-    const height = Score.titleHeight + Score.fretboardHeight;
+    const height = Fingering.titleHeight + Fingering.fretboardHeight;
     const stage = new Stage({
-      container: "scoreContainer",
+      container: "fingeringContainer",
       width: width,
       height: height,
     });
@@ -65,7 +65,8 @@ export default class Score {
 
   setStageHeight() {
     const stageHeight =
-      Score.titleHeight + Score.fretboardHeight * this.fretboards.length;
+      Fingering.titleHeight +
+      Fingering.fretboardHeight * this.fretboards.length;
     this.stage.height(stageHeight);
   }
 
@@ -176,7 +177,9 @@ export default class Score {
             bubbles: true,
           });
           fretboard.destroy();
-          document.getElementById("scoreContainer").dispatchEvent(deleteEvent);
+          document
+            .getElementById("fingeringContainer")
+            .dispatchEvent(deleteEvent);
         });
       });
       fretboard.add(button);

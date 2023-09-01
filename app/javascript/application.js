@@ -2,5 +2,5 @@
 import "@hotwired/turbo-rails";
 import "./controllers";
 import "bootstrap";
-import "./score.js";
+import "./fingering.js";
 import "./fretboard.js";

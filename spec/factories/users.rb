@@ -7,8 +7,8 @@ FactoryBot.define do
     name { 'Ritchie' }
     image_url { 'http://example.com/image1.jpg' }
 
-    trait :with_scores do
-      after(:create) { |user| create_list(:score, 5, user:) }
+    trait :with_fingerings do
+      after(:create) { |user| create_list(:fingering, 5, user:) }
     end
   end
 end

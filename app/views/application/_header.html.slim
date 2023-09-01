@@ -4,9 +4,9 @@ header.p-3.mb-3.border-bottom.no-print
       = link_to 'Guitar Scale Sketch', root_path, class: 'd-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none'
       ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
         li
-          = link_to '指板図一覧', scores_path, class: 'nav-link px-2 link-dark'
+          = link_to '指板図一覧', fingerings_path, class: 'nav-link px-2 link-dark'
         li
-          = link_to '指板図をつくる', new_score_path, class: 'nav-link px-2 link-dark'
+          = link_to '指板図をつくる', new_fingering_path, class: 'nav-link px-2 link-dark'
       - if logged_in?
         .dropdown.text-end
           a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" data-bs-toggle="dropdown" aria-expanded="false"

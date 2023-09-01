@@ -2,9 +2,9 @@
 ja:
   activerecord:
     models:
-      score: スコア
+      fingering: 指板図
     attributes:
-      score:
+      fingering:
         title: タイトル
     errors:
       messages:

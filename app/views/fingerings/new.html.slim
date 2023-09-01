@@ -1,0 +1,7 @@
+.container
+  h1.no-print
+    | New fingering
+  = render 'form', fingering: @fingering
+  br
+  .no-print
+    = link_to 'Back to fingerings', fingerings_path
