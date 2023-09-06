@@ -3,7 +3,7 @@ import Fretboard from "./fretboard.js";
 
 export default class Fingering {
   static titleHeight = 100;
-  static fretboardHeight = 200;
+  static fretboardHeight = 250;
 
   constructor(title = "", fingeringCode = []) {
     this.title = title;
