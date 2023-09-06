@@ -25,7 +25,7 @@ export default class Fretboard {
       startFret: this.startFret,
       endFret: this.endFret,
       fretNumbers: this.fretNumbers,
-      y: 100 + 200 * (this.position - 1),
+      y: 100 + 250 * (this.position - 1),
     });
     const shapes = [
       this.#createFretNumberTexts(),
