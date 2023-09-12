@@ -1,22 +1,11 @@
 .container
-  h1
-    | Fingerings
-  #fingerings
-    - @fingerings.each do |fingering|
-      div id="#{dom_id fingering}"
-        p
-          strong
-            | Id:
-          = fingering.id
-        p
-          strong
-            | Title:
-          = fingering.title
-        p
-          strong
-            | Is public:
-          = fingering.is_public
-        p
-          = link_to 'Show this fingering', fingering
-  = paginate @fingerings
-  = link_to 'New fingering', new_fingering_path
+  h1.fs-4.text-center.m-4
+    | 自分の指板図
+  .fingering-items.card.col-6.d-flex.justify-content-center.mx-auto.mb-3.border-0
+    .card-body
+      - @fingerings.each do | fingering |
+        .fingering-item.text-center.row.py-2.border-top
+          div.cal-4.my-auto id="#{dom_id fingering}"
+            = link_to fingering.title, fingering, class: "fs-4"
+  .d-flex.justify-content-end.mt-3
+    = paginate @fingerings
