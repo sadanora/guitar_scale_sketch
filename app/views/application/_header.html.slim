@@ -1,13 +1,14 @@
 header.p-3.mb-3.border-bottom.no-print
   .container
     .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
-      = link_to 'Guitar Scale Sketch', root_path, class: 'd-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none'
-      ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
-        li
-          = link_to '指板図一覧', fingerings_path, class: 'nav-link px-2 link-dark'
-        li
-          = link_to '指板図をつくる', new_fingering_path, class: 'nav-link px-2 link-dark'
+      = link_to root_path, class: 'd-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none'
+        = image_tag '/logo.png', size: '258x50', class: "me-3"
       - if logged_in?
+        ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+          li
+            = link_to '自分の指板図', fingerings_path, class: 'nav-link px-2 link-dark'
+          li
+            = link_to '指板図をつくる', new_fingering_path, class: 'nav-link px-2 link-dark'
         .dropdown.text-end
           a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" data-bs-toggle="dropdown" aria-expanded="false"
             = image_tag current_user.image_url, alt: 'avatar', size: '32x32', class: 'rounded-circle'
@@ -25,5 +26,6 @@ header.p-3.mb-3.border-bottom.no-print
             li.dropdown-item
               = link_to '退会', new_retirements_path
       - else
-        .text-end
-          = button_to 'Googleでログイン', '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-warning'
+        .ms-lg-auto
+          = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0'
+            = image_tag '/btn_google_signin_dark_normal_web@2x.png', size: '200x48'

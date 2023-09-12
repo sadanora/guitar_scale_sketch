@@ -1,6 +1,5 @@
-h1
-  | Retirement
-
-p 退会すると、楽譜を含むすべてのユーザーデータが削除されます。
-
-= link_to '退会する', retirements_path, class: 'btn btn-danger', data: { turbo_method: :post, turbo_confirm: '本当に退会しますか？' }
+.container
+  h1.fs-3.text-center
+    | 退会
+  p.text-center 退会すると、楽譜を含むすべてのユーザーデータが削除されます。
+  = link_to '退会する', retirements_path, class: 'btn btn-danger d-grid mx-auto w-25 mb-3', data: { turbo_method: :post, turbo_confirm: '本当に退会しますか？' }
