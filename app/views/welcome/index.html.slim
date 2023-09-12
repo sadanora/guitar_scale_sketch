@@ -43,7 +43,7 @@
       h3.d-inline-flex.justify-content-center.align-items-center.fs-4
         | Googleでログインして指板図をつくる
       .d-inline-flex.justify-content-center.align-items-center.py-1
-        = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0'
+        = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0 google-login-button'
           = image_tag '/btn_google_signin_dark_normal_web@2x.png', size: '200x48'
       small.d-inline-flex.justify-content-center.align-items-center
         | ログインすることで
