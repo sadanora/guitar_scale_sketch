@@ -30,12 +30,12 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         expect do
           click_on '指板図をつくる'
           fill_in 'タイトル', with: 'Test Fingering'
-          select '1', from: 'Startfret'
-          select '5', from: 'Endfret'
-          click_button 'Add'
-          select '2', from: 'Startfret'
-          select '4', from: 'Endfret'
-          click_button 'Add'
+          select '1', from: '開始フレット'
+          select '5', from: '終端フレット'
+          click_button '指板を追加'
+          select '2', from: '開始フレット'
+          select '4', from: '終端フレット'
+          click_button '指板を追加'
           click_button '登録する'
           expect(page).to have_content 'Fingering was successfully created.'
         end.to change(Fingering, :count).by(1)
@@ -47,7 +47,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         fingering = user.created_fingerings.first
         sign_in_as(user)
         within "#fingering_#{fingering.id}" do
-          click_link 'Show this fingering'
+          click_link fingering.title.to_s
         end
         expect(page).to have_current_path fingering_path(fingering)
         expect(page).to have_selector '.konvajs-content'
@@ -60,12 +60,12 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         fingering = user.created_fingerings.first
         visit fingerings_path
         within "#fingering_#{fingering.id}" do
-          click_link 'Show this fingering'
+          click_link fingering.title.to_s
         end
-        click_link 'Edit this fingering'
-        select '3', from: 'Startfret'
-        select '8', from: 'Endfret'
-        click_button 'Add'
+        click_link '編集'
+        select '3', from: '開始フレット'
+        select '8', from: '終端フレット'
+        click_button '指板を追加'
         click_button '更新する'
         expect(page).to have_content 'Fingering was successfully updated.'
       end
@@ -77,12 +77,12 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         fingering = user.created_fingerings.first
         visit fingerings_path
         within "#fingering_#{fingering.id}" do
-          click_link 'Show this fingering'
+          click_link fingering.title.to_s
         end
 
         expect do
           page.accept_confirm do
-            click_link 'Destroy this fingering'
+            click_link '削除'
           end
           expect(page).to have_content 'Fingering was successfully destroyed.'
         end.to change(Fingering, :count).by(-1)
@@ -102,11 +102,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       it 'cannot save a fingering' do
         visit root_path
         click_on 'ログインせずに指板図をつくる'
-        fill_in 'タイトル', with: 'Test fingering'
-        select '1', from: 'Startfret'
-        select '5', from: 'Endfret'
-        click_button '登録する'
-        expect(page).to have_content 'ログインしてください'
+        expect(page).to have_no_content '登録する'
       end
     end
 
@@ -127,14 +123,14 @@ RSpec.describe 'Fingerings', type: :system, js: true do
     context 'when edit' do
       it 'does not display edit button' do
         visit fingering_path(public_fingering)
-        expect(page).to have_no_content 'Edit this fingering'
+        expect(page).to have_no_content '編集'
       end
     end
 
     context 'when destroy' do
       it 'does not display destroy button' do
         visit fingering_path(public_fingering)
-        expect(page).to have_no_content 'Destroy this fingering'
+        expect(page).to have_no_content '削除'
       end
     end
   end

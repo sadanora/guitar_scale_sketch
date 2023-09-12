@@ -1,7 +1,10 @@
-.container
-  h1.no-print
-    | New fingering
-  = render 'form', fingering: @fingering
-  br
-  .no-print
-    = link_to 'Back to fingerings', fingerings_path
+.fingering-container
+  .container.d-none.d-lg-block.d-print-inline
+    h1.no-print.fs-4
+      | 指板図をつくる
+    = render 'form', fingering: @fingering
+  .container.d-block.d-lg-none.d-print-none
+    h1.text-center
+      | PCでご利用ください🙏
+    p
+      | Guitar Scale Sketch は現在のところPCのみ(横幅992px以上のディスプレイ)に対応しています。

@@ -8,6 +8,6 @@ module SignInHelper
       { uid: user.uid, info: { image: user.image_url } }
     )
     visit root_path
-    click_on 'Googleでログインして指板図をつくる'
+    find('.google-login-button').click
   end
 end

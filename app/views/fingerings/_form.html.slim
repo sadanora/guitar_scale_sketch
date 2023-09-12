@@ -1,29 +1,41 @@
 div data-controller="fingering-form"
-  = bootstrap_form_with(model: fingering, class: 'no-print') do |f|
-    = f.text_field :title, data: { fingering_form_target: 'title' }
-    = f.hidden_field :fingering_code, data: { fingering_form_target: 'output' }
-    = f.check_box :is_public
-    = f.primary nil, data: { action: 'click->fingering-form#updateFingeringCode' }
-  .sticky-top.input-group.input-group-sm.no-print
-    = bootstrap_form_with do |f|
-      = f.select :startFret, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], { include_blank: 'Select a Start Fret', floating: true }, data: { fingering_form_target: 'startFret' }
-      = f.select :endFret, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], { include_blank: 'Select a End Fret', floating: true }, data: { fingering_form_target: 'endFret' }
-    .color-picker
-      ul
-        li
-          span.black id="#555555" data-action="click->fingering-form#fetchDotColor"
-        li
-          span.red id="#C7243A" data-action="click->fingering-form#fetchDotColor"
-        li
-          span.yellow id="#EDAD0B" data-action="click->fingering-form#fetchDotColor"
-        li
-          span.light-green id="#A4C520" data-action="click->fingering-form#fetchDotColor"
-        li
-          span.green id="#009250" data-action="click->fingering-form#fetchDotColor"
-        li
-          span.blue id="#007FB1" data-action="click->fingering-form#fetchDotColor"
-        li
-          span.violet id="#5D639E" data-action="click->fingering-form#fetchDotColor"
-    button data-action="click->fingering-form#addFretboard"
-      | Add
-  #fingeringContainer.print-target data-fingering-form-target="output"
+  = bootstrap_form_with(model: fingering, class: '') do |f|
+    .sticky-top.card.w-75.m-3.p-1.no-print
+      .pt-2.px-2
+        = f.text_field :title, data: { fingering_form_target: 'title' }
+        = f.hidden_field :fingering_code, data: { fingering_form_target: 'output' }
+        .row
+          .col
+            = f.select :startFret, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], { selected: '1', floating: true, label: '開始フレット' }, data: { fingering_form_target: 'startFret' }, class: 'm0'
+          .col
+            = f.select :endFret, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], { selected: '6', floating: true, label: '終端フレット' }, data: { fingering_form_target: 'endFret' }, class: 'm0'
+          .col.d-flex.justify-content-center.mb-3
+            button.btn.btn-primary.w-100 type="button" data-action="click->fingering-form#addFretboard"
+              | 指板を追加
+      .color-picker.mx-3.mb-3
+        ul
+          li
+            span.black id="#555555" data-action="click->fingering-form#fetchDotColor"
+          li
+            span.red id="#C7243A" data-action="click->fingering-form#fetchDotColor"
+          li
+            span.yellow id="#EDAD0B" data-action="click->fingering-form#fetchDotColor"
+          li
+            span.light-green id="#A4C520" data-action="click->fingering-form#fetchDotColor"
+          li
+            span.green id="#009250" data-action="click->fingering-form#fetchDotColor"
+          li
+            span.blue id="#007FB1" data-action="click->fingering-form#fetchDotColor"
+          li
+            span.violet id="#5D639E" data-action="click->fingering-form#fetchDotColor"
+    #fingeringContainer.print-target data-fingering-form-target="output"
+    .d-flex.d-print-none.justify-content-center.row
+      - if logged_in?
+        .d-grid.w-50
+          = f.check_box :is_public, label: '公開する'
+          = f.primary nil, data: { action: 'click->fingering-form#updateFingeringCode' }, class: 'btn btn-primary'
+        .text-end
+          = link_to 'キャンセル', fingerings_path, class: 'col text-end'
+      - else
+        .form-actions-items
+          = link_to 'キャンセル', root_path, class: 'col text-end'

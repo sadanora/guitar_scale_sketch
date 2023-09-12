@@ -14,14 +14,8 @@
     }
   }
 
-  box-sizing: border-box;
-  margin: 12px;
-  border: solid 1px;
-  padding: 12px;
-  display: inline-block;
   ul {
     display: flex;
-    width: $width;
     flex-wrap: wrap;
     gap: $gap;
     list-style: none;
