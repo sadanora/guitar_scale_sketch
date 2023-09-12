@@ -94,6 +94,8 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.7)
+      rails
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -285,6 +287,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.11.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.11.0)
+    sentry-ruby (5.11.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     slim (5.1.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
@@ -342,6 +349,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  dockerfile-rails (>= 1.5)
   dotenv-rails
   factory_bot_rails
   jbuilder
@@ -357,6 +365,8 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   selenium-webdriver
+  sentry-rails (~> 5.11)
+  sentry-ruby (~> 5.11)
   slim-rails
   slim_lint
   sprockets-rails
