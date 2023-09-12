@@ -89,8 +89,8 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'slim-rails'
 
-gem "dockerfile-rails", ">= 1.5", :group => :development
+gem 'dockerfile-rails', '>= 1.5', group: :development
 
-gem "sentry-ruby", "~> 5.11"
+gem 'sentry-ruby', '~> 5.11'
 
-gem "sentry-rails", "~> 5.11"
+gem 'sentry-rails', '~> 5.11'
