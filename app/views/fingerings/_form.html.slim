@@ -6,9 +6,9 @@ div data-controller="fingering-form"
         = f.hidden_field :fingering_code, data: { fingering_form_target: 'output' }
         .row
           .col
-            = f.select :startFret, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], { selected: '1', floating: true, label: '開始フレット' }, data: { fingering_form_target: 'startFret' }, class: "m0"
+            = f.select :startFret, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], { selected: '1', floating: true, label: '開始フレット' }, data: { fingering_form_target: 'startFret' }, class: 'm0'
           .col
-            = f.select :endFret, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], { selected: '6', floating: true, label: '終端フレット' }, data: { fingering_form_target: 'endFret' }, class: "m0"
+            = f.select :endFret, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], { selected: '6', floating: true, label: '終端フレット' }, data: { fingering_form_target: 'endFret' }, class: 'm0'
           .col.d-flex.justify-content-center.mb-3
             button.btn.btn-primary.w-100 type="button" data-action="click->fingering-form#addFretboard"
               | 指板を追加
@@ -32,10 +32,10 @@ div data-controller="fingering-form"
     .d-flex.d-print-none.justify-content-center.row
       - if logged_in?
         .d-grid.w-50
-          = f.check_box :is_public, label: "公開する"
-          = f.primary nil, data: { action: 'click->fingering-form#updateFingeringCode' }, class: "btn btn-primary"
+          = f.check_box :is_public, label: '公開する'
+          = f.primary nil, data: { action: 'click->fingering-form#updateFingeringCode' }, class: 'btn btn-primary'
         .text-end
-          = link_to 'キャンセル', fingerings_path, class: "col text-end"
+          = link_to 'キャンセル', fingerings_path, class: 'col text-end'
       - else
         .form-actions-items
-          = link_to 'キャンセル', root_path, class: "col text-end"
+          = link_to 'キャンセル', root_path, class: 'col text-end'

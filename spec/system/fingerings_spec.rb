@@ -47,7 +47,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         fingering = user.created_fingerings.first
         sign_in_as(user)
         within "#fingering_#{fingering.id}" do
-          click_link "#{fingering.title}"
+          click_link fingering.title.to_s
         end
         expect(page).to have_current_path fingering_path(fingering)
         expect(page).to have_selector '.konvajs-content'
@@ -60,7 +60,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         fingering = user.created_fingerings.first
         visit fingerings_path
         within "#fingering_#{fingering.id}" do
-          click_link "#{fingering.title}"
+          click_link fingering.title.to_s
         end
         click_link '編集'
         select '3', from: '開始フレット'
@@ -77,7 +77,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         fingering = user.created_fingerings.first
         visit fingerings_path
         within "#fingering_#{fingering.id}" do
-          click_link "#{fingering.title}"
+          click_link fingering.title.to_s
         end
 
         expect do

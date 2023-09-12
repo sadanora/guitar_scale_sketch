@@ -3,9 +3,9 @@
     | 自分の指板図
   .fingering-items.card.col-6.d-flex.justify-content-center.mx-auto.mb-3.border-0
     .card-body
-      - @fingerings.each do | fingering |
+      - @fingerings.each do |fingering|
         .fingering-item.text-center.row.py-2.border-top
-          div.cal-4.my-auto id="#{dom_id fingering}"
-            = link_to fingering.title, fingering, class: "fs-4"
+          .cal-4.my-auto id="#{dom_id fingering}"
+            = link_to fingering.title, fingering, class: 'fs-4'
   .d-flex.justify-content-end.mt-3
     = paginate @fingerings
