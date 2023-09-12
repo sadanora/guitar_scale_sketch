@@ -32,6 +32,7 @@ div data-controller="fingering-form"
     .d-flex.d-print-none.justify-content-center.row
       - if logged_in?
         .d-grid.w-50
+          = f.check_box :is_public, label: "公開する"
           = f.primary nil, data: { action: 'click->fingering-form#updateFingeringCode' }, class: "btn btn-primary"
         .text-end
           = link_to 'キャンセル', fingerings_path, class: "col text-end"
