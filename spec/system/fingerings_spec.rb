@@ -52,6 +52,18 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         expect(page).to have_current_path fingering_path(fingering)
         expect(page).to have_selector '.konvajs-content'
       end
+
+      it 'does not display edit link for others fingerings' do
+        sign_in_as(other_user)
+        visit fingering_path(public_fingering)
+        expect(page).to have_no_content '編集'
+      end
+
+      it 'does not display destroy link for others fingerings' do
+        sign_in_as(other_user)
+        visit fingering_path(public_fingering)
+        expect(page).to have_no_content '削除'
+      end
     end
 
     context 'when update' do
@@ -111,6 +123,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         expect(public_fingering.is_public).to be true
         visit fingering_path(public_fingering)
         expect(page).to have_selector '.konvajs-content'
+        expect(page).to have_no_content '一覧へ戻る'
       end
 
       it 'does not display private fingerings' do
