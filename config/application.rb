@@ -23,5 +23,8 @@ module GuitarScaleSketch
         helper_specs: false,
         routing_specs: false
     end
+
+    # preloadのヒントを提供するLinkヘッダを無効にする
+    config.action_view.preload_links_header = false
   end
 end
