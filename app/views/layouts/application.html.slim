@@ -11,7 +11,6 @@ html
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
     - if Rails.env.production?
       = render 'google_tag_manager'
-      = render 'google_site_verification'
   body
     = render 'header'
     main
