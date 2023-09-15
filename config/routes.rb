@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  constraints host: 'guitar-scale-sketch.fly.dev' do
+    get '/(*path)', to: redirect { |path_params,| "https://guitar-scale-sketch.com/#{path_params[:path]}" }
+  end
+
   get 'welcome/index'
   get 'privacy_policy', to: 'welcome#privacy_policy'
   get 'tos', to: 'welcome#tos'
