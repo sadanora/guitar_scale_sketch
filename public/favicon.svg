@@ -1,7 +1,6 @@
 <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_3571_1394)">
-<rect width="120" height="120" fill="white"/>
-<rect x="39" y="39" width="74" height="74" stroke="#212529" stroke-width="14"/>
+<rect x="39" y="39" width="74" height="74" fill="white" stroke="#212529" stroke-width="14"/>
 <circle cx="38" cy="38" r="38" fill="#212529"/>
 </g>
 <defs>
