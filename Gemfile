@@ -85,12 +85,12 @@ end
 
 gem 'bootstrap_form'
 gem 'kaminari'
+gem 'meta-tags'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'slim-rails'
 
+# fly added gems
 gem 'dockerfile-rails', '>= 1.5', group: :development
-
-gem 'sentry-ruby', '~> 5.11'
-
 gem 'sentry-rails', '~> 5.11'
+gem 'sentry-ruby', '~> 5.11'
