@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module MetaTagsHelper
+  # rubocop:disable Metrics/MethodLength
   def default_meta_tags
     {
       site: 'Guitar Scale Sketch',
@@ -15,11 +18,12 @@ module MetaTagsHelper
         type: 'website',
         url: 'https://guitar-scale-sketch.com/',
         image: image_url('/og_image.png'),
-        local: 'ja-JP',
+        local: 'ja-JP'
       },
       twitter: {
-        card: 'summary_large_image',
+        card: 'summary_large_image'
       }
     }
   end
+  # rubocop:enable Metrics/MethodLength
 end
