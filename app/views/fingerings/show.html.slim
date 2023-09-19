@@ -1,3 +1,4 @@
+- set_meta_tags(title: @fingering.title, canonical: fingering_url)
 .container
   - if @fingering.is_public || @fingering.created_by?(current_user)
     = render @fingering
