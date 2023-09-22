@@ -4,6 +4,8 @@ import Fretboard from "./fretboard.js";
 export default class Fingering {
   static titleHeight = 100;
   static fretboardHeight = 250;
+  // containerの最大幅1320pxからx方向のpadding 12px * 2 を引いた幅
+  static stageWidth = 1296;
 
   constructor(title = "", fingeringCode = []) {
     this.title = title;
@@ -49,12 +51,10 @@ export default class Fingering {
   }
 
   #generateStage() {
-    // containerの最大幅1320pxからx方向のpadding 12px * 2 を引いた幅
-    const containerWidth = 1296;
     const height = Fingering.titleHeight + Fingering.fretboardHeight;
     const stage = new Stage({
       container: "fingeringContainer",
-      width: containerWidth,
+      width: Fingering.stageWidth,
       height: height,
     });
     const layer = new Layer();
@@ -71,8 +71,6 @@ export default class Fingering {
   }
 
   #createTitle() {
-    const element = document.querySelector(".container");
-    const width = element.clientWidth;
     const titleContainer = new Group({
       name: "title",
     });
@@ -80,7 +78,7 @@ export default class Fingering {
       text: this.title,
       fontSize: 40,
       y: 20,
-      width: width,
+      width: Fingering.stageWidth,
       align: "center",
     });
     titleContainer.add(title);
