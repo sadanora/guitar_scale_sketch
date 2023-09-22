@@ -1,7 +1,7 @@
 - set_meta_tags(title: @fingering.title, canonical: fingering_url)
 .container
   .card.border-0
-    .card-body
+    .card-body.p-0
       - if @fingering.is_public || @fingering.created_by?(current_user)
         = render @fingering
       - else
