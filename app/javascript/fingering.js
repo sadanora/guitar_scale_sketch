@@ -49,12 +49,12 @@ export default class Fingering {
   }
 
   #generateStage() {
-    const element = document.querySelector(".container");
-    const width = element.clientWidth;
+    // containerの最大幅1320pxからx方向のpadding 12px * 2 を引いた幅
+    const containerWidth = 1296;
     const height = Fingering.titleHeight + Fingering.fretboardHeight;
     const stage = new Stage({
       container: "fingeringContainer",
-      width: width,
+      width: containerWidth,
       height: height,
     });
     const layer = new Layer();
