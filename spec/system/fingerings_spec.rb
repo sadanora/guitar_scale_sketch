@@ -37,7 +37,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
           select '4', from: '終端フレット'
           click_button '指板を追加'
           click_button '登録する'
-          expect(page).to have_content 'Fingering was successfully created.'
+          expect(page).to have_content '指板図を作成しました。'
         end.to change(Fingering, :count).by(1)
       end
 
@@ -95,7 +95,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         select '8', from: '終端フレット'
         click_button '指板を追加'
         click_button '更新する'
-        expect(page).to have_content 'Fingering was successfully updated.'
+        expect(page).to have_content '指板図を更新しました。'
       end
     end
 
@@ -112,7 +112,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
           page.accept_confirm do
             click_link '削除'
           end
-          expect(page).to have_content 'Fingering was successfully destroyed.'
+          expect(page).to have_content '指板図を削除しました。'
         end.to change(Fingering, :count).by(-1)
       end
     end
