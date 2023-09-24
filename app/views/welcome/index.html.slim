@@ -1,47 +1,41 @@
 - set_meta_tags(title: '', separator: '')
-.container.col-xxl-8.px-3
-  .px-4.py-5.my-5.text-center
-    h1.display-1.fw-bold.text-body-emphasis.lh-1.mb-3
-      | Guitar
-      br
-      | Scale
-      br
-      | Sketch
-    p.lead
-      | 「いま欲しい」ギターの指板図をさっと作れる指板図作成ツール
-  .mx-auto.pb-3.mb-3.mb-md-5.text-md-center
-    .row.g-4.py-5.row-cols-1.row-cols-lg-3
-      .feature.col
-        .feature-icon.d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
-          span
-            img src="/palette.svg" width="60" height="60"
-        h3.fs-2
-          | ドットを打つだけ
-        p
-          | 指板の幅を指定してドットを打つだけで、かんたんに指板図を作成できます。
-      .feature.col
-        .feature-icon.d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
-          span
-            img src="/printer.svg" width="60" height="60"
-        h3.fs-2
-          | 印刷しやすい
-        p
-          | 作った指板図はブラウザからそのまま印刷して使えます。ページのヘッダーやフッターなど余計な要素は入りません。
-      .feature.col
-        .feature-icon.d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
-          span
-            img src="/link-45deg.svg" width="60" height="60"
-        h3.fs-2
-          | URLで共有
-        p
-          | Googleアカウントでログインすれば指板図の保存やURLでの共有もできます。
-  h2
-    | こんな問題を解決します
-  ul
-    li
-      | ネットや書籍に掲載されている指板図でもいいけど、実は自分がいま練習したい運指には情報が多すぎる/少なすぎる
-    li
-      | 指板の図を書き抑えるポジションに印を付け、作った指板図を印刷用にレイアウトする、といった自分で綺麗な指板図を作る手間をなくしたい
+.container.col-xxl-8.px-4.py-5
+  .row.flex-lg-row.align-items-center.g-5.py-5
+    .col-lg-6
+      h1.display-1.fw-bold.text-body-emphasis.lh-1.mb-3
+        | Guitar
+        br
+        | Scale
+        br
+        | Sketch
+      p.lead 「いま欲しい」ギターの指板図をさっと作れる指板図作成ツール
+    .col-10.col-sm-8.col-lg-6
+      = image_tag '/fingering_sample_img.png', class: "d-block mx-lg-auto img-fluid shadow", alt: "fingering sample image", width: "500", height: "322", loading: "lazy"
+  .row.row-cols-1.row-cols-lg-3.mb-3
+    .col
+      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+        span
+          img src="/palette.svg" width="60" height="60"
+      h3.fs-2
+        | ドットを打つだけ
+      p
+        | 指板の幅を指定してドットを打つだけで、かんたんに指板図を作成できます。
+    .col
+      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+        span
+          img src="/printer.svg" width="60" height="60"
+      h3.fs-2
+        | 印刷しやすい
+      p
+        | 作った指板図はブラウザからそのまま印刷して使えます。ページのヘッダーやフッターなど余計な要素は入りません。
+    .col
+      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+        span
+          img src="/link-45deg.svg" width="60" height="60"
+      h3.fs-2
+        | URLで共有
+      p
+        | Googleアカウントでログインすれば指板図の保存やURLでの共有もできます。
   - unless logged_in?
     .d-flex.flex-column.g-4.pt-5
       h3.d-inline-flex.justify-content-center.align-items-center.fs-4
