@@ -43,8 +43,10 @@
       .d-inline-flex.justify-content-center.align-items-center.py-1
         = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0 google-login-button'
           = image_tag '/btn_google_signin_dark_normal_web@2x.png', size: '200x48'
+      small.d-inline-flex.justify-content-center.align-items-center.fw-bold
+        | ※PCからご利用ください。
       small.d-inline-flex.justify-content-center.align-items-center
-        | ログインすることで
+        | ※ログインすることで
         = link_to '利用規約', '/tos'
         | ・
         = link_to 'プライバシーポリシー', '/privacy_policy', class: 'm-1'
