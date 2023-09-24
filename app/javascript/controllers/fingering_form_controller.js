@@ -2,7 +2,14 @@ import { Controller } from "@hotwired/stimulus";
 import Fingering from "../fingering.js";
 
 export default class extends Controller {
-  static targets = ["title", "startFret", "endFret", "output"];
+  static targets = [
+    "title",
+    "startFret",
+    "endFret",
+    "output",
+    "fretWidthErrorMessage",
+    "addFretboardButton",
+  ];
   static values = {
     fingeringCode: [],
     dotColor: { type: String, default: "#555555" },
@@ -112,5 +119,36 @@ export default class extends Controller {
 
   dotColorValueChanged() {
     this.fingering.setDotColor(this.dotColorValue);
+  }
+
+  fretWidthValidation() {
+    const startFretNumber = parseInt(this.startFretTarget.value);
+    const endFretNumber = parseInt(this.endFretTarget.value);
+    const errorMessage = this.fretWidthErrorMessageTarget;
+    const addFretboardButton = this.addFretboardButtonTarget;
+    if (endFretNumber < startFretNumber) {
+      this.showFretWidthError(
+        addFretboardButton,
+        errorMessage,
+        "終端フレットは開始フレット以上の値にしてください",
+      );
+    } else if (endFretNumber - startFretNumber > 11) {
+      this.showFretWidthError(
+        addFretboardButton,
+        errorMessage,
+        "指板の幅は開始フレットと終端フレットの差を11以下にしてください",
+      );
+    } else {
+      addFretboardButton.removeAttribute("disabled");
+      errorMessage.classList.remove("invalid-feedback", "mb-3");
+      errorMessage.innerHTML = "";
+    }
+  }
+
+  showFretWidthError(disabledTarget, messageTarget, message) {
+    disabledTarget.setAttribute("disabled", "");
+    messageTarget.classList.add("invalid-feedback", "mb-3");
+    messageTarget.style.display = "block";
+    messageTarget.textContent = message;
   }
 }
