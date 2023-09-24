@@ -20,7 +20,7 @@ class FingeringsController < ApplicationController
   def create
     @fingering = current_user.created_fingerings.build(fingering_params)
     if @fingering.save
-      redirect_to @fingering, notice: 'Fingering was successfully created.'
+      redirect_to @fingering, notice: '指板図を作成しました。'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class FingeringsController < ApplicationController
 
   def update
     if @fingering.update(fingering_params)
-      redirect_to @fingering, notice: 'Fingering was successfully updated.'
+      redirect_to @fingering, notice: '指板図を更新しました。'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class FingeringsController < ApplicationController
   def destroy
     @fingering.destroy!
 
-    redirect_to fingerings_url, notice: 'Fingering was successfully destroyed.'
+    redirect_to fingerings_url, notice: '指板図を削除しました。'
   end
 
   private

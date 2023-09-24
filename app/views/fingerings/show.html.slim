@@ -1,17 +1,20 @@
 - set_meta_tags(title: @fingering.title, canonical: fingering_url)
 .container
-  - if @fingering.is_public || @fingering.created_by?(current_user)
-    = render @fingering
-  - else
-    = content_tag(:p, '非公開の指板図です')
-
-  - if logged_in?
-    .d-print-none.d-flex.flex-wrap.justify-content-between.align-items-center.py-3.my-4.border-top
-      .col-md-4.d-flex.align-items-center
-        - if @fingering.created_by?(current_user)
-          .mb-3.me-2.mb-md-0.text-body-secondary
-            = link_to '編集', edit_fingering_path(@fingering)
-          .mb-3.me-2.mb-md-0.text-body-secondary
-            = link_to '削除', @fingering, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }
-        .mb-3.me-2.mb-md-0.text-body-secondary
-          = link_to '一覧に戻る', fingerings_path
+  .card.border-0
+    .card-body.p-0
+      - if @fingering.is_public || @fingering.created_by?(current_user)
+        = render @fingering
+      - else
+        = content_tag(:p, '非公開の指板図です')
+    .card-footer.d-print-none.border-0.rounded
+      - if @fingering.created_by?(current_user)
+        ul.card-actions.d-flex.m-2.p-0.justify-content-center.w-auto.position-relative
+          li.card-action.list-unstyled.w-50
+            = link_to edit_fingering_path(@fingering), class: 'btn btn-outline-primary w-100'
+              i.bi.bi-pencil-fill.me-2
+              | 編集する
+          li.card-action.list-unstyled.end-0.bottom-0.position-absolute
+            = link_to '削除する', @fingering, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'text-muted'
+  - if @fingering.created_by?(current_user)
+    .m-2.p-2.d-print-none.text-center
+      = link_to '一覧に戻る', fingerings_path
