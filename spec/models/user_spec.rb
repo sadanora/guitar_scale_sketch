@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
     FactoryBot.create(:user, uid: '1234')
     user = FactoryBot.build(:user, uid: '1234')
     user.valid?
-    expect(user.errors[:uid]).to include('はすでに存在します')
+    expect(user.errors[:uid]).to include('Uidはすでに存在します')
   end
 
   it 'has many fingerings' do
