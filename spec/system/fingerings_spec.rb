@@ -40,6 +40,22 @@ RSpec.describe 'Fingerings', type: :system, js: true do
           expect(page).to have_content 'Fingering was successfully created.'
         end.to change(Fingering, :count).by(1)
       end
+
+      it 'can not add fretboard if endFret value is less than startFret' do
+        sign_in_as(user)
+        click_on '指板図をつくる'
+        fill_in 'タイトル', with: 'Test Fingering'
+        select '10', from: '開始フレット'
+        expect(page).to have_content '終端フレットは開始フレット以上の値にしてください'
+      end
+
+      it 'can not add fretboard if the fretboard width over 12 frets' do
+        sign_in_as(user)
+        click_on '指板図をつくる'
+        fill_in 'タイトル', with: 'Test Fingering'
+        select '13', from: '終端フレット'
+        expect(page).to have_content '指板の幅は開始フレットと終端フレットの差を11以下にしてください'
+      end
     end
 
     context 'when show' do
