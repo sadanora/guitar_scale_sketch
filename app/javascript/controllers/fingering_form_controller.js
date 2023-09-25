@@ -136,7 +136,7 @@ export default class extends Controller {
       this.showFretWidthError(
         addFretboardButton,
         errorMessage,
-        "指板の幅は開始フレットと終端フレットの差を11以下にしてください",
+        "指板の幅は12フレット以下にしてください",
       );
     } else {
       addFretboardButton.removeAttribute("disabled");
