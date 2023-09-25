@@ -9,3 +9,6 @@ application.register("fingering", FingeringController);
 
 import FingeringFormController from "./fingering_form_controller";
 application.register("fingering-form", FingeringFormController);
+
+import TooltipController from "./tooltip_controller";
+application.register("tooltip", TooltipController);

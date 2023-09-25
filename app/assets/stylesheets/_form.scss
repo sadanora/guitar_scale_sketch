@@ -2,3 +2,7 @@ label.required:after {
   content:" *";
   color: red;
 }
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-primary);
+}
