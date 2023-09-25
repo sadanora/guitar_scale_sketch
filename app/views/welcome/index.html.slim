@@ -15,7 +15,7 @@
     .col
       .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
         span
-          img src="/palette.svg" width="60" height="60"
+          img src="/palette.svg" width="60" height="60" alt="palette_icon"
       h3.fs-2
         | ドットを打つだけ
       p
@@ -23,7 +23,7 @@
     .col
       .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
         span
-          img src="/printer.svg" width="60" height="60"
+          img src="/printer.svg" width="60" height="60" alt="printer_icon"
       h3.fs-2
         | 印刷しやすい
       p
@@ -31,7 +31,7 @@
     .col
       .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
         span
-          img src="/link-45deg.svg" width="60" height="60"
+          img src="/link-45deg.svg" width="60" height="60" alt="link_icon"
       h3.fs-2
         | URLで共有
       p
@@ -42,7 +42,7 @@
         | Googleでログインして指板図をつくる
       .d-inline-flex.justify-content-center.align-items-center.py-1
         = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0 google-login-button'
-          = image_tag '/btn_google_signin_dark_normal_web@2x.png', size: '200x48'
+          = image_tag '/btn_google_signin_dark_normal_web@2x.png', alt: 'signin_button', size: '200x48'
       small.d-inline-flex.justify-content-center.align-items-center.fw-bold
         | ※PCからご利用ください。
       small.d-inline-flex.justify-content-center.align-items-center
