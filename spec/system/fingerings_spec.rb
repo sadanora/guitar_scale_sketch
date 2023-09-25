@@ -54,7 +54,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         click_on '指板図をつくる'
         fill_in 'タイトル', with: 'Test Fingering'
         select '13', from: '終端フレット'
-        expect(page).to have_content '指板の幅は開始フレットと終端フレットの差を11以下にしてください'
+        expect(page).to have_content '指板の幅は12フレット以下にしてください'
       end
     end
 
