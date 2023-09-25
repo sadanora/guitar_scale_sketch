@@ -12,14 +12,17 @@ RSpec.describe 'Fingerings', type: :system, js: true do
     context 'when index' do
       it 'displays their own fingerings list' do
         sign_in_as(user)
+        visit fingerings_path
         expect(page).to have_content "#{user.name}'s scale"
       end
 
       it 'does not display others fingerings' do
         sign_in_as(user)
+        visit fingerings_path
         expect(page).to have_content "#{user.name}'s scale"
         visit logout_path
         sign_in_as(other_user)
+        visit fingerings_path
         expect(page).to have_no_content "#{user.name}'s scale"
       end
     end
@@ -62,6 +65,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       it 'can display their own fingering' do
         fingering = user.created_fingerings.first
         sign_in_as(user)
+        visit fingerings_path
         within "#fingering_#{fingering.id}" do
           click_link fingering.title.to_s
         end
