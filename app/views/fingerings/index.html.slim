@@ -4,7 +4,7 @@
     | 自分の指板図
   .fingering-items.card.col-6.d-flex.justify-content-center.mx-auto.mb-3.border-0
     .card-body
-      - if @fingerings.length == 0
+      - if @fingerings.empty?
         p.text-muted.text-center
           i.bi.bi-search.pe-1
           | 0件です
