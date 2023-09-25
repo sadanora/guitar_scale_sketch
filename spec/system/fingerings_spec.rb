@@ -12,14 +12,17 @@ RSpec.describe 'Fingerings', type: :system, js: true do
     context 'when index' do
       it 'displays their own fingerings list' do
         sign_in_as(user)
+        visit fingerings_path
         expect(page).to have_content "#{user.name}'s scale"
       end
 
       it 'does not display others fingerings' do
         sign_in_as(user)
+        visit fingerings_path
         expect(page).to have_content "#{user.name}'s scale"
         visit logout_path
         sign_in_as(other_user)
+        visit fingerings_path
         expect(page).to have_no_content "#{user.name}'s scale"
       end
     end
@@ -37,8 +40,24 @@ RSpec.describe 'Fingerings', type: :system, js: true do
           select '4', from: '終端フレット'
           click_button '指板を追加'
           click_button '登録する'
-          expect(page).to have_content 'Fingering was successfully created.'
+          expect(page).to have_content '指板図を作成しました。'
         end.to change(Fingering, :count).by(1)
+      end
+
+      it 'can not add fretboard if endFret value is less than startFret' do
+        sign_in_as(user)
+        click_on '指板図をつくる'
+        fill_in 'タイトル', with: 'Test Fingering'
+        select '10', from: '開始フレット'
+        expect(page).to have_content '終端フレットは開始フレット以上の値にしてください'
+      end
+
+      it 'can not add fretboard if the fretboard width over 12 frets' do
+        sign_in_as(user)
+        click_on '指板図をつくる'
+        fill_in 'タイトル', with: 'Test Fingering'
+        select '13', from: '終端フレット'
+        expect(page).to have_content '指板の幅は12フレット以下にしてください'
       end
     end
 
@@ -46,6 +65,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       it 'can display their own fingering' do
         fingering = user.created_fingerings.first
         sign_in_as(user)
+        visit fingerings_path
         within "#fingering_#{fingering.id}" do
           click_link fingering.title.to_s
         end
@@ -79,7 +99,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         select '8', from: '終端フレット'
         click_button '指板を追加'
         click_button '更新する'
-        expect(page).to have_content 'Fingering was successfully updated.'
+        expect(page).to have_content '指板図を更新しました。'
       end
     end
 
@@ -96,7 +116,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
           page.accept_confirm do
             click_link '削除'
           end
-          expect(page).to have_content 'Fingering was successfully destroyed.'
+          expect(page).to have_content '指板図を削除しました。'
         end.to change(Fingering, :count).by(-1)
       end
     end
