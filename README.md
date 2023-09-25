@@ -45,7 +45,7 @@ https://guitar-scale-sketch.com/
 ## インストールと起動
 ```bash
 $ git clone https://github.com/sadanora/guitar_scale_sketch.git
-$ cd  guitar_scale_sketch
+$ cd guitar_scale_sketch
 $ bin/setup
 $ bin/dev
 ```
