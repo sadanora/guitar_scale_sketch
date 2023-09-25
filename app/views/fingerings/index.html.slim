@@ -4,6 +4,12 @@
     | 自分の指板図
   .fingering-items.card.col-6.d-flex.justify-content-center.mx-auto.mb-3.border-0
     .card-body
+      - if @fingerings.empty?
+        p.text-muted.text-center
+          i.bi.bi-search.pe-1
+          | 0件です
+        p.text-center
+          = link_to '指板図をつくる', new_fingering_path
       - @fingerings.each do |fingering|
         .fingering-item.text-center.row.py-2.border-top
           .cal-4.my-auto id="#{dom_id fingering}"
