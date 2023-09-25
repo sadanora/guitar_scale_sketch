@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :fingerings
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
-  resource :retirements
+  resource :retirements, only: [:new, :create, :destroy]
 
   root 'welcome#index'
 end
