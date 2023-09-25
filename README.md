@@ -1,3 +1,4 @@
+
 # Guitar Scale Sketch
 **いま反復練習したいスケール、運指に最適化された綺麗で見やすい指板図がさっと手に入る**
 
@@ -26,48 +27,35 @@ https://guitar-scale-sketch.com/
 - [Slim](https://slim-template.github.io/)
 - [Konva 9.2.0](https://konvajs.org/)
 - [PostgreSQL](https://www.postgresql.org/)
-
 ### ソーシャルログイン
-- Google OAuth
-#### テスティングフレームワーク
+- [OmniAuth Google OAuth2](https://github.com/zquestz/omniauth-google-oauth2)
+- [OmniAuth - Rails CSRF Protection](https://github.com/cookpad/omniauth-rails_csrf_protection)
+### テスティングフレームワーク
 - [RSpec 6.0.3](https://rspec.info/)
-
 ### Linter/Formatter
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [Rubocop](https://docs.rubocop.org/rubocop/index.html)
 - [Slim-Lint](https://github.com/sds/slim-lint)
-
 ### CI / CD
 - [GitHub Actions](https://docs.github.com/ja/actions)
 ### インフラ
 - [Fly.io](https://fly.io/)
 
-## 開発環境の構築
-### セットアップ
+## インストールと起動
 ```bash
 $ git clone https://github.com/sadanora/guitar_scale_sketch.git
 $ cd  guitar_scale_sketch
 $ bin/setup
+$ bin/dev
 ```
-
-### 環境変数の設定
+## 環境変数の設定
 環境変数名 | 説明
 --- | ---
 GOOGLE_ID | GoogleクライアントID
 GOOGLE_SECRET | Googleクライアントシークレット
 
-### 起動
-```bash
-$ bin/dev
-```
-
-### Lint
-#### rubocop、slim-lint、eslint、prettier すべてを実行
-```bash
-$ bin/lint
-```
-#### 個別に実行
+## Linter / Formatter
 rubocop
 ```bash
 $ bundle exec rubocop
@@ -84,8 +72,12 @@ prettier
 ```bash
 $ yarn prettier --check ./app/javascript
 ```
+### 上記をまとめて実行
+```bash
+$ bin/lint
+```
 
-### テスト
+## テスト
 ```bash
 $ bin/rails spec
 ```
