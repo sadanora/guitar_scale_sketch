@@ -60,19 +60,19 @@ export default class extends Controller {
     if (this.fingering.fretboards.length === 0) {
       return;
     } else {
-      const fretboards = this.fingering.stage
+      const fretboardGroups = this.fingering.stage
         .getLayers()[0]
         .getChildren((node) => {
           return node.hasName("fretboard");
         });
-      const newFingeringCode = fretboards.map((fretboard, i) => {
-        const dotContainers = fretboard.getChildren((node) => {
+      const newFingeringCode = fretboardGroups.map((fretboardGroup, i) => {
+        const dotContainers = fretboardGroup.getChildren((node) => {
           return node.hasName("dotContainer");
         });
         const dots = dotContainers
           .map((dotContainer) => {
             return dotContainer.getChildren((node) => {
-              return node.getClassName() === "Circle";
+              return node.hasName("dot");
             });
           })
           .filter((v) => v.length)
@@ -84,8 +84,8 @@ export default class extends Controller {
         }));
         const fretboardCode = {
           position: i + 1,
-          startFret: fretboard.attrs.startFret,
-          endFret: fretboard.attrs.endFret,
+          startFret: fretboardGroup.attrs.startFret,
+          endFret: fretboardGroup.attrs.endFret,
           dots: dotCodes,
         };
         return fretboardCode;
