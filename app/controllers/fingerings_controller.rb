@@ -22,7 +22,7 @@ class FingeringsController < ApplicationController
     if @fingering.save
       redirect_to @fingering, notice: '指板図を作成しました。'
     else
-      render :edit, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
