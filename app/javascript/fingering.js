@@ -31,16 +31,6 @@ export default class Fingering {
     return fretboardGroups;
   }
 
-  createFretboard(startFret, endFret, position) {
-    const fretboardCode = {
-      startFret: startFret,
-      endFret: endFret,
-      position: position,
-    };
-    const fretboard = new Fretboard(fretboardCode);
-    this.fretboards.push(fretboard);
-  }
-
   createFretboards(fingeringCode) {
     const fretboards = [];
     fingeringCode.forEach((e) => {
