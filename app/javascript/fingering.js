@@ -1,5 +1,6 @@
-import { Text, Rect, Circle, Image, Group, Layer, Stage } from "konva";
+import { Text, Rect, Image, Group, Layer, Stage } from "konva";
 import Fretboard from "./fretboard.js";
+import { generateDot } from "./generateDot.js";
 
 export default class Fingering {
   static titleHeight = 100;
@@ -93,7 +94,14 @@ export default class Fingering {
         if (dot.length) {
           dot[0].destroy();
         } else {
-          dotContainer.add(this.#createDot(dotContainer.attrs.dotProperty));
+          const newDot = generateDot(
+            dotContainer.attrs.dotProperty,
+            Fretboard.currentColor,
+          );
+          newDot.on("click", () => {
+            dot.destroy();
+          });
+          dotContainer.add(newDot);
         }
       });
       dotContainer.add(clickableArea);
@@ -160,21 +168,5 @@ export default class Fingering {
     });
     titleContainer.add(title);
     return titleContainer;
-  }
-
-  #createDot(dotProperty) {
-    const dot = new Circle({
-      name: "dot",
-      x: dotProperty.x,
-      y: dotProperty.y,
-      radius: dotProperty.radius,
-      fill: Fretboard.currentColor,
-      fret: dotProperty.fret,
-      guitarString: dotProperty.guitarString,
-    });
-    dot.on("click", () => {
-      dot.destroy();
-    });
-    return dot;
   }
 }

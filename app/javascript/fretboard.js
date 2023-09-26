@@ -1,4 +1,5 @@
-import { Text, Line, Circle, Group } from "konva";
+import { Text, Line, Group } from "konva";
+import { generateDot } from "./generateDot.js";
 
 export default class Fretboard {
   static referencePoint = 34;
@@ -124,7 +125,10 @@ export default class Fretboard {
       const matchedDot = this.#findDot(dotContainer);
       // dotが存在すればdotを追加
       if (matchedDot) {
-        const dot = this.#generateDot(dotContainer.attrs.dotProperty);
+        const dot = generateDot(
+          dotContainer.attrs.dotProperty,
+          this.currentColor,
+        );
         dot.fill(matchedDot.fill);
         dotContainer.add(dot);
       }
@@ -164,19 +168,6 @@ export default class Fretboard {
       x = 34 + 100 * i;
     }
     return x;
-  }
-
-  #generateDot(dotProperty) {
-    const dot = new Circle({
-      name: "dot",
-      x: dotProperty.x,
-      y: dotProperty.y,
-      radius: dotProperty.radius,
-      fill: Fretboard.currentColor,
-      fret: dotProperty.fret,
-      guitarString: dotProperty.guitarString,
-    });
-    return dot;
   }
 
   #findDot(dotContainer) {
