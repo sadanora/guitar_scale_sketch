@@ -25,10 +25,10 @@ export default class Fingering {
   addKonvaObjectsToLayer(KonvaObjects) {
     let layer = this.stage.getChildren()[0];
     layer.destroyChildren();
-    const title = this.#renderTitle();
+    const title = this.#generateTitleText();
     layer.add(title);
-    KonvaObjects.forEach((f) => {
-      layer.add(f);
+    KonvaObjects.forEach((obj) => {
+      layer.add(obj);
     });
   }
 
@@ -147,7 +147,7 @@ export default class Fingering {
     return stage;
   }
 
-  #renderTitle() {
+  #generateTitleText() {
     const titleContainer = new Group({
       name: "title",
     });
