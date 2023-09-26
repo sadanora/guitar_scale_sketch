@@ -15,6 +15,6 @@ export default class extends Controller {
   render() {
     const fretboardGroups = this.fingering.generateFretboardGroups();
     this.fingering.setStageHeight();
-    this.fingering.render(fretboardGroups);
+    this.fingering.addKonvaObjectsToLayer(fretboardGroups);
   }
 }

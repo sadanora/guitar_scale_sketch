@@ -39,7 +39,7 @@ export default class extends Controller {
     const fretboardGroups = this.fingering.generateFretboardGroups();
     this.fingering.addClickEvent(fretboardGroups, this.fingeringCode);
     this.fingering.addDeleteButton(fretboardGroups);
-    this.fingering.render(fretboardGroups);
+    this.fingering.addKonvaObjectsToLayer(fretboardGroups);
   }
 
   updateTitle() {

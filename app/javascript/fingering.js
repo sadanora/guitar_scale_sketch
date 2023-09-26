@@ -13,12 +13,21 @@ export default class Fingering {
     this.stage = this.#initializeStage();
   }
 
-  render(fretboardGroups) {
+  createFretboards(fingeringCode) {
+    const fretboards = [];
+    fingeringCode.forEach((e) => {
+      const fretboard = new Fretboard(e);
+      fretboards.push(fretboard);
+    });
+    return fretboards;
+  }
+
+  addKonvaObjectsToLayer(KonvaObjects) {
     let layer = this.stage.getChildren()[0];
     layer.destroyChildren();
     const title = this.#renderTitle();
     layer.add(title);
-    fretboardGroups.forEach((f) => {
+    KonvaObjects.forEach((f) => {
       layer.add(f);
     });
   }
@@ -29,15 +38,6 @@ export default class Fingering {
     });
 
     return fretboardGroups;
-  }
-
-  createFretboards(fingeringCode) {
-    const fretboards = [];
-    fingeringCode.forEach((e) => {
-      const fretboard = new Fretboard(e);
-      fretboards.push(fretboard);
-    });
-    return fretboards;
   }
 
   setStageHeight() {
