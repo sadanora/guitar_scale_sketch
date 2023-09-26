@@ -10,23 +10,23 @@ export default class Fingering {
   constructor(title = "", fingeringCode = []) {
     this.title = title;
     this.fretboards = this.createFretboards(fingeringCode);
-    this.stage = this.#generateStage();
+    this.stage = this.#initializeStage();
   }
 
-  buildFretboardShapes() {
-    const fretboardShapes = this.fretboards.map((fretboard) => {
-      return fretboard.build();
+  generateFretboardGroups() {
+    const fretboardGroups = this.fretboards.map((fretboard) => {
+      return fretboard.generateFretboardGroup();
     });
 
-    return fretboardShapes;
+    return fretboardGroups;
   }
 
-  draw(fretboardArray) {
+  render(fretboardGroups) {
     let layer = this.stage.getChildren()[0];
     layer.destroyChildren();
-    const title = this.#createTitle();
+    const title = this.#renderTitle();
     layer.add(title);
-    fretboardArray.forEach((f) => {
+    fretboardGroups.forEach((f) => {
       layer.add(f);
     });
   }
@@ -50,7 +50,7 @@ export default class Fingering {
     return fretboards;
   }
 
-  #generateStage() {
+  #initializeStage() {
     const height = Fingering.titleHeight + Fingering.fretboardHeight;
     const stage = new Stage({
       container: "fingeringContainer",
@@ -70,7 +70,7 @@ export default class Fingering {
     this.stage.height(stageHeight);
   }
 
-  #createTitle() {
+  #renderTitle() {
     const titleContainer = new Group({
       name: "title",
     });
@@ -85,15 +85,15 @@ export default class Fingering {
     return titleContainer;
   }
 
-  addClickEvent(fretboardShapes) {
-    fretboardShapes.forEach((fretboardShape) => {
-      this.addDotDestroyEvent(fretboardShape);
-      this.addClickableArea(fretboardShape);
+  addClickEvent(fretboardGroups) {
+    fretboardGroups.forEach((fretboardGroup) => {
+      this.addDotDestroyEvent(fretboardGroup);
+      this.addClickableArea(fretboardGroup);
     });
   }
 
-  addDotDestroyEvent(fretboardShape) {
-    const dotContainers = fretboardShape.getChildren((node) => {
+  addDotDestroyEvent(fretboardGroup) {
+    const dotContainers = fretboardGroup.getChildren((node) => {
       return node.hasName("dotContainer");
     });
     const dots = dotContainers
@@ -127,8 +127,8 @@ export default class Fingering {
     return dot;
   }
 
-  addClickableArea(fretboardShape) {
-    const dotContainers = fretboardShape.getChildren((node) => {
+  addClickableArea(fretboardGroup) {
+    const dotContainers = fretboardGroup.getChildren((node) => {
       return node.hasName("dotContainer");
     });
     // clickableAreaの追加
@@ -154,11 +154,11 @@ export default class Fingering {
     });
   }
 
-  addDeleteButton(fretboardArray) {
-    fretboardArray.forEach((fretboard) => {
+  addDeleteButton(fretboardGroups) {
+    fretboardGroups.forEach((fretboardGroup) => {
       const button = new Group({
         name: "deleteButton",
-        x: 157 + 100 * (fretboard.attrs.fretNumbers.length - 1),
+        x: 157 + 100 * (fretboardGroup.attrs.fretNumbers.length - 1),
         y: Fretboard.referencePoint + Fretboard.guitarStringSpacing * 4,
         width: 30,
         height: 30,
@@ -174,13 +174,13 @@ export default class Fingering {
           const deleteEvent = new CustomEvent("fretboardDeleted", {
             bubbles: true,
           });
-          fretboard.destroy();
+          fretboardGroup.destroy();
           document
             .getElementById("fingeringContainer")
             .dispatchEvent(deleteEvent);
         });
       });
-      fretboard.add(button);
+      fretboardGroup.add(button);
     });
   }
 

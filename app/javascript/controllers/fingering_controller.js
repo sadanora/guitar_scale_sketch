@@ -9,12 +9,12 @@ export default class extends Controller {
       this.titleTarget.textContent,
       JSON.parse(this.fingeringCodeTarget.textContent),
     );
-    this.draw();
+    this.render();
   }
 
-  draw() {
-    const fretboardShapes = this.fingering.buildFretboardShapes();
+  render() {
+    const fretboardGroups = this.fingering.generateFretboardGroups();
     this.fingering.setStageHeight();
-    this.fingering.draw(fretboardShapes);
+    this.fingering.render(fretboardGroups);
   }
 }

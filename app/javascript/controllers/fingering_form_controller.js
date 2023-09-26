@@ -8,7 +8,7 @@ export default class extends Controller {
     "endFret",
     "output",
     "fretWidthErrorMessage",
-    "addFretboardButton",
+    "appendFretboardButton",
   ];
   static values = {
     fingeringCode: [],
@@ -24,26 +24,26 @@ export default class extends Controller {
     } else {
       this.fingering = new Fingering(this.titleTarget.value);
     }
-    this.draw();
+    this.render();
     document
       .getElementById("fingeringContainer")
       .addEventListener("fretboardDeleted", () => {
         this.updateFingeringCode();
-        this.draw();
+        this.render();
       });
   }
 
-  addFretboard() {
+  appendFretboard() {
     this.updateFingeringCode();
-    this.#addFretboardCode();
+    this.#appendFretboardCode();
     this.fingeringCodeValue = this.fingering.fingeringCode;
     this.fingering.fretboards = this.fingering.createFretboards(
       this.fingeringCodeValue,
     );
-    this.draw();
+    this.render();
   }
 
-  #addFretboardCode() {
+  #appendFretboardCode() {
     const fretboardCode = {
       startFret: parseInt(this.startFretTarget.value),
       endFret: parseInt(this.endFretTarget.value),
@@ -100,20 +100,20 @@ export default class extends Controller {
     }
   }
 
-  draw() {
-    this.fetchTitle();
+  render() {
+    this.updateTitle();
     this.fingering.setStageHeight();
-    const fretboardShapes = this.fingering.buildFretboardShapes();
-    this.fingering.addClickEvent(fretboardShapes, this.fingeringCode);
-    this.fingering.addDeleteButton(fretboardShapes);
-    this.fingering.draw(fretboardShapes);
+    const fretboardGroups = this.fingering.generateFretboardGroups();
+    this.fingering.addClickEvent(fretboardGroups, this.fingeringCode);
+    this.fingering.addDeleteButton(fretboardGroups);
+    this.fingering.render(fretboardGroups);
   }
 
-  fetchTitle() {
+  updateTitle() {
     this.fingering.title = this.titleTarget.value;
   }
 
-  fetchDotColor(event) {
+  updateDotColor(event) {
     this.dotColorValue = event.currentTarget.id;
   }
 
@@ -121,31 +121,31 @@ export default class extends Controller {
     this.fingering.setDotColor(this.dotColorValue);
   }
 
-  fretWidthValidation() {
+  validateFretWidth() {
     const startFretNumber = parseInt(this.startFretTarget.value);
     const endFretNumber = parseInt(this.endFretTarget.value);
     const errorMessage = this.fretWidthErrorMessageTarget;
-    const addFretboardButton = this.addFretboardButtonTarget;
+    const appendFretboardButton = this.appendFretboardButtonTarget;
     if (endFretNumber < startFretNumber) {
-      this.showFretWidthError(
-        addFretboardButton,
+      this.displayFretWidthError(
+        appendFretboardButton,
         errorMessage,
         "終端フレットは開始フレット以上の値にしてください",
       );
     } else if (endFretNumber - startFretNumber > 11) {
-      this.showFretWidthError(
-        addFretboardButton,
+      this.displayFretWidthError(
+        appendFretboardButton,
         errorMessage,
         "指板の幅は12フレット以下にしてください",
       );
     } else {
-      addFretboardButton.removeAttribute("disabled");
+      appendFretboardButton.removeAttribute("disabled");
       errorMessage.classList.remove("invalid-feedback", "mb-3");
       errorMessage.innerHTML = "";
     }
   }
 
-  showFretWidthError(disabledTarget, messageTarget, message) {
+  displayFretWidthError(disabledTarget, messageTarget, message) {
     disabledTarget.setAttribute("disabled", "");
     messageTarget.classList.add("invalid-feedback", "mb-3");
     messageTarget.style.display = "block";
