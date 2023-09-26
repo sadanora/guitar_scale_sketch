@@ -99,7 +99,7 @@ export default class Fingering {
             Fretboard.currentColor,
           );
           newDot.on("click", () => {
-            dot.destroy();
+            newDot.destroy();
           });
           dotContainer.add(newDot);
         }
