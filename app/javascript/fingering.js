@@ -13,14 +13,6 @@ export default class Fingering {
     this.stage = this.#initializeStage();
   }
 
-  generateFretboardGroups() {
-    const fretboardGroups = this.fretboards.map((fretboard) => {
-      return fretboard.generateFretboardGroup();
-    });
-
-    return fretboardGroups;
-  }
-
   render(fretboardGroups) {
     let layer = this.stage.getChildren()[0];
     layer.destroyChildren();
@@ -29,6 +21,14 @@ export default class Fingering {
     fretboardGroups.forEach((f) => {
       layer.add(f);
     });
+  }
+
+  generateFretboardGroups() {
+    const fretboardGroups = this.fretboards.map((fretboard) => {
+      return fretboard.generateFretboardGroup();
+    });
+
+    return fretboardGroups;
   }
 
   createFretboard(startFret, endFret, position) {
@@ -50,39 +50,11 @@ export default class Fingering {
     return fretboards;
   }
 
-  #initializeStage() {
-    const height = Fingering.titleHeight + Fingering.fretboardHeight;
-    const stage = new Stage({
-      container: "fingeringContainer",
-      width: Fingering.stageWidth,
-      height: height,
-    });
-    const layer = new Layer();
-    stage.add(layer);
-
-    return stage;
-  }
-
   setStageHeight() {
     const stageHeight =
       Fingering.titleHeight +
       Fingering.fretboardHeight * this.fretboards.length;
     this.stage.height(stageHeight);
-  }
-
-  #renderTitle() {
-    const titleContainer = new Group({
-      name: "title",
-    });
-    const title = new Text({
-      text: this.title,
-      fontSize: 40,
-      y: 20,
-      width: Fingering.stageWidth,
-      align: "center",
-    });
-    titleContainer.add(title);
-    return titleContainer;
   }
 
   addClickEvent(fretboardGroups) {
@@ -109,22 +81,6 @@ export default class Fingering {
         dot.destroy();
       });
     });
-  }
-
-  #createDot(dotProperty) {
-    const dot = new Circle({
-      name: "dot",
-      x: dotProperty.x,
-      y: dotProperty.y,
-      radius: dotProperty.radius,
-      fill: Fretboard.currentColor,
-      fret: dotProperty.fret,
-      guitarString: dotProperty.guitarString,
-    });
-    dot.on("click", () => {
-      dot.destroy();
-    });
-    return dot;
   }
 
   addClickableArea(fretboardGroup) {
@@ -186,5 +142,49 @@ export default class Fingering {
 
   setDotColor(color) {
     Fretboard.currentColor = color;
+  }
+
+  #initializeStage() {
+    const height = Fingering.titleHeight + Fingering.fretboardHeight;
+    const stage = new Stage({
+      container: "fingeringContainer",
+      width: Fingering.stageWidth,
+      height: height,
+    });
+    const layer = new Layer();
+    stage.add(layer);
+
+    return stage;
+  }
+
+  #renderTitle() {
+    const titleContainer = new Group({
+      name: "title",
+    });
+    const title = new Text({
+      text: this.title,
+      fontSize: 40,
+      y: 20,
+      width: Fingering.stageWidth,
+      align: "center",
+    });
+    titleContainer.add(title);
+    return titleContainer;
+  }
+
+  #createDot(dotProperty) {
+    const dot = new Circle({
+      name: "dot",
+      x: dotProperty.x,
+      y: dotProperty.y,
+      radius: dotProperty.radius,
+      fill: Fretboard.currentColor,
+      fret: dotProperty.fret,
+      guitarString: dotProperty.guitarString,
+    });
+    dot.on("click", () => {
+      dot.destroy();
+    });
+    return dot;
   }
 }

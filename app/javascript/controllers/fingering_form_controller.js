@@ -33,6 +33,19 @@ export default class extends Controller {
       });
   }
 
+  render() {
+    this.updateTitle();
+    this.fingering.setStageHeight();
+    const fretboardGroups = this.fingering.generateFretboardGroups();
+    this.fingering.addClickEvent(fretboardGroups, this.fingeringCode);
+    this.fingering.addDeleteButton(fretboardGroups);
+    this.fingering.render(fretboardGroups);
+  }
+
+  updateTitle() {
+    this.fingering.title = this.titleTarget.value;
+  }
+
   appendFretboard() {
     this.updateFingeringCode();
     this.#appendFretboardCode();
@@ -41,20 +54,6 @@ export default class extends Controller {
       this.fingeringCodeValue,
     );
     this.render();
-  }
-
-  #appendFretboardCode() {
-    const fretboardCode = {
-      startFret: parseInt(this.startFretTarget.value),
-      endFret: parseInt(this.endFretTarget.value),
-    };
-    if (!this.fingering.fingeringCode) {
-      fretboardCode.position = 1;
-      this.fingering.fingeringCode = [fretboardCode];
-    } else {
-      fretboardCode.position = this.fingering.fingeringCode.length + 1;
-      this.fingering.fingeringCode.push(fretboardCode);
-    }
   }
 
   updateFingeringCode() {
@@ -100,17 +99,18 @@ export default class extends Controller {
     }
   }
 
-  render() {
-    this.updateTitle();
-    this.fingering.setStageHeight();
-    const fretboardGroups = this.fingering.generateFretboardGroups();
-    this.fingering.addClickEvent(fretboardGroups, this.fingeringCode);
-    this.fingering.addDeleteButton(fretboardGroups);
-    this.fingering.render(fretboardGroups);
-  }
-
-  updateTitle() {
-    this.fingering.title = this.titleTarget.value;
+  #appendFretboardCode() {
+    const fretboardCode = {
+      startFret: parseInt(this.startFretTarget.value),
+      endFret: parseInt(this.endFretTarget.value),
+    };
+    if (!this.fingering.fingeringCode) {
+      fretboardCode.position = 1;
+      this.fingering.fingeringCode = [fretboardCode];
+    } else {
+      fretboardCode.position = this.fingering.fingeringCode.length + 1;
+      this.fingering.fingeringCode.push(fretboardCode);
+    }
   }
 
   updateDotColor(event) {
