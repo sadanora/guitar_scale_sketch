@@ -29,24 +29,20 @@ export default class Fretboard {
       fretNumbers: this.fretNumbers,
       y: 100 + 250 * (this.position - 1),
     });
-    const fletboardElements = [
+    [
       this.#generateFretNumberLabels(),
       this.#generateFretLines(),
       this.#generateGuitarStringLines(),
       ...this.#generateDotContainers(),
-    ];
-    fletboardElements.forEach((element) => {
-      fretboardGroup.add(element);
-    });
+    ].forEach((element) => fretboardGroup.add(element));
 
     return fretboardGroup;
   }
 
   #generateFretNumbers(startFret, endFret) {
-    const fretNumbers = [...Array(endFret - startFret + 1).keys()].map(
+    return [...Array(endFret - startFret + 1).keys()].map(
       (value) => value + startFret,
     );
-    return fretNumbers;
   }
 
   #generateFretNumberLabels() {
@@ -93,7 +89,7 @@ export default class Fretboard {
       y: Fretboard.referencePoint,
     });
 
-    for (let i = 0; i < 6; i++) {
+    [...Array(6)].forEach((_, i) => {
       const guitarStringLine = new Line({
         y: Fretboard.guitarStringSpacing * i,
         points: [0, 0, 100 * this.fretNumbers.length, 0],
@@ -101,7 +97,8 @@ export default class Fretboard {
         strokeWidth: 1,
       });
       guitarStringLines.add(guitarStringLine);
-    }
+    });
+
     return guitarStringLines;
   }
 
@@ -109,32 +106,30 @@ export default class Fretboard {
     const guitarStringNumbers = [1, 2, 3, 4, 5, 6];
     const dotContainers = [];
 
-    // [{"fret": 1,"guitarString": 1,"fill": ""}, {"fret": 1,"guitarString": 2,"fill": ""}...]
-    const fingerPositions = this.fretNumbers.flatMap((fretNumber) =>
-      guitarStringNumbers.map((guitarStringNumber) => ({
-        fret: fretNumber,
-        guitarString: guitarStringNumber,
-        fill: "",
-      })),
-    );
+    this.fretNumbers
+      .flatMap((fretNumber) =>
+        guitarStringNumbers.map((guitarStringNumber) => ({
+          fret: fretNumber,
+          guitarString: guitarStringNumber,
+          fill: "",
+        })),
+      )
+      .forEach((fingerPosition) => {
+        const dotContainer = this.#generateDotContainer(fingerPosition);
+        // fretとguitarStringが一致するdotが存在するか確認
+        const matchedDot = this.#findDot(dotContainer);
+        // dotが存在すればdotを追加
+        if (matchedDot) {
+          const dot = generateDot(
+            dotContainer.attrs.dotProperty,
+            Fretboard.currentColor,
+          );
+          dot.fill(matchedDot.fill);
+          dotContainer.add(dot);
+        }
+        dotContainers.push(dotContainer);
+      });
 
-    fingerPositions.map((fingerPosition) => {
-      const dotContainer = this.#generateDotContainer(fingerPosition);
-
-      // fretとguitarStringが一致するdotが存在するか確認
-      const matchedDot = this.#findDot(dotContainer);
-      // dotが存在すればdotを追加
-      if (matchedDot) {
-        const dot = generateDot(
-          dotContainer.attrs.dotProperty,
-          this.currentColor,
-        );
-        dot.fill(matchedDot.fill);
-        dotContainer.add(dot);
-      }
-
-      dotContainers.push(dotContainer);
-    });
     return dotContainers;
   }
 
@@ -163,11 +158,9 @@ export default class Fretboard {
   }
 
   #calcDotContainerX(i) {
-    let x = 34;
-    if (i > 0) {
-      x = 34 + 100 * i;
-    }
-    return x;
+    return i > 0
+      ? Fretboard.referencePoint + Fretboard.fretDistance * i
+      : Fretboard.referencePoint;
   }
 
   #findDot(dotContainer) {
