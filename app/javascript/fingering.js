@@ -15,22 +15,15 @@ export default class Fingering {
   }
 
   createFretboards(fingeringCode) {
-    const fretboards = [];
-    fingeringCode.forEach((e) => {
-      const fretboard = new Fretboard(e);
-      fretboards.push(fretboard);
-    });
-    return fretboards;
+    return fingeringCode.map((code) => new Fretboard(code));
   }
 
   addKonvaObjectsToLayer(KonvaObjects) {
-    let layer = this.stage.getChildren()[0];
+    const layer = this.stage.getChildren()[0];
     layer.destroyChildren();
-    const titleText = this.#generateTitleText();
-    layer.add(titleText);
-    KonvaObjects.forEach((obj) => {
-      layer.add(obj);
-    });
+
+    layer.add(this.#generateTitleText());
+    KonvaObjects.forEach((obj) => layer.add(obj));
   }
 
   generateFretboardGroups() {
@@ -50,61 +43,12 @@ export default class Fingering {
 
   addClickEvent(fretboardGroups) {
     fretboardGroups.forEach((fretboardGroup) => {
-      this.addDotDestroyEvent(fretboardGroup);
-      this.addClickableArea(fretboardGroup);
-    });
-  }
-
-  addDotDestroyEvent(fretboardGroup) {
-    const dotContainers = fretboardGroup.getChildren((node) => {
-      return node.hasName("dotContainer");
-    });
-    const dots = dotContainers
-      .map((node) => {
-        return node.getChildren((node) => {
-          return node.hasName("dot");
-        });
-      })
-      .filter((v) => v.length)
-      .flat();
-    dots.forEach((dot) => {
-      dot.on("click", () => {
-        dot.destroy();
-      });
-    });
-  }
-
-  addClickableArea(fretboardGroup) {
-    const dotContainers = fretboardGroup.getChildren((node) => {
-      return node.hasName("dotContainer");
-    });
-    // clickableAreaの追加
-    dotContainers.forEach((dotContainer) => {
-      const clickableArea = new Rect({
-        width: 100,
-        height: 30,
-      });
-      // dotの追加、削除を行うイベント
-      clickableArea.on("click", () => {
-        // dotを取得
-        const dot = dotContainer.getChildren((node) => {
-          return node.hasName("dot");
-        });
-        // dotがあれば削除、なければ追加する
-        if (dot.length) {
-          dot[0].destroy();
-        } else {
-          const newDot = generateDot(
-            dotContainer.attrs.dotProperty,
-            Fretboard.currentColor,
-          );
-          newDot.on("click", () => {
-            newDot.destroy();
-          });
-          dotContainer.add(newDot);
-        }
-      });
-      dotContainer.add(clickableArea);
+      const dotContainers = this.#getChildrenByName(
+        fretboardGroup,
+        "dotContainer",
+      );
+      this.#addDotDestroyEvent(dotContainers);
+      this.#addClickableArea(dotContainers);
     });
   }
 
@@ -155,6 +99,49 @@ export default class Fingering {
     return stage;
   }
 
+  #addDotDestroyEvent(dotContainers) {
+    const dots = dotContainers
+      .map((node) => this.#getChildrenByName(node, "dot"))
+      .filter((v) => v.length)
+      .flat();
+    dots.forEach((dot) => {
+      this.#bindDestroyEventToDot(dot);
+    });
+  }
+
+  #addClickableArea(dotContainers) {
+    dotContainers.forEach((dotContainer) => {
+      const clickableArea = new Rect({
+        width: 100,
+        height: 30,
+      });
+      clickableArea.on("click", () =>
+        this.#handleClickableAreaEvent(dotContainer),
+      );
+      dotContainer.add(clickableArea);
+    });
+  }
+
+  #handleClickableAreaEvent(dotContainer) {
+    const dot = this.#getChildrenByName(dotContainer, "dot");
+    if (dot.length) {
+      dot[0].destroy();
+    } else {
+      const newDot = generateDot(
+        dotContainer.attrs.dotProperty,
+        Fretboard.currentColor,
+      );
+      this.#bindDestroyEventToDot(newDot);
+      dotContainer.add(newDot);
+    }
+  }
+
+  #bindDestroyEventToDot(dot) {
+    dot.on("click", () => {
+      dot.destroy();
+    });
+  }
+
   #generateTitleText() {
     const titleText = new Text({
       text: this.title,
@@ -164,5 +151,9 @@ export default class Fingering {
       align: "center",
     });
     return titleText;
+  }
+
+  #getChildrenByName(parent, name) {
+    return parent.getChildren((node) => node.hasName(name));
   }
 }
