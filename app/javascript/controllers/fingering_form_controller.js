@@ -16,14 +16,10 @@ export default class extends Controller {
   };
 
   initialize() {
-    if (this.outputTarget.value) {
-      this.fingering = new Fingering(
-        this.titleTarget.value,
-        JSON.parse(this.outputTarget.value),
-      );
-    } else {
-      this.fingering = new Fingering(this.titleTarget.value);
-    }
+    this.fingering = new Fingering(
+      this.titleTarget.value,
+      this.outputTarget.value ? JSON.parse(this.outputTarget.value) : [],
+    );
     this.render();
     document
       .getElementById("fingeringContainer")
@@ -34,16 +30,12 @@ export default class extends Controller {
   }
 
   render() {
-    this.updateTitle();
+    this.#updateTitle();
     this.fingering.setStageHeight();
     const fretboardGroups = this.fingering.generateFretboardGroups();
     this.fingering.addClickEvent(fretboardGroups);
     this.fingering.addDeleteButton(fretboardGroups);
     this.fingering.addKonvaObjectsToLayer(fretboardGroups);
-  }
-
-  updateTitle() {
-    this.fingering.title = this.titleTarget.value;
   }
 
   appendFretboard() {
@@ -57,60 +49,13 @@ export default class extends Controller {
   }
 
   updateFingeringCode() {
-    if (this.fingering.fretboards.length === 0) {
-      return;
-    } else {
-      const fretboardGroups = this.fingering.stage
-        .getLayers()[0]
-        .getChildren((node) => {
-          return node.hasName("fretboard");
-        });
-      const newFingeringCode = fretboardGroups.map((fretboardGroup, i) => {
-        const dotContainers = fretboardGroup.getChildren((node) => {
-          return node.hasName("dotContainer");
-        });
-        const dots = dotContainers
-          .map((dotContainer) => {
-            return dotContainer.getChildren((node) => {
-              return node.hasName("dot");
-            });
-          })
-          .filter((v) => v.length)
-          .flat();
-        const dotCodes = dots.map((dot) => ({
-          fill: dot.attrs.fill,
-          fret: dot.attrs.fret,
-          guitarString: dot.attrs.guitarString,
-        }));
-        const fretboardCode = {
-          position: i + 1,
-          startFret: fretboardGroup.attrs.startFret,
-          endFret: fretboardGroup.attrs.endFret,
-          dots: dotCodes,
-        };
-        return fretboardCode;
-      });
-
-      this.fingeringCodeValue = this.fingering.fingeringCode = newFingeringCode;
-      this.outputTarget.value = JSON.stringify(this.fingeringCodeValue);
-      this.fingering.fretboards = this.fingering.createFretboards(
-        this.fingeringCodeValue,
-      );
-    }
-  }
-
-  #appendFretboardCode() {
-    const fretboardCode = {
-      startFret: parseInt(this.startFretTarget.value),
-      endFret: parseInt(this.endFretTarget.value),
-    };
-    if (!this.fingering.fingeringCode) {
-      fretboardCode.position = 1;
-      this.fingering.fingeringCode = [fretboardCode];
-    } else {
-      fretboardCode.position = this.fingering.fingeringCode.length + 1;
-      this.fingering.fingeringCode.push(fretboardCode);
-    }
+    if (this.fingering.fretboards.length === 0) return;
+    const newFingeringCode = this.#generateNewFingeringCode();
+    this.fingeringCodeValue = this.fingering.fingeringCode = newFingeringCode;
+    this.outputTarget.value = JSON.stringify(this.fingeringCodeValue);
+    this.fingering.fretboards = this.fingering.createFretboards(
+      this.fingeringCodeValue,
+    );
   }
 
   updateDotColor(event) {
@@ -124,31 +69,82 @@ export default class extends Controller {
   validateFretWidth() {
     const startFretNumber = parseInt(this.startFretTarget.value);
     const endFretNumber = parseInt(this.endFretTarget.value);
-    const errorMessage = this.fretWidthErrorMessageTarget;
-    const appendFretboardButton = this.appendFretboardButtonTarget;
+
     if (endFretNumber < startFretNumber) {
-      this.displayFretWidthError(
-        appendFretboardButton,
-        errorMessage,
+      this.#displayFretWidthError(
         "終端フレットは開始フレット以上の値にしてください",
       );
     } else if (endFretNumber - startFretNumber > 11) {
-      this.displayFretWidthError(
-        appendFretboardButton,
-        errorMessage,
-        "指板の幅は12フレット以下にしてください",
-      );
+      this.#displayFretWidthError("指板の幅は12フレット以下にしてください");
     } else {
-      appendFretboardButton.removeAttribute("disabled");
-      errorMessage.classList.remove("invalid-feedback", "mb-3");
-      errorMessage.innerHTML = "";
+      this.#clearFretWidthError();
     }
   }
 
-  displayFretWidthError(disabledTarget, messageTarget, message) {
-    disabledTarget.setAttribute("disabled", "");
-    messageTarget.classList.add("invalid-feedback", "mb-3");
-    messageTarget.style.display = "block";
-    messageTarget.textContent = message;
+  #updateTitle() {
+    this.fingering.title = this.titleTarget.value;
+  }
+
+  #generateNewFingeringCode() {
+    const fretboardGroups = this.fingering.stage
+      .getLayers()[0]
+      .getChildren((node) => {
+        return node.hasName("fretboard");
+      });
+
+    return fretboardGroups.map((fretboardGroup, i) => {
+      const dotContainers = fretboardGroup.getChildren((node) => {
+        return node.hasName("dotContainer");
+      });
+      const dots = dotContainers
+        .map((dotContainer) => {
+          return dotContainer.getChildren((node) => {
+            return node.hasName("dot");
+          });
+        })
+        .filter((v) => v.length)
+        .flat();
+      const dotCodes = dots.map((dot) => ({
+        fill: dot.attrs.fill,
+        fret: dot.attrs.fret,
+        guitarString: dot.attrs.guitarString,
+      }));
+      const fretboardCode = {
+        position: i + 1,
+        startFret: fretboardGroup.attrs.startFret,
+        endFret: fretboardGroup.attrs.endFret,
+        dots: dotCodes,
+      };
+      return fretboardCode;
+    });
+  }
+
+  #appendFretboardCode() {
+    const fretboardCode = {
+      startFret: parseInt(this.startFretTarget.value),
+      endFret: parseInt(this.endFretTarget.value),
+      position: this.fingering.fingeringCode
+        ? this.fingering.fingeringCode.length + 1
+        : 1,
+    };
+    this.fingering.fingeringCode = (this.fingering.fingeringCode || []).concat(
+      fretboardCode,
+    );
+  }
+
+  #displayFretWidthError(message) {
+    this.appendFretboardButtonTarget.setAttribute("disabled", "");
+    this.fretWidthErrorMessageTarget.classList.add("invalid-feedback", "mb-3");
+    this.fretWidthErrorMessageTarget.style.display = "block";
+    this.fretWidthErrorMessageTarget.textContent = message;
+  }
+
+  #clearFretWidthError() {
+    this.appendFretboardButtonTarget.removeAttribute("disabled");
+    this.fretWidthErrorMessageTarget.classList.remove(
+      "invalid-feedback",
+      "mb-3",
+    );
+    this.fretWidthErrorMessageTarget.innerHTML = "";
   }
 }
