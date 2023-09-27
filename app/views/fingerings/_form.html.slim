@@ -3,7 +3,7 @@ div data-controller="fingering-form"
     .sticky-top.card.w-75.m-3.p-1.d-print-none
       .pt-2.px-2
         = f.text_field :title, data: { fingering_form_target: 'title' }
-        = f.hidden_field :fingering_code, data: { fingering_form_target: 'output' }
+        = f.hidden_field :fingering_code, data: { fingering_form_target: 'fingeringCode' }
         .row
           .col
             = f.select :startFret, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], { selected: '1', floating: true, label: '開始フレット' }, data: { fingering_form_target: 'startFret', action: 'fingering-form#validateFretWidth' }, class: 'm0'

@@ -6,7 +6,7 @@ export default class extends Controller {
     "title",
     "startFret",
     "endFret",
-    "output",
+    "fingeringCode",
     "fretWidthErrorMessage",
     "appendFretboardButton",
   ];
@@ -18,7 +18,9 @@ export default class extends Controller {
   initialize() {
     this.fingering = new Fingering(
       this.titleTarget.value,
-      this.outputTarget.value ? JSON.parse(this.outputTarget.value) : [],
+      this.fingeringCodeTarget.value
+        ? JSON.parse(this.fingeringCodeTarget.value)
+        : [],
     );
     this.render();
     document
@@ -52,7 +54,7 @@ export default class extends Controller {
     if (this.fingering.fretboards.length === 0) return;
     const newFingeringCode = this.#generateNewFingeringCode();
     this.fingeringCodeValue = this.fingering.fingeringCode = newFingeringCode;
-    this.outputTarget.value = JSON.stringify(this.fingeringCodeValue);
+    this.fingeringCodeTarget.value = JSON.stringify(this.fingeringCodeValue);
     this.fingering.fretboards = this.fingering.createFretboards(
       this.fingeringCodeValue,
     );
