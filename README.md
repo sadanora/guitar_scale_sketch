@@ -52,8 +52,8 @@ $ bin/dev
 ## 環境変数の設定
 環境変数名 | 説明
 --- | ---
-GOOGLE_ID | GoogleクライアントID
-GOOGLE_SECRET | Googleクライアントシークレット
+GOOGLE_CLIENT_ID | GoogleクライアントID
+GOOGLE_CLIENT_SECRET | Googleクライアントシークレット
 
 ## Linter / Formatter
 rubocop
