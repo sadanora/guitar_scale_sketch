@@ -6,9 +6,9 @@ div data-controller="fingering-form"
         = f.hidden_field :fingering_code, data: { fingering_form_target: 'fingeringCode' }
         .row
           .col
-            = f.select :startFret, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], { selected: '1', floating: true, label: '開始フレット' }, data: { fingering_form_target: 'startFret', action: 'fingering-form#validateFretWidth' }, class: 'm0'
+            = f.select :startFret, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], { selected: '1', floating: true, label: '開始フレット' }, data: { fingering_form_target: 'startFret', action: 'fingering-form#validateFretWidth' }, name: '', class: 'm0'
           .col
-            = f.select :endFret, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], { selected: '6', floating: true, label: '終端フレット' }, data: { fingering_form_target: 'endFret', action: 'fingering-form#validateFretWidth' }, class: 'm0'
+            = f.select :endFret, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], { selected: '6', floating: true, label: '終端フレット' }, data: { fingering_form_target: 'endFret', action: 'fingering-form#validateFretWidth' }, name: '', class: 'm0'
           .col.d-flex.justify-content-center.mb-3
             button.btn.btn-primary.w-100 type="button" data-action="click->fingering-form#appendFretboard" data-fingering-form-target="appendFretboardButton"
               | 指板を追加
