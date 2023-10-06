@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Fingerings', type: :system, js: true do
-  let!(:user) { FactoryBot.create(:user, :with_fingerings) }
-  let!(:other_user) { FactoryBot.create(:user, name: 'Jimi') }
+  let!(:user) { create(:user, :with_fingerings) }
+  let!(:other_user) { create(:user, name: 'Jimi') }
   let!(:public_fingering) { user.created_fingerings.first }
-  let!(:private_fingering) { FactoryBot.create(:fingering, :is_not_public) }
+  let!(:private_fingering) { create(:fingering, :is_not_public) }
 
   describe 'Logged-in user' do
     context 'when index' do
