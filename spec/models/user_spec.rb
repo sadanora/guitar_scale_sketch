@@ -11,10 +11,10 @@ RSpec.describe User, type: :model do
         uid: user.uid,
         info: {
           name: user.name,
-          image: user.image_url,
+          image: user.image_url
         }
       }
-      expect(User.find_or_create_from_auth_hash!(auth_hash)).to eq user
+      expect(described_class.find_or_create_from_auth_hash!(auth_hash)).to eq user
     end
   end
 end
