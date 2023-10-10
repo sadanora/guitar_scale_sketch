@@ -1,19 +1,19 @@
 - set_meta_tags(title: '', separator: '')
-.container.col-xxl-8.px-4.py-5
-  .row.flex-lg-row.align-items-center.g-5.py-5
+.container.col-xxl-8
+  .row.flex-lg-row.align-items-center.mb-3.py-4
     .col-lg-6
-      h1.display-1.fw-bold.text-body-emphasis.lh-1.mb-3
+      h1.display-1.fw-bold.text-body-emphasis.lh-1
         | Guitar
         br
         | Scale
         br
         | Sketch
       p.lead 「いま欲しい」ギターの指板図をさっと作れる指板図作成ツール
-    .col-10.col-sm-8.col-lg-6
+    .col-lg-6
       = image_tag '/fingering_sample_img.png', class: 'd-block mx-lg-auto img-fluid shadow', alt: 'fingering sample image', width: '500', height: '322', loading: 'lazy'
-  .row.row-cols-1.row-cols-lg-3.mb-3
+  .row.row-cols-1.row-cols-md-3.mb-3
     .col
-      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-2
         span
           img src="/palette.svg" width="60" height="60" alt="palette_icon"
       h3.fs-2
@@ -21,7 +21,7 @@
       p
         | 指板の幅を指定してドットを打つだけで、かんたんに指板図を作成できます。
     .col
-      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-2
         span
           img src="/printer.svg" width="60" height="60" alt="printer_icon"
       h3.fs-2
@@ -29,7 +29,7 @@
       p
         | 作った指板図はブラウザからそのまま印刷して使えます。ページのヘッダーやフッターなど余計な要素は入りません。
     .col
-      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-3
+      .d-inline-flex.align-items-center.justify-content-center.fs-2.mb-2
         span
           img src="/link-45deg.svg" width="60" height="60" alt="link_icon"
       h3.fs-2
@@ -37,10 +37,10 @@
       p
         | Googleアカウントでログインすれば指板図の保存やURLでの共有もできます。
   - unless logged_in?
-    .d-flex.flex-column.g-4.pt-5
+    .d-flex.flex-column
       h3.d-inline-flex.justify-content-center.align-items-center.fs-4
         | Googleでログインして指板図をつくる
-      .d-inline-flex.justify-content-center.align-items-center.py-1
+      .d-inline-flex.justify-content-center.align-items-center
         = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0 google-login-button'
           = image_tag '/btn_google_signin_dark_normal_web@2x.png', alt: 'signin_button', size: '200x48'
       small.d-inline-flex.justify-content-center.align-items-center.fw-bold
@@ -52,5 +52,5 @@
         = link_to 'プライバシーポリシー', '/privacy_policy', class: 'm-1'
         | に同意いただいたものとします。
       = link_to 'ログインせずに指板図をつくる', new_fingering_path, class: 'd-inline-flex justify-content-center align-items-center mt-5'
-      small.d-inline-flex.justify-content-center.align-items-center.mb-2.pb-2
+      small.d-inline-flex.justify-content-center.align-items-center
         | ログインしない場合指板図の保存ができません。

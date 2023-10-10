@@ -1,5 +1,5 @@
 header.p-3.mb-3.border-bottom.d-print-none
-  .container
+  .container.col-xxl-8
     .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
       = link_to root_path, class: 'd-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none'
         = image_tag '/logo.png', alt: 'logo', size: '258x50', class: 'me-3'
@@ -23,6 +23,6 @@ header.p-3.mb-3.border-bottom.d-print-none
             li.dropdown-item
               = link_to '退会', new_retirements_path
       - else
-        .ms-lg-auto
+        .ms-sm-auto
           = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0'
             = image_tag '/btn_google_signin_dark_normal_web@2x.png', alt: 'signin_button', size: '200x48'
