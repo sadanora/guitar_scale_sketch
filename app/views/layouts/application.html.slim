@@ -8,6 +8,7 @@ html
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = display_meta_tags default_meta_tags
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
+    script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"
     - if Rails.env.production?
       = render 'google_tag_manager'
   body.d-flex.flex-column.min-vh-100.m-0
