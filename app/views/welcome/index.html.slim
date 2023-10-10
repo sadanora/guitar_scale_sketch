@@ -37,20 +37,16 @@
       budoux-ja.text-secondary
         | Googleアカウントでログインすれば指板図の保存やURLでの共有もできます。
   - unless logged_in?
-    .d-flex.flex-column
-      h3.d-inline-flex.justify-content-center.align-items-center.fs-4
-        | Googleでログインして指板図をつくる
+    .d-flex.flex-column.py-5.mb-3
       .d-inline-flex.justify-content-center.align-items-center
         = button_to '/auth/google_oauth2', data: { turbo: false }, class: 'btn btn-link p-0 google-login-button'
-          = image_tag '/btn_google_signin_dark_normal_web@2x.png', alt: 'signin_button', size: '200x48'
-      small.d-inline-flex.justify-content-center.align-items-center.fw-bold
-        | ※PCからご利用ください。
-      small.d-inline-flex.justify-content-center.align-items-center
-        | ※ログインすることで
-        = link_to '利用規約', '/tos'
-        | ・
-        = link_to 'プライバシーポリシー', '/privacy_policy', class: 'm-1'
-        | に同意いただいたものとします。
-      = link_to 'ログインせずに指板図をつくる', new_fingering_path, class: 'd-inline-flex justify-content-center align-items-center mt-5'
-      small.d-inline-flex.justify-content-center.align-items-center
-        | ログインしない場合指板図の保存ができません。
+          = image_tag '/btn_google_signin_dark_normal_web@2x.png', alt: 'signin_button', size: '250x60'
+      small.d-inline-flex.text-secondary.justify-content-center.align-items-center
+        budoux-ja.text-center
+          = link_to '利用規約', '/tos', class: 'text-secondary'
+          | ・
+          = link_to 'プライバシーポリシー', '/privacy_policy', class: 'text-secondary m-1'
+          | に同意したうえでログインしてください。
+      = link_to 'ログインせずに指板図をつくる', new_fingering_path, class: 'd-inline-flex btn btn-outline-secondary fs-6 justify-content-center align-items-center mt-5 mb-2 m-auto p-2'
+      small.text-secondary.d-inline-flex.justify-content-center.align-items-center
+        | ログインしない場合は指板図の保存ができません。
