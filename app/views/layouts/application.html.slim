@@ -14,7 +14,7 @@ html
   body.d-flex.flex-column.min-vh-100.m-0
     = render 'header'
     main.flex-grow-1
-      = render 'flash'
       .page-body
+        = render 'toast'
         = yield
     = render 'footer'
