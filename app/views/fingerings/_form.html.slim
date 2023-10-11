@@ -1,6 +1,6 @@
 div data-controller="fingering-form"
   = bootstrap_form_with(model: fingering, html: { novalidate: true }) do |f|
-    .sticky-top.card.w-75.m-3.p-1.d-print-none
+    .sticky-top.card.w-75.d-print-none.m-3.ms-2.p-1
       .pt-2.px-2
         = f.text_field :title, data: { fingering_form_target: 'title' }
         = f.hidden_field :fingering_code, data: { fingering_form_target: 'fingeringCode' }

@@ -1,5 +1,5 @@
 - set_meta_tags(title: '', separator: '')
-.container.col-xxl-8
+.container
   .row.flex-lg-row.align-items-center.mb-3.py-4
     .col-lg-6
       h1.display-1.fw-bold.text-body-emphasis.lh-1
@@ -47,6 +47,6 @@
           | ・
           = link_to 'プライバシーポリシー', '/privacy_policy', class: 'text-secondary m-1'
           | に同意したうえでログインしてください。
-      = link_to 'ログインせずに指板図をつくる', new_fingering_path, class: 'd-inline-flex btn btn-outline-secondary fs-6 justify-content-center align-items-center mt-5 mb-2 m-auto p-2'
+      = link_to 'ログインせずに指板図をつくる', new_fingering_path, class: 'd-inline-flex btn btn-outline-secondary fs-6 justify-content-center align-items-center mt-5 mb-1 m-auto p-2'
       small.text-secondary.d-inline-flex.justify-content-center.align-items-center
         | ログインしない場合は指板図の保存ができません。
