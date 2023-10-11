@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system, js: true do
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:user_with_fingerings) { FactoryBot.create(:user, :with_fingerings) }
+  let!(:user) { create(:user) }
+  let!(:user_with_fingerings) { create(:user, :with_fingerings) }
 
   it 'can login' do
     sign_in_as(user)

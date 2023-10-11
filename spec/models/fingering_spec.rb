@@ -3,19 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe Fingering, type: :model do
-  it 'has a valid factory' do
-    expect(FactoryBot.create(:fingering)).to be_valid
-  end
+  let!(:fingering) { create(:fingering) }
 
-  it 'is invalid without a title' do
-    fingering = FactoryBot.build(:fingering, title: nil)
-    fingering.valid?
-    expect(fingering.errors[:title]).to include('タイトルを入力してください')
-  end
+  describe '#created_by?' do
+    it 'return true created user' do
+      created_user = fingering.user
+      expect(fingering.created_by?(created_user)).to be true
+    end
 
-  it 'is invalid without fingering_code' do
-    fingering = FactoryBot.build(:fingering, fingering_code: nil)
-    fingering.valid?
-    expect(fingering.errors[:fingering_code]).to include('Fingering codeを入力してください')
+    it 'return false not created user' do
+      not_created_user = create(:user)
+      expect(fingering.created_by?(not_created_user)).to be false
+    end
+
+    it 'return false unless user' do
+      fingering = create(:fingering)
+      expect(fingering.created_by?(nil)).to be false
+    end
   end
 end

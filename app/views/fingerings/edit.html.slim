@@ -1,5 +1,11 @@
 - set_meta_tags(title: '指板図の編集')
-.container
-  h1.fs-4
-    | 指板図編集
-  = render 'form', fingering: @fingering
+.fingering-container
+  .container.d-none.d-lg-block.d-print-inline
+    h1.d-none
+      | 指板図編集
+    = render 'form', fingering: @fingering
+  .container.d-block.d-lg-none.d-print-none
+    h1.text-center
+      | PCでご利用ください
+    p.text-center
+      | 指板図の編集はPCのみ(横幅992px以上のディスプレイ)に対応しています。
