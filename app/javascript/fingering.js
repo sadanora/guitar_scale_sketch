@@ -1,4 +1,4 @@
-import { Text, Rect, Image, Group, Layer, Stage } from "konva";
+import { Text, Rect, Circle, Image, Group, Layer, Stage } from "konva";
 import Fretboard from "./fretboard.js";
 import { generateDot } from "./generateDot.js";
 
@@ -7,6 +7,15 @@ export default class Fingering {
   static fretboardHeight = 250;
   // containerの最大幅1320pxからx方向のpadding 12px * 2 を引いた幅
   static stageWidth = 1296;
+  static dotColors = [
+    "#555555",
+    "#C7243A",
+    "#EDAD0B",
+    "#A4C520",
+    "#009250",
+    "#007FB1",
+    "#5D639E",
+  ];
 
   constructor(title = "", fingeringCode = []) {
     this.title = title;
@@ -21,9 +30,11 @@ export default class Fingering {
   addKonvaObjectsToLayer(KonvaObjects) {
     const layer = this.stage.getChildren()[0];
     layer.destroyChildren();
-
     layer.add(this.#generateTitleText());
     KonvaObjects.forEach((obj) => layer.add(obj));
+    // KonvaObjectsより手前に配置しないとcolorpickerをクリックできないため最後に追加する
+    const colorPicker = this.#generateColorPicker();
+    layer.add(colorPicker);
   }
 
   generateFretboardGroups() {
@@ -153,7 +164,108 @@ export default class Fingering {
     return titleText;
   }
 
+  #generateColorPicker() {
+    const colorPicker = new Group({
+      name: "colorPicker",
+      x: Fretboard.referencePoint,
+      visible: false,
+    });
+    this.#bindShowEventsToColorPicker(colorPicker);
+    this.#addColorButtonsToPicker(colorPicker);
+    return colorPicker;
+  }
+
+  #bindShowEventsToColorPicker(colorPicker) {
+    colorPicker.on("mouseenter", () => {
+      colorPicker.show();
+    });
+  }
+
+  #addColorButtonsToPicker(colorPicker) {
+    Fingering.dotColors.forEach((color, i) => {
+      const button = this.#generateColorButton(color, i);
+      colorPicker.add(button);
+    });
+  }
+
+  #generateColorButton(color, index) {
+    const columnWidth = 45;
+    const colorButton = new Circle({
+      x: 20 + columnWidth * index,
+      radius: 18,
+      fill: color,
+      stroke: `${color === Fretboard.currentColor ? "blue" : color}`,
+    });
+    this.#bindMouseEventsToColorButton(colorButton, color);
+    return colorButton;
+  }
+
+  #bindMouseEventsToColorButton(colorButton, color) {
+    this.#bindCursorStyleEvents(colorButton);
+
+    colorButton.on("click", () => {
+      Fretboard.currentColor = color;
+
+      const parent = colorButton.getParent();
+      if (parent) {
+        const colorButtons = parent.getChildren();
+        // 枠線のリセット
+        colorButtons.forEach((button) => {
+          button.stroke(button.fill());
+        });
+      }
+      colorButton.stroke("blue");
+    });
+  }
+
+  addShowColorPickerArea(fretboardGroups) {
+    fretboardGroups.forEach((fretboardGroup) => {
+      const showColorPickerArea = this.#createShowColorPickerArea();
+      this.#bindMouseEventsToFretboardGroup(fretboardGroup);
+      fretboardGroup.add(showColorPickerArea);
+      showColorPickerArea.setZIndex(0);
+    });
+  }
+
+  #createShowColorPickerArea() {
+    return new Rect({
+      name: "showColorPickerArea",
+      width: 1200,
+      height: 250,
+    });
+  }
+
+  #bindMouseEventsToFretboardGroup(fretboardGroup) {
+    fretboardGroup.on("mouseenter", () => {
+      const colorPicker = this.#getColorPicker(fretboardGroup);
+      this.#setColorPickerPosition(colorPicker, fretboardGroup);
+      colorPicker.show();
+    });
+    fretboardGroup.on("mouseleave", () => {
+      const colorPicker = this.#getColorPicker(fretboardGroup);
+      colorPicker.hide();
+    });
+  }
+
+  #getColorPicker(group) {
+    return this.#getChildrenByName(group.getParent(), "colorPicker")[0];
+  }
+
+  #setColorPickerPosition(colorPicker, fretboardGroup) {
+    const y = fretboardGroup.y() + 220;
+    colorPicker.y(y);
+  }
+
   #getChildrenByName(parent, name) {
     return parent.getChildren((node) => node.hasName(name));
+  }
+
+  #bindCursorStyleEvents(element) {
+    element.on("mouseenter", () => {
+      document.body.style.cursor = "pointer";
+    });
+    element.on("mouseleave", () => {
+      document.body.style.cursor = "default";
+    });
   }
 }
