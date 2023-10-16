@@ -2,21 +2,16 @@
 .container
   .card.border-0
     .card-body.p-0
-      - if @fingering.is_public || @fingering.created_by?(current_user)
-        = render @fingering
-        .card-footer.d-print-none.border-0.rounded
-          - if @fingering.created_by?(current_user)
-            ul.card-actions.d-flex.m-2.p-0.justify-content-center.w-auto.position-relative
-              li.card-action.list-unstyled.w-50
-                = link_to edit_fingering_path(@fingering), class: 'btn btn-outline-primary w-100'
-                  i.bi.bi-pencil-fill.me-2
-                  | 編集する
-              li.card-action.list-unstyled.end-0.bottom-0.position-absolute
-                = link_to '削除する', @fingering, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'text-muted'
-      - else
-        h1.text-center.mb-3.fs-4
-          i.bi.bi-file-earmark-lock.me-1
-          | 非公開の指板図です
+      = render @fingering
+      .card-footer.d-print-none.border-0.rounded
+        - if @fingering.created_by?(current_user)
+          ul.card-actions.d-flex.m-2.p-0.justify-content-center.w-auto.position-relative
+            li.card-action.list-unstyled.w-50
+              = link_to edit_fingering_path(@fingering), class: 'btn btn-outline-primary w-100'
+                i.bi.bi-pencil-fill.me-2
+                | 編集する
+            li.card-action.list-unstyled.end-0.bottom-0.position-absolute
+              = link_to '削除する', @fingering, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'text-muted'
   - if @fingering.created_by?(current_user)
     .m-2.p-2.d-print-none.text-center
       = link_to '一覧に戻る', fingerings_path
