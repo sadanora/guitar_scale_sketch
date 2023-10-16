@@ -5,8 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Fingerings', type: :system, js: true do
   let!(:user) { create(:user, :with_fingerings) }
   let!(:other_user) { create(:user, name: 'Jimi') }
-  let!(:public_fingering) { user.created_fingerings.first }
-  let!(:private_fingering) { create(:fingering, :is_not_public) }
+  let!(:fingering) { user.created_fingerings.first }
 
   describe 'Logged-in user' do
     context 'when index' do
@@ -75,13 +74,13 @@ RSpec.describe 'Fingerings', type: :system, js: true do
 
       it 'does not display edit link for others fingerings' do
         sign_in_as(other_user)
-        visit fingering_path(public_fingering)
+        visit fingering_path(fingering)
         expect(page).to have_no_content '編集'
       end
 
       it 'does not display destroy link for others fingerings' do
         sign_in_as(other_user)
-        visit fingering_path(public_fingering)
+        visit fingering_path(fingering)
         expect(page).to have_no_content '削除'
       end
     end
@@ -139,30 +138,23 @@ RSpec.describe 'Fingerings', type: :system, js: true do
     end
 
     context 'when show' do
-      it 'can display public fingerings' do
-        expect(public_fingering.is_public).to be true
-        visit fingering_path(public_fingering)
+      it 'can display fingerings' do
+        visit fingering_path(fingering)
         expect(page).to have_selector '.konvajs-content'
         expect(page).to have_no_content '一覧へ戻る'
-      end
-
-      it 'does not display private fingerings' do
-        visit fingering_path(private_fingering)
-        expect(private_fingering.is_public).to be false
-        expect(page).to have_content '非公開の指板図です'
       end
     end
 
     context 'when edit' do
       it 'does not display edit button' do
-        visit fingering_path(public_fingering)
+        visit fingering_path(fingering)
         expect(page).to have_no_content '編集'
       end
     end
 
     context 'when destroy' do
       it 'does not display destroy button' do
-        visit fingering_path(public_fingering)
+        visit fingering_path(fingering)
         expect(page).to have_no_content '削除'
       end
     end

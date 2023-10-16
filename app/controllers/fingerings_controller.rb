@@ -51,6 +51,6 @@ class FingeringsController < ApplicationController
   end
 
   def fingering_params
-    params.require(:fingering).permit(:id, :title, :is_public, :fingering_code)
+    params.require(:fingering).permit(:id, :title, :fingering_code)
   end
 end

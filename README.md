@@ -1,5 +1,8 @@
 
 # Guitar Scale Sketch
+
+<img width="989" alt="KV" src="https://github.com/sadanora/guitar_scale_sketch/assets/66685066/d5da91dd-71df-4ca4-83c1-639b5a9fb047">
+
 **いま反復練習したいスケール、運指に最適化された綺麗で見やすい指板図がさっと手に入る**
 
 Guitar Scale Sketchは、ギターの指板図を人に渡したり自分用に保存したい人向けの指板図作成ツールです。
