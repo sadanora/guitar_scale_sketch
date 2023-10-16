@@ -16,7 +16,7 @@ div data-controller="fingering-form"
     .action-items.d-print-none.py-2.px-3
       ul.d-flex.m-2.p-0.justify-content-center.w-auto.position-relative
         - if logged_in?
-          li.action-item.list-unstyled.w-50
+          li.action-item.list-unstyled.w-25
             .d-flex.justify-content-center
               = f.check_box :is_public, label: '公開する'
               div data-controller="tooltip"
