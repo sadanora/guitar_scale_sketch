@@ -17,10 +17,6 @@ div data-controller="fingering-form"
       ul.d-flex.m-2.p-0.justify-content-center.w-auto.position-relative
         - if logged_in?
           li.action-item.list-unstyled.w-25
-            .d-flex.justify-content-center
-              = f.check_box :is_public, label: '公開する'
-              div data-controller="tooltip"
-                i.bi.bi-question-circle-fill.text-secondary.ms-1 data-tooltip-target="tooltip"
             = f.primary nil, data: { action: 'click->fingering-form#updateFingeringCode' }, class: 'btn btn-primary w-100'
         li.action-item.list-unstyled.end-0.bottom-0.position-absolute
           = link_to 'キャンセル', :back
