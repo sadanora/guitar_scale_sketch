@@ -2,7 +2,7 @@
 .container
   h1.fs-4.text-center.m-4
     | 自分の指板図
-  .fingering-items.card.col-6.d-flex.justify-content-center.mx-auto.mb-3.border-0
+  .card.col-lg-8.mx-auto.mb-3.border-0
     .card-body
       - if @fingerings.empty?
         p.text-muted.text-center
@@ -10,9 +10,22 @@
           | 0件です
         p.text-center
           = link_to '指板図をつくる', new_fingering_path
-      - @fingerings.each do |fingering|
-        .fingering-item.text-center.row.py-2.border-top
-          .cal-4.my-auto id="#{dom_id fingering}"
-            = link_to fingering.title, fingering, class: 'fs-4'
+      ul.list-group.p-2
+        - @fingerings.each do |fingering|
+          li.list-group-item.p-2.border-top.list-unstyled
+            div id="#{dom_id fingering}"
+              .fw-bold
+                = link_to fingering.title, fingering, class: 'fs-5'
+              .row.fs-6.text-secondary
+                .col-md-4.d-flex
+                  p.mb-0.me-2
+                    | 更新
+                  p.mb-0
+                    = l fingering.updated_at, format: :short
+                .col-md-4.d-flex
+                  p.mb-0.me-2
+                    | 作成
+                  p.mb-0
+                    = l fingering.created_at, format: :short
   .d-flex.justify-content-end.mt-3
     = paginate @fingerings
