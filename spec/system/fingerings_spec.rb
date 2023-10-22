@@ -11,7 +11,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
   describe 'For a logged-in user' do
     before { sign_in_as(user) }
 
-    context 'when on the index page' do
+    context 'on the index page' do
       before { visit fingerings_path }
 
       it 'displays their own fingerings' do
@@ -26,7 +26,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       end
     end
 
-    context 'when on the create page' do
+    context 'on the create page' do
       before do
         visit root_path
         click_on '指板図をつくる'
@@ -59,7 +59,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       end
     end
 
-    context 'when on their own fingering show page' do
+    context 'on their own fingering show page' do
       before do
         visit fingerings_path
         within "#fingering_#{fingering.id}" do
@@ -91,7 +91,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       end
     end
 
-    context 'when on other users fingering show page' do
+    context 'on other users fingering show page' do
       before { visit fingering_path(other_users_fingering) }
 
       it 'does not display edit link' do
@@ -105,14 +105,14 @@ RSpec.describe 'Fingerings', type: :system, js: true do
   end
 
   describe 'For a non logged-in user' do
-    context 'when on the index page' do
+    context 'on the index page' do
       it 'cannot access' do
         visit fingerings_path
         expect(page).to have_content 'ログインしてください'
       end
     end
 
-    context 'when on the create page' do
+    context 'on the create page' do
       it 'cannot save a fingering' do
         visit root_path
         click_on 'ログインせずに指板図をつくる'
@@ -120,7 +120,7 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       end
     end
 
-    context 'when on the show page' do
+    context 'on the show page' do
       before { visit fingering_path(fingering) }
 
       it 'can display fingerings' do
