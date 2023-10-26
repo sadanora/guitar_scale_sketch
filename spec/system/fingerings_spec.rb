@@ -4,21 +4,21 @@ require 'rails_helper'
 
 RSpec.describe 'Fingerings', type: :system, js: true do
   let!(:user) { create(:user, :with_fingerings) }
-  let!(:other_user) { create(:user, name: 'Jimi') }
   let!(:fingering) { user.created_fingerings.first }
+  let!(:other_user) { create(:user, name: 'Jimi') }
+  let!(:other_users_fingering) { create(:fingering, user: other_user) }
 
-  describe 'Logged-in user' do
-    context 'when index' do
-      it 'displays their own fingerings list' do
-        sign_in_as(user)
-        visit fingerings_path
+  describe 'For a logged-in user' do
+    before { sign_in_as(user) }
+
+    context 'on the index page' do
+      before { visit fingerings_path }
+
+      it 'displays their own fingerings' do
         expect(page).to have_content "#{user.name}'s scale"
       end
 
       it 'does not display others fingerings' do
-        sign_in_as(user)
-        visit fingerings_path
-        expect(page).to have_content "#{user.name}'s scale"
         visit logout_path
         sign_in_as(other_user)
         visit fingerings_path
@@ -26,11 +26,14 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       end
     end
 
-    context 'when create' do
+    context 'on the create page' do
+      before do
+        visit root_path
+        click_on '指板図をつくる'
+      end
+
       it 'can save a fingering' do
-        sign_in_as(user)
         expect do
-          click_on '指板図をつくる'
           fill_in 'タイトル', with: 'Test Fingering'
           select '1', from: '開始フレット'
           select '5', from: '終端フレット'
@@ -44,55 +47,32 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       end
 
       it 'can not add fretboard if endFret value is less than startFret' do
-        sign_in_as(user)
-        click_on '指板図をつくる'
         fill_in 'タイトル', with: 'Test Fingering'
         select '10', from: '開始フレット'
         expect(page).to have_content '終端フレットは開始フレット以上の値にしてください'
       end
 
-      it 'can not add fretboard if the fretboard width over 12 frets' do
-        sign_in_as(user)
-        click_on '指板図をつくる'
+      it 'can not add fretboard if the fretboard width exceeds 12 frets' do
         fill_in 'タイトル', with: 'Test Fingering'
         select '13', from: '終端フレット'
         expect(page).to have_content '指板の幅は12フレット以下にしてください'
       end
     end
 
-    context 'when show' do
-      it 'can display their own fingering' do
-        fingering = user.created_fingerings.first
-        sign_in_as(user)
+    context 'on their own fingering show page' do
+      before do
         visit fingerings_path
         within "#fingering_#{fingering.id}" do
           click_link fingering.title.to_s
         end
+      end
+
+      it 'can display fingering' do
         expect(page).to have_current_path fingering_path(fingering)
         expect(page).to have_selector '.konvajs-content'
       end
 
-      it 'does not display edit link for others fingerings' do
-        sign_in_as(other_user)
-        visit fingering_path(fingering)
-        expect(page).to have_no_content '編集'
-      end
-
-      it 'does not display destroy link for others fingerings' do
-        sign_in_as(other_user)
-        visit fingering_path(fingering)
-        expect(page).to have_no_content '削除'
-      end
-    end
-
-    context 'when update' do
       it 'can update a fingering' do
-        sign_in_as(user)
-        fingering = user.created_fingerings.first
-        visit fingerings_path
-        within "#fingering_#{fingering.id}" do
-          click_link fingering.title.to_s
-        end
         click_link '編集'
         select '3', from: '開始フレット'
         select '8', from: '終端フレット'
@@ -100,17 +80,8 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         click_button '更新する'
         expect(page).to have_content '指板図を更新しました。'
       end
-    end
 
-    context 'when destroy' do
-      it 'can delete a fingering' do
-        sign_in_as(user)
-        fingering = user.created_fingerings.first
-        visit fingerings_path
-        within "#fingering_#{fingering.id}" do
-          click_link fingering.title.to_s
-        end
-
+      it 'can delete fingering' do
         expect do
           page.accept_confirm do
             click_link '削除'
@@ -119,17 +90,29 @@ RSpec.describe 'Fingerings', type: :system, js: true do
         end.to change(Fingering, :count).by(-1)
       end
     end
+
+    context 'on other users fingering show page' do
+      before { visit fingering_path(other_users_fingering) }
+
+      it 'does not display edit link' do
+        expect(page).to have_no_content '編集'
+      end
+
+      it 'does not display delete link' do
+        expect(page).to have_no_content '削除'
+      end
+    end
   end
 
-  describe 'Non logged-in user' do
-    context 'when index' do
+  describe 'For a non logged-in user' do
+    context 'on the index page' do
       it 'cannot access' do
         visit fingerings_path
         expect(page).to have_content 'ログインしてください'
       end
     end
 
-    context 'when create' do
+    context 'on the create page' do
       it 'cannot save a fingering' do
         visit root_path
         click_on 'ログインせずに指板図をつくる'
@@ -137,24 +120,19 @@ RSpec.describe 'Fingerings', type: :system, js: true do
       end
     end
 
-    context 'when show' do
+    context 'on the show page' do
+      before { visit fingering_path(fingering) }
+
       it 'can display fingerings' do
-        visit fingering_path(fingering)
         expect(page).to have_selector '.konvajs-content'
         expect(page).to have_no_content '一覧へ戻る'
       end
-    end
 
-    context 'when edit' do
-      it 'does not display edit button' do
-        visit fingering_path(fingering)
+      it 'does not display edit link' do
         expect(page).to have_no_content '編集'
       end
-    end
 
-    context 'when destroy' do
-      it 'does not display destroy button' do
-        visit fingering_path(fingering)
+      it 'does not display delete link' do
         expect(page).to have_no_content '削除'
       end
     end
