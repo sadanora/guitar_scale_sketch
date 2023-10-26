@@ -1,9 +1,14 @@
-footer.pt-1.border-top.d-print-none
+footer.pt-3.border-top.d-print-none
   .container
-    ul.nav.justify-content-center.pb-0
+    ul.nav.justify-content-center
+      li.nav-item
+        = link_to '利用規約', tos_path, class: 'nav-link px-2 py-0 text-body-secondary text-dark'
+      li.nav-item
+        = link_to 'プライバシーポリシー', privacy_policy_path, class: 'nav-link px-2 py-0 text-body-secondary text-dark'
+    ul.nav.justify-content-center
       li.nav-item
         p.nav-link.px-2.text-body-secondary.text-dark.text-decoration-none &copy; sadanora
       li.nav-item
-        = link_to '利用規約', tos_path, class: 'nav-link px-2 text-body-secondary text-dark'
+        = link_to image_tag('/x-logo.png', alt: 'X logo', size: '20x20'), 'https://twitter.com/sadan0ra', class: 'nav-link px-2'
       li.nav-item
-        = link_to 'プライバシーポリシー', privacy_policy_path, class: 'nav-link px-2 text-body-secondary text-dark'
+        = link_to image_tag('/github-mark.png', alt: 'GitHub logo', size: '20x20'), 'https://github.com/sadanora/guitar_scale_sketch', class: 'nav-link px-2'
