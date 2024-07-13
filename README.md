@@ -19,8 +19,8 @@ Guitar Scale Sketchは、ギターの指板図を人に渡したり自分用に�
 https://guitar-scale-sketch.com/
 
 ## 使用技術
-- [Ruby 3.1.2](https://www.ruby-lang.org/ja/)
-- [Ruby on Rails 7.0.4.3](https://rubyonrails.org/)
+- [Ruby 3.3.1](https://www.ruby-lang.org/ja/)
+- [Ruby on Rails 7.1.3](https://rubyonrails.org/)
 - [jsbundling-rails](https://github.com/rails/jsbundling-rails)
   - [esbuild](https://esbuild.github.io/)
 - [Hotwire](https://hotwired.dev/)
@@ -34,7 +34,7 @@ https://guitar-scale-sketch.com/
 - [OmniAuth Google OAuth2](https://github.com/zquestz/omniauth-google-oauth2)
 - [OmniAuth - Rails CSRF Protection](https://github.com/cookpad/omniauth-rails_csrf_protection)
 ### テスティングフレームワーク
-- [RSpec 6.0.3](https://rspec.info/)
+- [RSpec 6.1.3](https://rspec.info/)
 ### Linter/Formatter
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
