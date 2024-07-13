@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :system, js: true do
+RSpec.describe 'Users', :js, type: :system do
   let!(:user) { create(:user) }
   let!(:user_with_fingerings) { create(:user, :with_fingerings) }
 
