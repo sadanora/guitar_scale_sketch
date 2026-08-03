@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "private": "true",
+  "private": true,
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
@@ -20,5 +20,5 @@
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.1"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@4.18.0"
 }
