@@ -1,5 +1,7 @@
-import { Text, Line, Group } from "konva";
+import Konva from "konva";
 import { generateDot } from "./generateDot.js";
+
+const { Text, Line, Group } = Konva;
 
 export default class Fretboard {
   static referencePoint = 34;

@@ -9,5 +9,6 @@ module SignInHelper
     )
     visit root_path
     find('.google-login-button').click
+    expect(page).to have_current_path(new_fingering_path)
   end
 end

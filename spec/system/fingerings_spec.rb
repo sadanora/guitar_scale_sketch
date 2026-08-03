@@ -60,12 +60,7 @@ RSpec.describe 'Fingerings', :js, type: :system do
     end
 
     context 'on their own fingering show page' do
-      before do
-        visit fingerings_path
-        within "#fingering_#{fingering.id}" do
-          click_link fingering.title.to_s
-        end
-      end
+      before { visit fingering_path(fingering) }
 
       it 'can display fingering' do
         expect(page).to have_current_path fingering_path(fingering)

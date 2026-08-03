@@ -1,4 +1,6 @@
-import { Circle } from "konva";
+import Konva from "konva";
+
+const { Circle } = Konva;
 
 export function generateDot(dotProperty, fillColor = "#555555") {
   return new Circle({
