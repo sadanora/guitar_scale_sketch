@@ -1,6 +1,8 @@
-import { Text, Rect, Circle, Image, Group, Layer, Stage } from "konva";
+import Konva from "konva";
 import Fretboard from "./fretboard.js";
 import { generateDot } from "./generateDot.js";
+
+const { Text, Rect, Circle, Image, Group, Layer, Stage } = Konva;
 
 export default class Fingering {
   static titleHeight = 100;
