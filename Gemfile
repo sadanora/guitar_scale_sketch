@@ -67,6 +67,9 @@ group :development, :test do
 end
 
 group :development do
+  # Run the Rails server and frontend build watchers together via bin/dev
+  gem 'foreman'
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
