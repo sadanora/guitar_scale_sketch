@@ -39,5 +39,8 @@ module GuitarScaleSketch
 
     # preloadのヒントを提供するLinkヘッダを無効にする
     config.action_view.preload_links_header = false
+
+    # This application does not generate Active Storage image variants.
+    config.active_storage.variant_processor = :disabled
   end
 end

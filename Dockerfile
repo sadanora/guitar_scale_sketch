@@ -2,7 +2,7 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=4.0.6
-FROM ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-slim AS base
 
 LABEL fly_launch_runtime="rails"
 
@@ -21,7 +21,7 @@ RUN gem update --system --no-document && \
 
 
 # Throw-away build stage to reduce size of final image
-FROM base as build
+FROM base AS build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
