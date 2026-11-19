@@ -23,7 +23,7 @@ https://guitar-scale-sketch.com/
 ## 使用技術
 
 - [Ruby 4.0.10](https://www.ruby-lang.org/ja/)
-- [Ruby on Rails 8.1.3.1](https://rubyonrails.org/)
+- [Ruby on Rails 8.1.4.1](https://rubyonrails.org/)
 - [Node.js 24.18.0](https://nodejs.org/)
 - [Yarn 4.18.0](https://yarnpkg.com/)
 - [jsbundling-rails](https://github.com/rails/jsbundling-rails)
