@@ -22,7 +22,7 @@ https://guitar-scale-sketch.com/
 
 ## 使用技術
 
-- [Ruby 4.0.6](https://www.ruby-lang.org/ja/)
+- [Ruby 4.0.10](https://www.ruby-lang.org/ja/)
 - [Ruby on Rails 8.1.3.1](https://rubyonrails.org/)
 - [Node.js 24.18.0](https://nodejs.org/)
 - [Yarn 4.18.0](https://yarnpkg.com/)
@@ -64,7 +64,7 @@ https://guitar-scale-sketch.com/
 
 ### 前提
 
-Ruby 4.0.6、Node.js 24.18.0、PostgreSQLをあらかじめインストールしてください。Node.jsとRubyのバージョン管理に[mise](https://mise.jdx.dev/)を利用する場合は、`$ mise install`で必要なバージョンをインストールできます。
+Ruby 4.0.10、Node.js 24.18.0、PostgreSQLをあらかじめインストールしてください。Node.jsとRubyのバージョン管理に[mise](https://mise.jdx.dev/)を利用する場合は、`$ mise install`で必要なバージョンをインストールできます。
 
 ### セットアップと起動
 
