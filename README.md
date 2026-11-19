@@ -24,7 +24,7 @@ https://guitar-scale-sketch.com/
 
 - [Ruby 4.0.10](https://www.ruby-lang.org/ja/)
 - [Ruby on Rails 8.1.4.1](https://rubyonrails.org/)
-- [Node.js 24.18.0](https://nodejs.org/)
+- [Node.js 26.13.1](https://nodejs.org/)
 - [Yarn 4.18.0](https://yarnpkg.com/)
 - [jsbundling-rails](https://github.com/rails/jsbundling-rails)
   - [esbuild 0.28.1](https://esbuild.github.io/)
@@ -64,13 +64,14 @@ https://guitar-scale-sketch.com/
 
 ### 前提
 
-Ruby 4.0.10、Node.js 24.18.0、PostgreSQLをあらかじめインストールしてください。Node.jsとRubyのバージョン管理に[mise](https://mise.jdx.dev/)を利用する場合は、`$ mise install`で必要なバージョンをインストールできます。
+Ruby 4.0.10、Node.js 26.13.1、PostgreSQLをあらかじめインストールしてください。Node.jsとRubyのバージョン管理に[mise](https://mise.jdx.dev/)を利用する場合は、`$ mise install`で必要なバージョンをインストールできます。
 
 ### セットアップと起動
 
 ```bash
 $ git clone https://github.com/sadanora/guitar_scale_sketch.git
 $ cd guitar_scale_sketch
+$ npm install --global corepack@0.36.0
 $ corepack enable
 $ bin/setup
 ```
