@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=4.0.6
+ARG RUBY_VERSION=4.0.10
 FROM ruby:$RUBY_VERSION-slim AS base
 
 LABEL fly_launch_runtime="rails"
@@ -25,16 +25,17 @@ FROM base AS build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3
+    apt-get install --no-install-recommends -y build-essential curl libatomic1 libpq-dev node-gyp pkg-config python-is-python3
 
 # Install JavaScript dependencies
-ARG NODE_VERSION=24.18.0
+ARG NODE_VERSION=26.13.1
 ARG YARN_VERSION=4.18.0
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    npm install --global corepack@0.36.0 && \
     corepack enable && \
-    corepack prepare yarn@$YARN_VERSION --activate && \
+    corepack install --global yarn@"$YARN_VERSION" && \
     rm -rf /tmp/node-build-master
 
 # Install application gems
