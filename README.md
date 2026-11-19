@@ -27,13 +27,13 @@ https://guitar-scale-sketch.com/
 - [Node.js 26.13.1](https://nodejs.org/)
 - [Yarn 4.18.0](https://yarnpkg.com/)
 - [jsbundling-rails](https://github.com/rails/jsbundling-rails)
-  - [esbuild 0.28.1](https://esbuild.github.io/)
+  - [esbuild 0.28.2](https://esbuild.github.io/)
 - [Hotwire](https://hotwired.dev/)
   - [Turbo 8.0.23](https://turbo.hotwired.dev/)
   - [Stimulus 3.2.2](https://stimulus.hotwired.dev/)
-- [Bootstrap 5.3.8](https://getbootstrap.jp/)
+- [Bootstrap 5.3.9](https://getbootstrap.jp/)
 - [Slim](https://slim-template.github.io/)
-- [Konva 10.3.0](https://konvajs.org/)
+- [Konva 10.9.1](https://konvajs.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 
 ### ソーシャルログイン
@@ -43,7 +43,7 @@ https://guitar-scale-sketch.com/
 
 ### テスティングフレームワーク
 
-- [RSpec 6.1.3](https://rspec.info/)
+- [RSpec Rails 8.1.0](https://rspec.info/)
 
 ### Linter/Formatter
 

@@ -15,7 +15,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 8.0', '>= 8.0.3'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -98,5 +98,5 @@ gem 'slim-rails'
 
 # fly added gems
 gem 'dockerfile-rails', '>= 1.5', group: :development
-gem 'sentry-rails', '~> 5.11'
-gem 'sentry-ruby', '~> 5.11'
+gem 'sentry-rails', '~> 7.0'
+gem 'sentry-ruby', '~> 7.0'
